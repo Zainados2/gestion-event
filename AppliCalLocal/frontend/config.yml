@@ -1,0 +1,22 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+    - duration: 120
+      arrivalRate: 10
+
+scenarios:
+  - flow:
+    - post:
+        url: '/'
+        json:
+          username: '*****'
+          password: '*****'
+        extract:
+          authToken: '$.token'  
+
+    - get:
+        url: '/calendar'
+        headers:
+          Authorization: 'Bearer {{ authToken }}' 

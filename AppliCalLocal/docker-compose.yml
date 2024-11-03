@@ -1,0 +1,68 @@
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Dragove12*
+      MYSQL_DATABASE: Memoire
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: Dragove12*
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8081:8081"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Dragove12*
+      MYSQL_DATABASE: Memoire
+    command: sh -c "wait-for-it db:3306 -- npm start"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  nextjs:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.nextjs
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: my_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./conf.d:/etc/nginx/conf.d
+    depends_on:
+      - nextjs
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,7 @@
+{
+  "/calendar/page": "app/calendar/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/decor&article/page": "app/decor&article/page.js",
+  "/lieux/page": "app/lieux/page.js"
+}
