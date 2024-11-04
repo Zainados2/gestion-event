@@ -19,9 +19,21 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
-        port: 22  # Port SSH
+        port: 22
         script: |
-            cd gestion-event/AppliCalLocal  # Chemin vers votre application
+            # Navigation vers le répertoire de gestion-event
+            cd ~/gestion-event
+            
+            # Cloner ou mettre à jour le dépôt AppliCalLocal
+            if [ ! -d "AppliCalLocal" ]; then
+                git clone https://github.com/Zainados2/gestion-event.git AppliCalLocal
+            else
+                cd AppliCalLocal
+                git pull origin main
+            fi
+            
+            # Lancer les commandes Docker
+            cd AppliCalLocal  # Assurez-vous d'être dans le bon répertoire
             docker-compose down  # Stoppe et supprime les conteneurs existants
             docker-compose up -d --build  # Reconstruit et démarre les conteneurs en mode détaché
             echo 'Deployment to DigitalOcean finished'
