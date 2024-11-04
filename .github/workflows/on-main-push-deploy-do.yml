@@ -22,12 +22,20 @@ jobs:
         port: 22
         script: |
             cd gestion-event/AppliCalLocal/
-            docker-compose down --rmi all
-            docker system prune -a
+            
+            # Arrêter et supprimer uniquement les conteneurs (ne pas supprimer les volumes pour conserver les données)
+            docker-compose down
+            
+            # Nettoyer les images non utilisées sans affecter les volumes
+            docker image prune -f
+            
+            # Mettre à jour le code
             cd ../..
             rm -rf gestion-event/
             mkdir gestion-event
             cd gestion-event/
             git clone https://github.com/Zainados2/gestion-event.git .
             cd AppliCalLocal/
+            
+            # Recréer les conteneurs et mettre à jour les images si nécessaire
             docker-compose up -d --build

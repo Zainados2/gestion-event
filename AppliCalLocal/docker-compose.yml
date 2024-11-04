@@ -1,4 +1,4 @@
-version: '3.8'  # Assurez-vous d'utiliser une version de Docker Compose qui prend en charge les déploiements
+version: '3.8'
 
 services:
   db:
@@ -14,8 +14,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'   # Limite CPU à 0.5 vCPU (50% d'un vCPU)
-          memory: 1G    # Limite mémoire à 1 Go
+          cpus: '0.5'
+          memory: 1G
+    volumes:
+      - db_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -30,8 +32,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'   # Limite CPU à 0.2 vCPU (20% d'un vCPU)
-          memory: 512M   # Limite mémoire à 512 Mo
+          cpus: '0.2'
+          memory: 512M
 
   backend:
     build:
@@ -52,8 +54,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'     # Limite CPU à 1 vCPU
-          memory: 2G     # Limite mémoire à 2 Go
+          cpus: '1'
+          memory: 2G
 
   nextjs:
     build:
@@ -68,9 +70,12 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'     # Limite CPU à 1 vCPU
-          memory: 2G     # Limite mémoire à 2 Go
+          cpus: '1'
+          memory: 2G
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  db_data:
