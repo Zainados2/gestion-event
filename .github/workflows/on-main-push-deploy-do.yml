@@ -25,22 +25,8 @@ jobs:
             docker-compose down
             cd ../..
             rm -rf gestion-event/
-            # Créer le nouveau répertoire gestion-event
-            echo "Creating new gestion-event directory..."
             mkdir gestion-event
-            
-            # Se placer dans le répertoire gestion-event
             cd gestion-event/
-            
-            # Cloner le dépôt
-            echo "Cloning gestion-event..."
             git clone https://github.com/Zainados2/gestion-event.git .
-            
-            # Se placer dans AppliCalLocal
             cd AppliCalLocal/
-            
-            # Lancer les commandes Docker
-            echo "Starting Docker containers..."
-            docker-compose up -d --build  # Reconstruit et démarre les conteneurs en mode détaché
-            
-            echo 'Deployment to DigitalOcean finished'
+            docker-compose up -d --build
