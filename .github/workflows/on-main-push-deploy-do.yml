@@ -12,13 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
-    - name: Install Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install docker.io docker-compose -y
-        sudo systemctl start docker
-        sudo systemctl enable docker
 
     - name: Deploy to DigitalOcean
       uses: appleboy/ssh-action@master
