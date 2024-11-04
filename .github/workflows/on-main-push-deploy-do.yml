@@ -21,25 +21,23 @@ jobs:
         key: ${{ secrets.KEY }}
         port: 22
         script: |
-            # Supprimer l'ancien répertoire gestion-event s'il existe
-            if [ -d "~/gestion-event" ]; then
-                echo "Removing old gestion-event directory..."
-                rm -rf ~/gestion-event
-            fi
-            rm -rf gestion-event
+            cd gestion-event/AppliCalLocal/
+            docker-compose down
+            cd ../..
+            rm -rf gestion-event/
             # Créer le nouveau répertoire gestion-event
             echo "Creating new gestion-event directory..."
-            mkdir ~/gestion-event
+            mkdir gestion-event
             
             # Se placer dans le répertoire gestion-event
-            cd ~/gestion-event
+            cd gestion-event/
             
             # Cloner le dépôt
             echo "Cloning gestion-event..."
             git clone https://github.com/Zainados2/gestion-event.git .
             
             # Se placer dans AppliCalLocal
-            cd AppliCalLocal
+            cd AppliCalLocal/
             
             # Lancer les commandes Docker
             echo "Starting Docker containers..."
