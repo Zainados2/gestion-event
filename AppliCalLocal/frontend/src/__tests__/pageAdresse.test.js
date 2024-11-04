@@ -12,7 +12,7 @@ describe('AddressesPage', () => {
   // Réinitialiser le mock avant chaque test
   beforeEach(() => {
     mock.reset();
-    mock.onGet('http://localhost:8081/addresses').reply(200, []); // Mocking initial GET request
+    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, []); // Mocking initial GET request
   });
 
   test('should show an error if fields are not filled in', async () => {
@@ -29,7 +29,7 @@ describe('AddressesPage', () => {
 
   test('should create a new address and display it', async () => {
     // Simuler la réponse de l'API pour la création d'une nouvelle adresse
-    mock.onPost('http://localhost:8081/addresses').reply(200, {
+    mock.onPost('http://165.232.115.209:8081/addresses').reply(200, {
       id: 3,
       name: 'Adresse 3',
       location: 'Location 3',
@@ -37,7 +37,7 @@ describe('AddressesPage', () => {
     });
 
     // Simuler la réponse de l'API pour récupérer la liste des adresses après la création
-    mock.onGet('http://localhost:8081/addresses').reply(200, [
+    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, [
       { id: 3, name: 'Adresse 3', location: 'Location 3', type: 'studio' },
     ]);
 
@@ -59,7 +59,7 @@ describe('AddressesPage', () => {
 
   test('should retrieve and display "Adresse 3" after it is created', async () => {
     // Simuler la réponse de l'API pour la création d'une nouvelle adresse
-    mock.onPost('http://localhost:8081/addresses').reply(200, {
+    mock.onPost('http://165.232.115.209:8081/addresses').reply(200, {
       id: 3,
       name: 'Adresse 3',
       location: 'Location 3',
@@ -67,7 +67,7 @@ describe('AddressesPage', () => {
     });
 
     // Simuler la réponse de l'API pour récupérer la liste des adresses après la création
-    mock.onGet('http://localhost:8081/addresses').reply(200, [
+    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, [
       { id: 3, name: 'Adresse 3', location: 'Location 3', type: 'studio' },
     ]);
 
@@ -87,7 +87,7 @@ describe('AddressesPage', () => {
     });
 
     // Simuler la réponse de l'API pour récupérer l'adresse "Adresse 3"
-    mock.onGet('http://localhost:8081/addresses/3').reply(200, {
+    mock.onGet('http://165.232.115.209:8081/addresses/3').reply(200, {
       id: 3,
       name: 'Adresse 3',
       location: 'Location 3',
@@ -104,7 +104,7 @@ describe('AddressesPage', () => {
 
   test('should delete an address and ensure it is no longer displayed', async () => {
     // Simuler la réponse de l'API pour la création d'une nouvelle adresse
-    mock.onPost('http://localhost:8081/addresses').reply(200, {
+    mock.onPost('http://165.232.115.209:8081/addresses').reply(200, {
       id: 3,
       name: 'Adresse 3',
       location: 'Location 3',
@@ -112,12 +112,12 @@ describe('AddressesPage', () => {
     });
 
     // Simuler la réponse de l'API pour récupérer la liste des adresses après la création
-    mock.onGet('http://localhost:8081/addresses').reply(200, [
+    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, [
       { id: 3, name: 'Adresse 3', location: 'Location 3', type: 'studio' },
     ]);
 
     // Simuler la réponse de l'API pour la suppression d'une adresse
-    mock.onDelete('http://localhost:8081/addresses/3').reply(200);
+    mock.onDelete('http://165.232.115.209:8081/addresses/3').reply(200);
 
     render(<AddressesPage />);
 
@@ -138,7 +138,7 @@ describe('AddressesPage', () => {
     fireEvent.click(screen.getByText('Supprimer'));
 
     // Simuler la réponse de l'API pour récupérer la liste des adresses après suppression
-    mock.onGet('http://localhost:8081/addresses').reply(200, []);
+    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, []);
 
     // Vérifier que l'adresse "Adresse 3" n'est plus affichée dans le DOM
     await waitFor(() => {

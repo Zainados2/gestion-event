@@ -10,8 +10,8 @@ nj
 docker-compose up --build
 docker-compose down
 docker-compose up -d
-ssh root@localhost
-scp -r "Documents/AppliCal" root@localhost:memoire/calendrier/
+ssh root@165.232.115.209
+scp -r "Documents/AppliCal" root@165.232.115.209:memoire/calendrier/
 
 
 df -h
@@ -40,7 +40,7 @@ sudo rm -rf /var/log/*.gz
 
 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://165.232.115.209:3000](http://165.232.115.209:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 

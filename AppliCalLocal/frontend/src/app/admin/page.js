@@ -28,7 +28,7 @@ export default function ManageUsersAndRegister() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/users', {
+      const response = await axios.get('http://165.232.115.209:8081/users', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -46,7 +46,7 @@ export default function ManageUsersAndRegister() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`http://localhost:8081/users/${id}`, {
+      const response = await axios.delete(`http://165.232.115.209:8081/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -75,7 +75,7 @@ export default function ManageUsersAndRegister() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8081/users', {
+      const response = await axios.post('http://165.232.115.209:8081/users', {
         username,
         password,
         role,

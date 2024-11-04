@@ -6,7 +6,7 @@ import { checkPresta } from '../component/CheckPrestataire.spec.cy';
 describe('Test de la page de connexion et des événements', () => {
   beforeEach(() => {
     // Connexion avec des identifiants valides avant chaque test
-    cy.visit('http://localhost:3000/');
+    cy.visit('http://165.232.115.209:3000/');
     cy.get('input[name="username"]').type('gerant');
     cy.get('input[name="password"]').type('azerty619');
     cy.get('form').submit();

@@ -53,7 +53,7 @@ export default function UserDetails() {
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:8081/users/${id}`, {
+      const response = await axios.get(`http://165.232.115.209:8081/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -74,7 +74,7 @@ export default function UserDetails() {
     try {
       const token = localStorage.getItem('token');
       const role = user.role;
-      const response = await axios.get(`http://localhost:8081/events?role=${role}`, {
+      const response = await axios.get(`http://165.232.115.209:8081/events?role=${role}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

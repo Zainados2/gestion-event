@@ -18,7 +18,7 @@ const port = 8081;
 // Configurer CORS
 const corsOptions = {
   origin: [
-    'http://localhost:3000'
+    'http://165.232.115.209:3000'
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
@@ -33,11 +33,11 @@ app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "http://localhost:3000", "http://localhost:8080", "http://localhost:8081"],
+    scriptSrc: ["'self'", "http://165.232.115.209:3000", "http://165.232.115.209:8080", "http://165.232.115.209:8081"],
     objectSrc: ["'none'"],
     frameAncestors: ["'none'"],
-    connectSrc: ["'self'", "http://localhost:3000", "http://localhost:8080", "http://localhost:8081"],
-    imgSrc: ["'self'", "data:", "http://localhost:8080", "http://localhost:8081"], 
+    connectSrc: ["'self'", "http://165.232.115.209:3000", "http://165.232.115.209:8080", "http://165.232.115.209:8081"],
+    imgSrc: ["'self'", "data:", "http://165.232.115.209:8080", "http://165.232.115.209:8081"], 
   }
 }));
 app.use(helmet.noSniff());

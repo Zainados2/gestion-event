@@ -10,13 +10,13 @@ import ModalLecture from '../../components/modalLecture';
 import { useAuth } from '../contexts/authContext';
 import Loader from '../../components/Loader';
 
-const API_URL = 'http://localhost:8081/events';
-const API_DECORS_URL = 'http://localhost:8081/decors';
-const API_ARTICLES_URL = 'http://localhost:8081/articles';
-const API_ADDRESS_URL = 'http://localhost:8081/addresses';
-const API_DECORS_ARTICLES_URL = 'http://localhost:8081/decor_articles';
-const API_EVENT_ARTICLES_URL = 'http://localhost:8081/event_articles';
-const API_EVENT_DECORS_URL = 'http://localhost:8081/event_decors'
+const API_URL = 'http://165.232.115.209:8081/events';
+const API_DECORS_URL = 'http://165.232.115.209:8081/decors';
+const API_ARTICLES_URL = 'http://165.232.115.209:8081/articles';
+const API_ADDRESS_URL = 'http://165.232.115.209:8081/addresses';
+const API_DECORS_ARTICLES_URL = 'http://165.232.115.209:8081/decor_articles';
+const API_EVENT_ARTICLES_URL = 'http://165.232.115.209:8081/event_articles';
+const API_EVENT_DECORS_URL = 'http://165.232.115.209:8081/event_decors'
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -133,7 +133,7 @@ export default function Events() {
   const loadDecorArticles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8081/decor_articles', {
+      const response = await fetch('http://165.232.115.209:8081/decor_articles', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -439,7 +439,7 @@ end: info.event.allDay
     const eventId = selectedEvent.id;
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8081/event_articles/event_id/${eventId}/article_id/${articleId}/isValidated?role=${userRole}`, {
+      const response = await fetch(`http://165.232.115.209:8081/event_articles/event_id/${eventId}/article_id/${articleId}/isValidated?role=${userRole}`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,

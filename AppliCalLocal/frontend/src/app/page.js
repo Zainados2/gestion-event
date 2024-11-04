@@ -16,7 +16,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081', {
+      const response = await axios.post('http://165.232.115.209:8081', {
         username,
         password,
       });

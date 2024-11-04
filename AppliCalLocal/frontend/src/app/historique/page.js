@@ -81,7 +81,7 @@ export default function Historique() {
     try {
       const token = localStorage.getItem('token');
       const role = userRole;
-      const response = await axios.get(`http://localhost:8081/events?role=${role}`, {
+      const response = await axios.get(`http://165.232.115.209:8081/events?role=${role}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -105,7 +105,7 @@ export default function Historique() {
   const fetchAddresses = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/addresses', {
+      const response = await axios.get('http://165.232.115.209:8081/addresses', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -125,7 +125,7 @@ export default function Historique() {
   const fetchEventArticles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/event_articles', {
+      const response = await axios.get('http://165.232.115.209:8081/event_articles', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -142,7 +142,7 @@ export default function Historique() {
   const fetchArticles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/articles', {
+      const response = await axios.get('http://165.232.115.209:8081/articles', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -174,7 +174,7 @@ export default function Historique() {
   const fetchEventDecors = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/event_decors', {
+      const response = await axios.get('http://165.232.115.209:8081/event_decors', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -191,7 +191,7 @@ export default function Historique() {
   const fetchDecors = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/decors', {
+      const response = await axios.get('http://165.232.115.209:8081/decors', {
         headers: {
           Authorization: `Bearer ${token}`
         }

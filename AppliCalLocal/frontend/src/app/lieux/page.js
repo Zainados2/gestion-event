@@ -20,7 +20,7 @@ const AddressesPage = () => {
   const fetchAddresses = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/addresses',{
+      const response = await axios.get('http://165.232.115.209:8081/addresses',{
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -44,7 +44,7 @@ const AddressesPage = () => {
     if (validateAddress(newAddress)) {
       try {
         const token = localStorage.getItem('token');
-        await axios.post('http://localhost:8081/addresses', newAddress, {
+        await axios.post('http://165.232.115.209:8081/addresses', newAddress, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -61,7 +61,7 @@ const AddressesPage = () => {
     if (validateAddress(editingAddress)) {
       try {
         const token = localStorage.getItem('token');
-        await axios.put(`http://localhost:8081/addresses/${editingAddress.id}`, editingAddress, {
+        await axios.put(`http://165.232.115.209:8081/addresses/${editingAddress.id}`, editingAddress, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -77,7 +77,7 @@ const AddressesPage = () => {
   const handleDeleteAddress = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8081/addresses/${id}`, {
+      await axios.delete(`http://165.232.115.209:8081/addresses/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

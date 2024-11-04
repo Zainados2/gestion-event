@@ -24,7 +24,7 @@ export default function Prestataire() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/users', {
+      const response = await axios.get('http://165.232.115.209:8081/users', {
         headers: {
           Authorization: `Bearer ${token}`
         }

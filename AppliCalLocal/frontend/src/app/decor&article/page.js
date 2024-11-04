@@ -39,7 +39,7 @@ export default function DecorArticle() {
   const loadArticles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/articles',{
+      const response = await axios.get('http://165.232.115.209:8081/articles',{
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -53,7 +53,7 @@ export default function DecorArticle() {
   const loadDecors = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/decors', {
+      const response = await axios.get('http://165.232.115.209:8081/decors', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -72,7 +72,7 @@ export default function DecorArticle() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:8081/articles', newArticle, {
+      const response = await axios.post('http://165.232.115.209:8081/articles', newArticle, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -94,7 +94,7 @@ export default function DecorArticle() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:8081/articles/${editingArticle.id}`, editingArticle, {
+      await axios.put(`http://165.232.115.209:8081/articles/${editingArticle.id}`, editingArticle, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -114,7 +114,7 @@ export default function DecorArticle() {
   const handleDeleteArticle = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8081/articles/${id}`, {
+      await axios.delete(`http://165.232.115.209:8081/articles/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -136,7 +136,7 @@ export default function DecorArticle() {
     }
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:8081/decors', {
+      const response = await axios.post('http://165.232.115.209:8081/decors', {
         name: newDecor.name,
         articleIds: selectedArticleIds
       }, {
@@ -166,7 +166,7 @@ export default function DecorArticle() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:8081/decors/${editingDecor.id}`, {
+      await axios.put(`http://165.232.115.209:8081/decors/${editingDecor.id}`, {
         name: editingDecor.name,
         articleIds: editingDecorArticleIds
       }, {
@@ -190,7 +190,7 @@ export default function DecorArticle() {
   const handleDeleteDecor = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8081/decors/${id}`, {
+      await axios.delete(`http://165.232.115.209:8081/decors/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -205,7 +205,7 @@ export default function DecorArticle() {
     setEditingDecor(decor);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:8081/decors/${decor.id}/articles`, {
+      const response = await axios.get(`http://165.232.115.209:8081/decors/${decor.id}/articles`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -219,7 +219,7 @@ export default function DecorArticle() {
   const loadDecorArticles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8081/decor_articles', {
+      const response = await axios.get('http://165.232.115.209:8081/decor_articles', {
         headers: {
           Authorization: `Bearer ${token}`
         }

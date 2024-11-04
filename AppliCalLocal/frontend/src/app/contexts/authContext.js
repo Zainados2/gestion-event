@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const response = await axios.get('http://localhost:8081/me', {
+        const response = await axios.get('http://165.232.115.209:8081/me', {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (response.data.success) {
