@@ -21,23 +21,28 @@ jobs:
         key: ${{ secrets.KEY }}
         port: 22
         script: |
-            # Navigation vers le répertoire de gestion-event
-            cd ~/gestion-event
-            
-            # Clonage ou mise à jour du dépôt directement dans le répertoire gestion-event
-            if [ ! -d ".git" ]; then
-                echo "Cloning gestion-event..."
-                git clone https://github.com/Zainados2/gestion-event.git .
-            else
-                echo "Updating gestion-event..."
-                git pull origin main
+            # Supprimer l'ancien répertoire gestion-event s'il existe
+            if [ -d "~/gestion-event" ]; then
+                echo "Removing old gestion-event directory..."
+                rm -rf ~/gestion-event
             fi
             
-            # Supprimer le dossier .github si nécessaire
-            rm -rf .github  # Supprime le dossier .github
-
+            # Créer le nouveau répertoire gestion-event
+            echo "Creating new gestion-event directory..."
+            mkdir ~/gestion-event
+            
+            # Se placer dans le répertoire gestion-event
+            cd ~/gestion-event
+            
+            # Cloner le dépôt
+            echo "Cloning gestion-event..."
+            git clone https://github.com/Zainados2/gestion-event.git .
+            
+            # Se placer dans AppliCalLocal
+            cd AppliCalLocal
+            
             # Lancer les commandes Docker
-            cd AppliCalLocal/
-            docker-compose down  # Stoppe et supprime les conteneurs existants
+            echo "Starting Docker containers..."
             docker-compose up -d --build  # Reconstruit et démarre les conteneurs en mode détaché
+            
             echo 'Deployment to DigitalOcean finished'
