@@ -1,3 +1,5 @@
+version: '3.8'  # Assurez-vous d'utiliser une version de Docker Compose qui prend en charge les déploiements
+
 services:
   db:
     image: mysql:5.7
@@ -9,6 +11,11 @@ services:
       - "3306:3306"
     networks:
       - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'   # Limite CPU à 0.5 vCPU (50% d'un vCPU)
+          memory: 1G    # Limite mémoire à 1 Go
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -20,6 +27,11 @@ services:
       MYSQL_ROOT_PASSWORD: Dragove12*
     networks:
       - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'   # Limite CPU à 0.2 vCPU (20% d'un vCPU)
+          memory: 512M   # Limite mémoire à 512 Mo
 
   backend:
     build:
@@ -37,6 +49,11 @@ services:
       - db
     networks:
       - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'     # Limite CPU à 1 vCPU
+          memory: 2G     # Limite mémoire à 2 Go
 
   nextjs:
     build:
@@ -48,6 +65,11 @@ services:
       - backend
     networks:
       - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'     # Limite CPU à 1 vCPU
+          memory: 2G     # Limite mémoire à 2 Go
 
 networks:
   app-network:
