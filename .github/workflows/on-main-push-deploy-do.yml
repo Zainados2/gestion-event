@@ -26,7 +26,7 @@ jobs:
                 echo "Removing old gestion-event directory..."
                 rm -rf ~/gestion-event
             fi
-            
+            rm -rf gestion-event
             # Créer le nouveau répertoire gestion-event
             echo "Creating new gestion-event directory..."
             mkdir ~/gestion-event
