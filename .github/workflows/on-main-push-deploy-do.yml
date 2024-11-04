@@ -24,10 +24,12 @@ jobs:
             # Navigation vers le répertoire de gestion-event
             cd ~/gestion-event
             
-            # Cloner ou mettre à jour le dépôt AppliCalLocal
+            # Vérification de l'existence du dossier AppliCalLocal
             if [ ! -d "AppliCalLocal" ]; then
+                echo "Cloning AppliCalLocal..."
                 git clone https://github.com/Zainados2/gestion-event.git AppliCalLocal
             else
+                echo "Updating AppliCalLocal..."
                 cd AppliCalLocal
                 git pull origin main
             fi
