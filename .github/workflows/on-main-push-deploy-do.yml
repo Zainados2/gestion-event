@@ -22,7 +22,8 @@ jobs:
         port: 22
         script: |
             cd gestion-event/AppliCalLocal/
-            docker-compose down
+            docker-compose down --rmi all
+            docker system prune -a
             cd ../..
             rm -rf gestion-event/
             mkdir gestion-event
