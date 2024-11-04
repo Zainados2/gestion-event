@@ -21,7 +21,7 @@ jobs:
         key: ${{ secrets.KEY }}
         port: 22  # Port SSH
         script: |
-            cd /home/deployer/AppliCalLocal  # Chemin vers votre application
+            cd gestion-event/AppliCalLocal  # Chemin vers votre application
             docker-compose down  # Stoppe et supprime les conteneurs existants
             docker-compose up -d --build  # Reconstruit et démarre les conteneurs en mode détaché
             echo 'Deployment to DigitalOcean finished'
