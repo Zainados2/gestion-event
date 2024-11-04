@@ -1,0 +1,34 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main  # Changez cela selon le nom de votre branche principale
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install Docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install docker.io docker-compose -y
+        sudo systemctl start docker
+        sudo systemctl enable docker
+
+    - name: Deploy to DigitalOcean
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: 22  # Port SSH
+        script: |
+            cd /home/deployer/gestion-event  # Chemin vers votre application
+            docker-compose down  # Stoppe et supprime les conteneurs existants
+            docker-compose up -d --build  # Reconstruit et démarre les conteneurs en mode détaché
+            echo 'Deployment to DigitalOcean finished'
