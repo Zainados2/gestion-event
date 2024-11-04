@@ -24,18 +24,20 @@ jobs:
             # Navigation vers le répertoire de gestion-event
             cd ~/gestion-event
             
-            # Vérification de l'existence du dossier AppliCalLocal
-            if [ ! -d "AppliCalLocal" ]; then
-                echo "Cloning AppliCalLocal..."
-                git clone https://github.com/Zainados2/gestion-event.git AppliCalLocal
+            # Clonage ou mise à jour du dépôt directement dans le répertoire gestion-event
+            if [ ! -d ".git" ]; then
+                echo "Cloning gestion-event..."
+                git clone https://github.com/Zainados2/gestion-event.git .
             else
-                echo "Updating AppliCalLocal..."
-                cd AppliCalLocal
+                echo "Updating gestion-event..."
                 git pull origin main
             fi
             
+            # Supprimer le dossier .github si nécessaire
+            rm -rf .github  # Supprime le dossier .github
+
             # Lancer les commandes Docker
-            cd AppliCalLocal  # Assurez-vous d'être dans le bon répertoire
+            cd AppliCalLocal/
             docker-compose down  # Stoppe et supprime les conteneurs existants
             docker-compose up -d --build  # Reconstruit et démarre les conteneurs en mode détaché
             echo 'Deployment to DigitalOcean finished'
