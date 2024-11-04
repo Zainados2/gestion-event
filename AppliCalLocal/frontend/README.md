@@ -38,7 +38,7 @@ docker container prune
 sudo rm -rf /var/log/*.log
 sudo rm -rf /var/log/*.gz
 
-
+x
 
 Open [http://165.232.115.209:3000](http://165.232.115.209:3000) with your browser to see the result.
 
