@@ -5,9 +5,9 @@ import Link from 'next/link';
 const Footer = () => {
 
   return (
-    <footer className="text-center p-5 text-sm text-gray-700 border-t-violet-600">
+    <footer className="text-center p-5 text-sm text-white border-t-violet-600">
       <p>
-        En vous connectant à l'application, vous acceptez la gestion de vos données personnelles conformément à notre 
+        En vous connectant à l'application, vous acceptez la gestion de vos données personnelles conformément à notre&nbsp; 
         <Link href="/politiquedeconfidentialite">
           <a className="text-purple-600 hover:text-purple-800 underline">politique de confidentialité</a>
         </Link>.

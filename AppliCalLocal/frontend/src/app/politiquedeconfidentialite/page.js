@@ -5,8 +5,8 @@ const PolitiqueDeConfidentialite = () => {
   return (
     <div className="h-screen bg-white text-gray-800">
       <div className="absolute top-5 left-5">
-        <Link to="/" className="text-purple-600 font-semibold text-lg">
-          Retour à l'accueil
+        <Link href="/" className="text-purple-600 font-semibold text-lg">
+        <a className="text-purple-600 hover:text-purple-800 underline">Retour à l'accueil</a>
         </Link>
       </div>
 

@@ -255,7 +255,7 @@ export default function DecorArticle() {
   }
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="p-8 bg-gray-100 h-[85vh]">
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Gestion des Décors et Articles</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

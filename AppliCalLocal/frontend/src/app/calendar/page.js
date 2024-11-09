@@ -642,7 +642,7 @@ end: info.event.allDay
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col items-center p-4 lg:p-6 bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center p-4 lg:p-6 bg-gray-100 h-[90vh]">
       <div className="relative w-full max-w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl bg-white p-4 md:p-6 rounded-lg shadow-lg">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
