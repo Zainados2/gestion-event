@@ -117,7 +117,7 @@ export default function ManageUsersAndRegister() {
   }
 
   return (
-    <div className="p-8 bg-gray-100 h-[85vh]">
+    <div className="p-8 bg-gray-100 h-[90vh]">
       <h1 className="text-2xl font-bold mb-6 text-center text-black">Gestion des Utilisateurs</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

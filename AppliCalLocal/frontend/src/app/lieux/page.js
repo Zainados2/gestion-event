@@ -89,7 +89,7 @@ const AddressesPage = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100 h-[85vh]">
+    <div className="p-8 bg-gray-100 h-[90vh]">
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Gestion des Adresses</h1>
 
       <div className="flex flex-col md:flex-row gap-6">
