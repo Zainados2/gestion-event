@@ -4,16 +4,15 @@ import { useAuth } from '../contexts/authContext';
 
 const PolitiqueDeConfidentialite = () => {
   const { isAuthenticated } = useAuth();
+  console.log(isAuthenticated)
 
   return (
     <div className="bg-white text-gray-800 h-[100vh]">
-      {isAuthenticated && (
         <div className="absolute top-5 left-5">
           <Link href="/" className="text-purple-600 font-semibold text-lg hover:text-purple-800 underline">
             Retour à l'accueil
           </Link>
         </div>
-      )}
       
       <div className="max-w-none mx-auto p-8 sm:p-12">
         <h1 className="text-3xl font-bold text-center mb-5">Politique de confidentialité</h1>
