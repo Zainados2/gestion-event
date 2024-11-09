@@ -7,7 +7,7 @@ const PolitiqueDeConfidentialite = () => {
 
   return (
     <div className="bg-white text-gray-800 h-[100vh]">
-      {!isAuthenticated && (
+      {isAuthenticated && (
         <div className="absolute top-5 left-5">
           <Link href="/" className="text-purple-600 font-semibold text-lg hover:text-purple-800 underline">
             Retour à l'accueil
