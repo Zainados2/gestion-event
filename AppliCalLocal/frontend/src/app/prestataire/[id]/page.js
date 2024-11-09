@@ -1,6 +1,5 @@
 "use client";
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import Loader from '../../../components/Loader';
@@ -24,31 +23,34 @@ export default function UserDetails() {
   const [hoursByMonth, setHoursByMonth] = useState({});
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Mois par défaut
   const [selectedYear, setSelectedYear] = useState(currentYear); // Année par défaut
-  const { isAuthenticated, userRole } = useAuth();
+  const { isAuthenticated, userRole, userId } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
-    if (id) {
-      fetchUser();
+    // Vérifier si l'utilisateur est un gérant ou l'utilisateur correspondant à l'ID dans l'URL
+    if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
+      if (id) {
+        fetchUser();
+      }
+    } else {
+      setError('Accès non autorisé.');
     }
-  }
-  }, [id, isAuthenticated, userRole]);
+  }, [id, isAuthenticated, userRole, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
       if (user) {
         fetchEvents();
       }
     }
-  }, [user, isAuthenticated, userRole]);
+  }, [user, isAuthenticated, userRole, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
       if (events.length > 0) {
         calculateHoursByMonthAndYear();
       }
     }
-  }, [events, selectedMonth, selectedYear, isAuthenticated, userRole]);
+  }, [events, selectedMonth, selectedYear, isAuthenticated, userRole, userId]);
 
   const fetchUser = async () => {
     try {
@@ -165,37 +167,37 @@ export default function UserDetails() {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-    <h1 className="text-4xl font-bold text-center mb-8">Détails du prestataire</h1>
-    
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      <div className="bg-purple-400 text-white shadow-lg rounded-lg p-6 text-center flex flex-col items-center justify-center">
-        <h2 className="text-3xl font-semibold mb-2">{capitalize(user.username)}</h2>
-        <p className="text-2xl font-medium">{capitalize(user.role)}</p>
-      </div>
-      <div className="bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-4">Filtrer par mois et année</h2>
-        <select
-          value={selectedMonth}
-          onChange={e => setSelectedMonth(Number(e.target.value))}
-          className="w-full border border-gray-300 rounded-lg p-2 mb-4"
-        >
-          {months.map((month, index) => (
-            <option key={index + 1} value={index + 1}>
-              {month}
-            </option>
-          ))}
-        </select>
-        <select
-          value={selectedYear}
-          onChange={e => setSelectedYear(Number(e.target.value))}
-          className="w-full border border-gray-300 rounded-lg p-2"
-        >
-          {years.map((year, index) => (
-            <option key={index} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+      <h1 className="text-4xl font-bold text-center mb-8">Détails du prestataire</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="bg-purple-400 text-white shadow-lg rounded-lg p-6 text-center flex flex-col items-center justify-center">
+          <h2 className="text-3xl font-semibold mb-2">{capitalize(user.username)}</h2>
+          <p className="text-2xl font-medium">{capitalize(user.role)}</p>
+        </div>
+        <div className="bg-white shadow-lg rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Filtrer par mois et année</h2>
+          <select
+            value={selectedMonth}
+            onChange={e => setSelectedMonth(Number(e.target.value))}
+            className="w-full border border-gray-300 rounded-lg p-2 mb-4"
+          >
+            {months.map((month, index) => (
+              <option key={index + 1} value={index + 1}>
+                {month}
+              </option>
+            ))}
+          </select>
+          <select
+            value={selectedYear}
+            onChange={e => setSelectedYear(Number(e.target.value))}
+            className="w-full border border-gray-300 rounded-lg p-2"
+          >
+            {years.map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -208,25 +210,23 @@ export default function UserDetails() {
         <p className="text-lg"><strong>Heures à venir:</strong> {totalUpcomingHours.toFixed(2)} heures</p>
       </div>
 
-       <div className='bg-white shadow-lg rounded-lg p-6'>
-      <h2 className="text-2xl font-semibold mb-4">Événements du mois</h2>
-      {filteredEvents.length > 0 ? (
-        <div className="max-h-[600px] overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredEvents.map(event => (
-            <div key={event.id} className="border border-gray-300 rounded-lg p-4 mb-6 last:mb-0 bg-gray-50">
-              <h3 className="text-xl font-semibold mb-2">{capitalizeTitle(event.title)}</h3>
-              <p className="mb-2"><strong>Description:</strong> {capitalizeFirstWord(event.description)}</p>
-              <p className="mb-2"><strong>Début:</strong> {new Date(event.start).toLocaleDateString()}</p>
-              <p className="mb-2"><strong>Fin:</strong> {new Date(event.end).toLocaleDateString()}</p>
-              <p className="mb-2"><strong>Lieu:</strong> {capitalize(event.location_type)}</p>
-              <p className="mb-2"><strong>Heures travaillées:</strong> {event.hoursWorked ? event.hoursWorked.toFixed(2) : 'Non défini'} heures</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>Aucun événement trouvé pour le mois et l'année sélectionnés.</p>
-      )}
-       </div>
+      <div className='bg-white shadow-lg rounded-lg p-6'>
+        <h2 className="text-2xl font-semibold mb-4">Événements du mois</h2>
+        {filteredEvents.length > 0 ? (
+          <div className="max-h-[300px] overflow-y-auto">
+            {filteredEvents.map(event => (
+              <div key={event._id} className="bg-gray-200 p-4 mb-4 rounded-lg">
+                <h3 className="text-xl font-semibold">{event.title}</h3>
+                <p><strong>Start:</strong> {new Date(event.start).toLocaleString()}</p>
+                <p><strong>End:</strong> {new Date(event.end).toLocaleString()}</p>
+                <p><strong>Durée:</strong> {event.hoursWorked} heures</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Aucun événement trouvé pour ce mois.</p>
+        )}
+      </div>
     </div>
   );
 }
