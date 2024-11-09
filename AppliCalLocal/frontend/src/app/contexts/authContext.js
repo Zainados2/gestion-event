@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userRole, setUserRole] = useState('');
+  const [userId, setUserId] = useState('');
   const router = useRouter();
 
   // Fonction pour mettre à jour le contexte d'authentification
@@ -23,16 +24,19 @@ export function AuthProvider({ children }) {
         });
         if (response.data.success) {
           setUserRole(response.data.user.role);
+          setUserId(response.data.user.id);
           setIsAuthenticated(true);
         } else {
           router.push('/');
           setIsAuthenticated(false);
           setUserRole(''); 
+          setUserId(''); 
         }
       } catch (error) {
         router.push('/');
         setIsAuthenticated(false); 
         setUserRole(''); 
+        setUserId('');
       } finally {
         setIsLoading(false);
       }
@@ -58,7 +62,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userRole, updateAuthContext }}> {/* Transmettez updateAuthContext */}
+    <AuthContext.Provider value={{ isAuthenticated, userRole, userId, updateAuthContext }}> {/* Transmettez updateAuthContext */}
       {children}
     </AuthContext.Provider>
   );
