@@ -40,6 +40,9 @@ export default function Menu() {
                 <button onClick={() => router.push('/historique')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Historique</button>
               </>
             )}
+            {userRole !== 'gerant' && (
+              <button onClick={() => router.push(`/prestataire/${userId}`)} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none">Récapitulatif</button>
+            )}
             <button onClick={() => router.push('/calendar')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Calendrier</button>
             <button 
               className="hidden md:block bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4" 
@@ -47,9 +50,6 @@ export default function Menu() {
             >
               Déconnexion
             </button>
-            {userRole !== 'gerant' && (
-              <button onClick={() => router.push(`/prestataire/${userId}`)} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none">Récapitulatif</button>
-            )}
           </>
         )}
 
