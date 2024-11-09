@@ -26,10 +26,11 @@ export default function UserDetails() {
   const { isAuthenticated, userRole, userId } = useAuth();
 
   console.log(userId)
+  console.log(id)
 
   useEffect(() => {
     // Vérifier si l'utilisateur est un gérant ou l'utilisateur correspondant à l'ID dans l'URL
-    if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
+    if (isAuthenticated && (userId == id)) {
       if (id) {
         fetchUser();
       }
@@ -39,7 +40,7 @@ export default function UserDetails() {
   }, [id, isAuthenticated, userRole, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
+    if (isAuthenticated && (userId == id)) {
       if (user) {
         fetchEvents();
       }
@@ -47,7 +48,7 @@ export default function UserDetails() {
   }, [user, isAuthenticated, userRole, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
+    if (isAuthenticated && (userId == id)) {
       if (events.length > 0) {
         calculateHoursByMonthAndYear();
       }
