@@ -160,9 +160,9 @@ export default function Modal({
           </div>
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label htmlFor='lieu' className="block mb-1 text-sm font-semibold text-gray-800">Type de lieu</label>
+            <label id='lieu' htmlFor='lieu' className="block mb-1 text-sm font-semibold text-gray-800">Type de lieu</label>
             <div className="relative">
-              <button id='lieu' aria-label='selection type photo'
+              <button aria-labelledby="lieu" id='lieu' aria-label='selection type photo'
                 onClick={() => setShowLocationTypeDropdown(!showLocationTypeDropdown)}
                 className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
               >
@@ -199,9 +199,9 @@ export default function Modal({
 
           {locationType === 'shooting' && (
             <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-              <label htmlFor='decor' className="block mb-1 text-sm font-semibold text-gray-800">Décor</label>
+              <label id='decor' htmlFor='decor' className="block mb-1 text-sm font-semibold text-gray-800">Décor</label>
               <div className="relative">
-                <button id='decor' aria-label='selection decor'
+                <button aria-labelledby="decor" id='decor' aria-label='selection decor'
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
                 >
@@ -289,9 +289,9 @@ export default function Modal({
           )}
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label htmlFor='adresse' className="block mb-1 text-sm font-semibold text-gray-800">Adresse</label>
+            <label id='adresse' htmlFor='adresse' className="block mb-1 text-sm font-semibold text-gray-800">Adresse</label>
             <div className="relative">
-              <button id='adresse' aria-label='selection adresse'
+              <button aria-labelledby="adresse" id='adresse' aria-label='selection adresse'
                 onClick={() => setShowAddressDropdown(!showAddressDropdown)}
                 className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
               >
@@ -336,9 +336,9 @@ export default function Modal({
               <span className="text-gray-700 text-sm flex-grow text-left">Marquer comme complété</span>
             </label>
           </div>
-
+            <fieldset> 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner lg:col-span-2">
-            <label htmlFor='participant' className="block mb-1 text-sm font-semibold text-gray-800">Participants</label>
+            <legend><label htmlFor='participant' className="block mb-1 text-sm font-semibold text-gray-800">Participants</label></legend>
             <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {[
                 { value: 'photographe', label: 'Photographe' },
@@ -362,6 +362,7 @@ export default function Modal({
             </div>
             {errors.participants && <p className="text-red-500 text-xs mt-1">{errors.participants}</p>}
           </div>
+          </fieldset> 
         </div>
 
         <div className="mt-4 flex justify-between">
