@@ -137,7 +137,7 @@ export default function Modal({
         <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
             <label className="block mb-1 text-sm font-semibold text-gray-800">Titre</label>
-            <input
+            <input aria-label='title'
             name='title'
               type="text"
               value={title}
@@ -149,7 +149,7 @@ export default function Modal({
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
             <label className="block mb-1 text-sm font-semibold text-gray-800">Description</label>
-            <textarea
+            <textarea aria-label='description'
             name='description'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -162,7 +162,7 @@ export default function Modal({
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
             <label className="block mb-1 text-sm font-semibold text-gray-800">Type de lieu</label>
             <div className="relative">
-              <button
+              <button aria-label='selection type photo'
                 onClick={() => setShowLocationTypeDropdown(!showLocationTypeDropdown)}
                 className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
               >
@@ -201,7 +201,7 @@ export default function Modal({
             <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
               <label className="block mb-1 text-sm font-semibold text-gray-800">Décor</label>
               <div className="relative">
-                <button
+                <button aria-label='selection decor'
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
                 >
@@ -268,7 +268,7 @@ export default function Modal({
                       key={article.id}
                       className={itemClasses}
                     >
-                      <input
+                      <input aria-label='selection article'
                         type="checkbox"
                         value={article.id}
                         checked={selectedArticles.includes(article.id.toString())}
@@ -291,7 +291,7 @@ export default function Modal({
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
             <label className="block mb-1 text-sm font-semibold text-gray-800">Adresse</label>
             <div className="relative">
-              <button
+              <button aria-label='selection adresse'
                 onClick={() => setShowAddressDropdown(!showAddressDropdown)}
                 className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
               >
@@ -327,7 +327,7 @@ export default function Modal({
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
             <label className="block mb-1 text-sm font-semibold text-gray-800">Etat de l'événement</label>
             <label className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition">
-              <input
+              <input aria-label='selection etat evenement'
                 type="checkbox"
                 checked={isCompleted}
                 onChange={() => setIsCompleted(!isCompleted)}
@@ -348,7 +348,7 @@ export default function Modal({
                 { value: 'chauffeur', label: 'Chauffeur' },
               ].map(participant => (
                 <label key={participant.value} className="flex items-center p-2 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition h-10">
-                  <input
+                  <input aria-label='selection participant'
                   name='participants'
                     type="checkbox"
                     value={participant.value}
@@ -366,23 +366,23 @@ export default function Modal({
 
         <div className="mt-4 flex justify-between">
           {event && (
-            <button
+            <button aria-label='supprimer'
               onClick={handleDelete}
-              className="bg-red-500 text-white py-1 px-4 rounded-lg hover:bg-red-600 transition"
+              className="bg-red-600 text-white py-1 px-4 rounded-lg hover:bg-red-700 transition"
             >
               Supprimer
             </button>
           )}
           <div className="space-x-2">
-            <button
+            <button aria-label='annuler'
               onClick={onClose}
               className="bg-gray-300 text-gray-800 py-1 px-4 rounded-lg hover:bg-gray-400 transition"
             >
               Annuler
             </button>
-            <button
+            <button aria-label='valider'
               onClick={handleSave}
-              className="bg-blue-500 text-white py-1 px-4 rounded-lg hover:bg-blue-600 transition"
+              className="bg-blue-600 text-white py-1 px-4 rounded-lg hover:bg-blue-700 transition"
             >
               {event ? 'Sauvegarder' : 'Créer'}
             </button>

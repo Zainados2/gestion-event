@@ -175,7 +175,7 @@ const ModalLecture = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-60 z-50 p-4">
       <div className="bg-white rounded-xl p-8 shadow-2xl w-full max-w-6xl mx-auto relative border border-gray-200">
-        <button
+        <button aria-label='fermer'
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"
         >
@@ -213,14 +213,14 @@ const ModalLecture = ({
                       const isValidationButton = article.isValidated === 0 || article.isValidated === false;
                       const buttonText = isValidationButton ? 'Valider' : 'Annuler';
                       const buttonClass = isValidationButton
-                        ? 'bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition-colors'
-                        : 'bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition-colors';
+                        ? 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'
+                        : 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors';
                       const buttonAction = isValidationButton ? handleValidateArticle : handleInvalidateArticle;
 
                       return (
                         <li key={article.id} className="flex items-center justify-between">
                           {article.title}
-                          <button
+                          <button aria-label='valider article'
                             onClick={() => buttonAction(article.id)}
                             disabled={loadingArticleId === article.id}
                             className={buttonClass}
@@ -240,10 +240,10 @@ const ModalLecture = ({
                   <div className="mt-6 flex items-center justify-between">
                     <span className="font-semibold text-gray-800">{event.decorName}</span>
                     <div className="flex space-x-4">
-                      <button
+                      <button aria-label='valider decors'
                         onClick={event.decorValidationStatus ? handleInvalidateDecor : handleValidateDecor}
                         disabled={loadingValidationDecorId === 'decor'}
-                        className={event.decorValidationStatus ? 'bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition-colors' : 'bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition-colors'}
+                        className={event.decorValidationStatus ? 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors' : 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'}
                       >
                         {loadingValidationDecorId === 'decor' ? 'Chargement...' : event.decorValidationStatus ? 'Annuler Décor' : 'Valider Décor'}
                       </button>
@@ -258,10 +258,10 @@ const ModalLecture = ({
                   <div className="mt-6 flex items-center justify-between">
                     <span className="font-semibold text-gray-800">{event.decorName}</span>
                     <div className="flex space-x-4">
-                      <button
+                      <button aria-label='valider decors'
                         onClick={event.decorMontageStatus ? handleInvalidateMontageDecor : handleValidateMontageDecor}
                         disabled={loadingMontageDecorId === 'montage_decor'}
-                        className={event.decorMontageStatus ? 'bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition-colors' : 'bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition-colors'}
+                        className={event.decorMontageStatus ? 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors' : 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'}
                       >
                         {loadingMontageDecorId === 'montage_decor' ? 'Chargement...' : event.decorMontageStatus ? 'Annuler montage Décor' : 'Valider montage Décor'}
                       </button>
@@ -271,10 +271,10 @@ const ModalLecture = ({
                   <div className="mt-6 flex items-center justify-between">
                     <span className="font-semibold text-gray-800">{event.decorName}</span>
                     <div className="flex space-x-4">
-                      <button
+                      <button aria-label='valider demontage decors'
                         onClick={event.decorDemontageStatus ? handleInvalidateDemontageDecor : handleValidateDemontageDecor}
                         disabled={loadingDemontageDecorId === 'demontage_decor'}
-                        className={event.decorDemontageStatus ? 'bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition-colors' : 'bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition-colors'}
+                        className={event.decorDemontageStatus ? 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors' : 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'}
                       >
                         {loadingDemontageDecorId === 'demontage_decor' ? 'Chargement...' : event.decorDemontageStatus ? 'Annuler démontage Décor' : 'Valider démontage Décor'}
                       </button>
