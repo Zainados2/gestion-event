@@ -2,6 +2,7 @@ import React from "react";
 import "./globals.css";
 import Menu from "../components/menu";
 import { AuthProvider } from './contexts/authContext';
+import Footer from "../components/footer";
 
 
 export const metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
           <Menu />
           {children}
         </AuthProvider>
+          <Footer />
       </body>
     </html>
   );
