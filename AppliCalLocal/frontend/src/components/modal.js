@@ -136,8 +136,8 @@ export default function Modal({
         </h2>
         <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label className="block mb-1 text-sm font-semibold text-gray-800">Titre</label>
-            <input aria-label='title'
+            <label htmlFor='title' className="block mb-1 text-sm font-semibold text-gray-800">Titre</label>
+            <input id='title' aria-label='title'
             name='title'
               type="text"
               value={title}
@@ -148,8 +148,8 @@ export default function Modal({
           </div>
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label className="block mb-1 text-sm font-semibold text-gray-800">Description</label>
-            <textarea aria-label='description'
+            <label htmlFor='description' className="block mb-1 text-sm font-semibold text-gray-800">Description</label>
+            <textarea id='description' aria-label='description'
             name='description'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -160,9 +160,9 @@ export default function Modal({
           </div>
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label className="block mb-1 text-sm font-semibold text-gray-800">Type de lieu</label>
+            <label htmlFor='lieu' className="block mb-1 text-sm font-semibold text-gray-800">Type de lieu</label>
             <div className="relative">
-              <button aria-label='selection type photo'
+              <button id='lieu' aria-label='selection type photo'
                 onClick={() => setShowLocationTypeDropdown(!showLocationTypeDropdown)}
                 className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
               >
@@ -199,9 +199,9 @@ export default function Modal({
 
           {locationType === 'shooting' && (
             <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-              <label className="block mb-1 text-sm font-semibold text-gray-800">Décor</label>
+              <label htmlFor='decor' className="block mb-1 text-sm font-semibold text-gray-800">Décor</label>
               <div className="relative">
-                <button aria-label='selection decor'
+                <button id='decor' aria-label='selection decor'
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
                 >
@@ -251,7 +251,7 @@ export default function Modal({
 
           {locationType === 'studio' && (
             <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-              <label className="block mb-1 text-sm font-semibold text-gray-800">Articles</label>
+              <label htmlFor='article' className="block mb-1 text-sm font-semibold text-gray-800">Articles</label>
               <div className="max-h-32 overflow-y-auto border border-gray-300 p-1 rounded-lg">
                 {articles.map(article => {
                   const isProblematic = article.deteriorated || article.lost;
@@ -268,7 +268,7 @@ export default function Modal({
                       key={article.id}
                       className={itemClasses}
                     >
-                      <input aria-label='selection article'
+                      <input id='article' aria-label='selection article'
                         type="checkbox"
                         value={article.id}
                         checked={selectedArticles.includes(article.id.toString())}
@@ -289,9 +289,9 @@ export default function Modal({
           )}
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label className="block mb-1 text-sm font-semibold text-gray-800">Adresse</label>
+            <label htmlFor='adresse' className="block mb-1 text-sm font-semibold text-gray-800">Adresse</label>
             <div className="relative">
-              <button aria-label='selection adresse'
+              <button id='adresse' aria-label='selection adresse'
                 onClick={() => setShowAddressDropdown(!showAddressDropdown)}
                 className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
               >
@@ -325,9 +325,9 @@ export default function Modal({
           </div>
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
-            <label className="block mb-1 text-sm font-semibold text-gray-800">Etat de l'événement</label>
+            <label htmlFor='etatevent' className="block mb-1 text-sm font-semibold text-gray-800">Etat de l'événement</label>
             <label className="flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition">
-              <input aria-label='selection etat evenement'
+              <input id='etatevent' aria-label='selection etat evenement'
                 type="checkbox"
                 checked={isCompleted}
                 onChange={() => setIsCompleted(!isCompleted)}
@@ -338,7 +338,7 @@ export default function Modal({
           </div>
 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner lg:col-span-2">
-            <label className="block mb-1 text-sm font-semibold text-gray-800">Participants</label>
+            <label htmlFor='participant' className="block mb-1 text-sm font-semibold text-gray-800">Participants</label>
             <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {[
                 { value: 'photographe', label: 'Photographe' },
@@ -348,7 +348,7 @@ export default function Modal({
                 { value: 'chauffeur', label: 'Chauffeur' },
               ].map(participant => (
                 <label key={participant.value} className="flex items-center p-2 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition h-10">
-                  <input aria-label='selection participant'
+                  <input id='participant' aria-label='selection participant'
                   name='participants'
                     type="checkbox"
                     value={participant.value}

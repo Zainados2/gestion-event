@@ -141,7 +141,7 @@ const AddressesPage = () => {
                     <div className="flex flex-col sm:flex-row mt-4 sm:mt-0 sm:space-x-2">
                       <button aria-label='modifier'
                         onClick={() => setEditingAddress(address)}
-                        className="bg-lime-600 text-white py-1 px-3 rounded hover:bg-lime-700 transition"
+                        className="bg-lime-700 text-white py-1 px-3 rounded hover:bg-lime-800 transition"
                       >
                         Modifier
                       </button>

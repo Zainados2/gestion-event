@@ -302,7 +302,7 @@ export default function DecorArticle() {
                   </div>
                   <div className="flex space-x-2 mt-2">
                     <button aria-label='modifier'
-                      className="bg-lime-600 text-white px-3 py-1 rounded hover:bg-lime-700 transition"
+                      className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
                       onClick={() => {
                         setEditingArticle(article);
                         setIsArticleModalOpen(true);
@@ -343,7 +343,7 @@ export default function DecorArticle() {
             </h3>
             <div className="flex space-x-2">
               <button
-                className="bg-lime-600 text-white px-3 py-1 rounded hover:bg-lime-700 transition"
+                className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
                 onClick={() => {
                   handleSelectDecor(decor);
                   setIsDecorModalOpen(true);

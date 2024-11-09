@@ -642,8 +642,8 @@ end: info.event.allDay
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col items-center p-4 lg:p-6 bg-gray-100 h-[100vh]">
-      <div style={{fontSize:'36px', marginBottom:'30px', color:'#000', display:'flex', justifyContent:'center'}}>Planning des shootings</div>
+    <div className="flex flex-col items-center p-4 lg:p-6 bg-gray-100">
+      <h1 style={{fontSize:'36px', marginBottom:'30px', color:'#000', display:'flex', justifyContent:'center'}}>Planning des shootings</h1>
       <div className="relative w-full max-w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl bg-white p-4 md:p-6 rounded-lg shadow-lg">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
