@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link'; 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const PolitiqueDeConfidentialite = () => {
   const [hasToken, setHasToken] = useState(false);
