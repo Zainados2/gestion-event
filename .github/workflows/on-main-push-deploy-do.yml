@@ -27,7 +27,7 @@ jobs:
             docker-compose down
             
             # Nettoyer les images non utilisées sans affecter les volumes
-            docker image prune -f
+            # docker image prune -f
             
             # Mettre à jour le code
             cd ../..
@@ -39,3 +39,5 @@ jobs:
             
             # Recréer les conteneurs et mettre à jour les images si nécessaire
             docker-compose up -d --build
+
+            docker builder prune --filter "until=24h"

@@ -5,11 +5,11 @@ import Link from 'next/link';
 const Footer = () => {
 
   return (
-    <footer className="text-center p-5 bg-gray-100 text-sm text-gray-700 mt-5">
+    <footer className="text-center p-5 text-sm text-gray-700 border-t-violet-600">
       <p>
-        En vous connectant à l'application, vous acceptez la gestion de vos données personnelles conformément à notre
+        En vous connectant à l'application, vous acceptez la gestion de vos données personnelles conformément à notre 
         <Link href="/politiquedeconfidentialite">
-          <a className="text-blue-600 hover:text-blue-800 underline"> politique de confidentialité</a>
+          <a className="text-purple-600 hover:text-purple-800 underline">politique de confidentialité</a>
         </Link>.
       </p>
     </footer>

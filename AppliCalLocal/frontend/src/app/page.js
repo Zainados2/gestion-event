@@ -34,7 +34,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-[90vh] bg-gray-100">
       <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg lg:w-1/3">
         <h3 className="text-2xl font-bold text-gray-900 mb-6">Connexion</h3>
         {error && <p className="text-red-500 mb-4">{error}</p>}
