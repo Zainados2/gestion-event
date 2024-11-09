@@ -19,7 +19,7 @@ router.delete('/users/:id', authMiddleware.verifyToken, authMiddleware.verifyRol
 // Obtenir l'utilisateur actuel
 router.get('/me', authMiddleware.verifyToken, userController.getCurrentUser);
 
-router.get('/users/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), userController.getUserById)
+router.get('/users/:id', authMiddleware.verifyToken, userController.getUserById)
 
 // Route protégée (exemple)
 router.get('/admin', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), (req, res) => {
