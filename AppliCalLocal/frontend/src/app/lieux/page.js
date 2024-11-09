@@ -97,16 +97,16 @@ const AddressesPage = () => {
         <div className="bg-white p-4 rounded-lg shadow-md flex-1">
           <h2 className="text-xl font-semibold mb-6 text-black">Créer une Adresse</h2>
           {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-          <select
+          <select aria-label='selection type photo'
             data-testid="create-address-type"
             value={newAddress.type}
             onChange={(e) => setNewAddress({ ...newAddress, type: e.target.value })}
             className="p-3 border border-gray-300 rounded mb-6 w-full focus:ring-purple-600 focus:border-purple-600"
           >
-            <option value="studio">Studio</option>
-            <option value="shooting">Shooting</option>
+            <option aria-label='studio' value="studio">Studio</option>
+            <option aria-label='studio' value="shooting">Shooting</option>
           </select>
-          <input
+          <input aria-label='adresse'
             type="text"
             data-testid="address-name"
             placeholder="Nom de l'adresse"
@@ -114,14 +114,14 @@ const AddressesPage = () => {
             onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })}
             className="p-3 border border-gray-300 rounded mb-6 w-full focus:ring-purple-600 focus:border-purple-600"
           />
-          <input
+          <input aria-label='emplacement'
             type="text"
             placeholder="Emplacement de l'adresse"
             value={newAddress.location}
             onChange={(e) => setNewAddress({ ...newAddress, location: e.target.value })}
             className="p-3 border border-gray-300 rounded mb-6 w-full focus:ring-purple-600 focus:border-purple-600"
           />
-          <button
+          <button aria-label='créer'
             onClick={handleCreateAddress}
             className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition"
           >
@@ -139,13 +139,13 @@ const AddressesPage = () => {
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <span className="text-gray-800">{address.name} - {address.location} ({address.type})</span>
                     <div className="flex flex-col sm:flex-row mt-4 sm:mt-0 sm:space-x-2">
-                      <button
+                      <button aria-label='modifier'
                         onClick={() => setEditingAddress(address)}
-                        className="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 transition"
+                        className="bg-lime-600 text-white py-1 px-3 rounded hover:bg-lime-700 transition"
                       >
                         Modifier
                       </button>
-                      <button
+                      <button aria-label='supprimer'
                         onClick={() => handleDeleteAddress(address.id)}
                         className="bg-red-600 text-white py-1 px-3 rounded hover:bg-red-700 transition mt-2 sm:mt-0"
                       >
@@ -166,37 +166,37 @@ const AddressesPage = () => {
           <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3 max-h-[80%] overflow-y-auto">
             <h2 className="text-xl font-semibold mb-4 text-black">Modifier l'Adresse</h2>
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-            <input
+            <input aria-label='nom adresse'
               type="text"
               placeholder="Nom modifié de l'adresse"
               value={editingAddress.name}
               onChange={(e) => setEditingAddress({ ...editingAddress, name: e.target.value })}
               className="p-3 border border-gray-300 rounded mb-4 w-full focus:ring-purple-600 focus:border-purple-600"
             />
-            <input
+            <input aria-label='emplacement adresse'
               type="text"
               placeholder="Emplacement modifié de l'adresse"
               value={editingAddress.location}
               onChange={(e) => setEditingAddress({ ...editingAddress, location: e.target.value })}
               className="p-3 border border-gray-300 rounded mb-4 w-full focus:ring-purple-600 focus:border-purple-600"
             />
-            <select
+            <select aria-label='choix type photo'
               data-testid="edit-address-type"
               value={editingAddress.type}
               onChange={(e) => setEditingAddress({ ...editingAddress, type: e.target.value })}
               className="p-3 border border-gray-300 rounded mb-4 w-full focus:ring-purple-600 focus:border-purple-600"
             >
-              <option value="studio">Studio</option>
-              <option value="shooting">Shooting</option>
+              <option aria-label='studio' value="studio">Studio</option>
+              <option aria-label='shooting' value="shooting">Shooting</option>
             </select>
             <div className='flex lg:flex-row flex-col justify-left'>
-              <button
+              <button aria-label='mettre à jour'
                 onClick={handleUpdateAddress}
                 className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-500 transition"
               >
                 Mettre à jour Adresse
               </button>
-              <button
+              <button aria-label='annuler'
                 onClick={() => setEditingAddress(null)}
                 className="bg-gray-400 text-gray-800 py-2 px-4 rounded hover:bg-gray-500 transition mt-2 lg:mt-0 lg:ml-2 ml-0"
               >

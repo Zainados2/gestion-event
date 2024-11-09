@@ -277,24 +277,26 @@ export default function Historique() {
           {/* Filtrer par mois */}
           <div className="bg-gray-50 border border-gray-300 shadow-lg rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Filtrer par mois et année</h2>
-            <select
+            <label htmlFor='choixmois' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
+            <select id='choixmois' aria-label='choix du mois'
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(Number(e.target.value))}
               className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {months.map((month, index) => (
-                <option key={index + 1} value={index + 1}>
+                <option aria-label='mois' key={index + 1} value={index + 1}>
                   {month}
                 </option>
               ))}
             </select>
-            <select
+            <label htmlFor='choixannee' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner l'année'</label>
+            <select aria-label='choix annnée' id='choixannee'
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {years.map((year, index) => (
-                <option key={index} value={year}>
+                <option aria-label='annee' key={index} value={year}>
                   {year}
                 </option>
               ))}

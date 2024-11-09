@@ -76,9 +76,9 @@ export default function Prestataire() {
               </p>
             </div>
             <div className="p-4 bg-gray-50 border-t border-gray-200 flex justify-center">
-              <button
+              <button aria-label='voir les détails'
                 onClick={() => handleViewDetails(user.id)}
-                className="bg-[#A855F7] text-white px-4 py-2 rounded-lg hover:bg-[#9333ea] transition-colors font-semibold"
+                className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
               >
                 Voir les détails
               </button>

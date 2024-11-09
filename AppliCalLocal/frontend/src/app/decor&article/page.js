@@ -262,7 +262,7 @@ export default function DecorArticle() {
         {/* Création d'Article */}
         <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Créer un Article</h2>
-          <button
+          <button aria-label='modale creation article'
             className="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700 transition"
             onClick={() => {
               setEditingArticle(null); // Clear editing state
@@ -276,7 +276,7 @@ export default function DecorArticle() {
         {/* Création de Décor */}
         <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Créer un Décor</h2>
-          <button
+          <button aria-label='modale création décor'
             className="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700 transition"
             onClick={() => {
               setEditingDecor(null); // Clear editing state
@@ -301,8 +301,8 @@ export default function DecorArticle() {
                     </span>
                   </div>
                   <div className="flex space-x-2 mt-2">
-                    <button
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                    <button aria-label='modifier'
+                      className="bg-lime-600 text-white px-3 py-1 rounded hover:bg-lime-700 transition"
                       onClick={() => {
                         setEditingArticle(article);
                         setIsArticleModalOpen(true);
@@ -310,8 +310,8 @@ export default function DecorArticle() {
                     >
                       Modifier
                     </button>
-                    <button
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                    <button aria-label='supprimer'
+                      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700transition"
                       onClick={() => handleDeleteArticle(article.id)}
                     >
                       Supprimer
@@ -343,7 +343,7 @@ export default function DecorArticle() {
             </h3>
             <div className="flex space-x-2">
               <button
-                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                className="bg-lime-600 text-white px-3 py-1 rounded hover:bg-lime-700 transition"
                 onClick={() => {
                   handleSelectDecor(decor);
                   setIsDecorModalOpen(true);
@@ -351,8 +351,8 @@ export default function DecorArticle() {
               >
                 Modifier
               </button>
-              <button
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+              <button aria-label='supprimer'
+                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700transition"
                 onClick={() => handleDeleteDecor(decor.id)}
               >
                 Supprimer
@@ -372,7 +372,7 @@ export default function DecorArticle() {
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
             {editingArticle ? 'Modifier l\'Article' : 'Créer un Article'}
           </h2>
-          <input
+          <input aria-label='nom article'
             type="text"
             placeholder="Nom de l'article"
             value={editingArticle ? editingArticle.title : newArticle.title}
@@ -388,7 +388,7 @@ export default function DecorArticle() {
           />
           {articleError && <p className="text-red-600 mb-4">{articleError}</p>}
           <div className="flex items-center mb-4">
-            <input
+            <input aria-label='deteriorated'
               type="checkbox"
               id="deteriorated"
               checked={editingArticle ? editingArticle.deteriorated : newArticle.deteriorated}
@@ -405,7 +405,7 @@ export default function DecorArticle() {
             <label htmlFor="deteriorated" className="text-gray-800">Détérioré</label>
           </div>
           <div className="flex items-center mb-4">
-            <input
+            <input aria-label='lost'
               type="checkbox"
               id="lost"
               checked={editingArticle ? editingArticle.lost : newArticle.lost}
@@ -421,7 +421,7 @@ export default function DecorArticle() {
             />
             <label htmlFor="lost" className="text-gray-800">Perdu</label>
           </div>
-          <button
+          <button aria-label='valider'
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
             onClick={() => {
               if (editingArticle) {
@@ -442,7 +442,7 @@ export default function DecorArticle() {
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
             {editingDecor ? 'Modifier le Décor' : 'Créer un Décor'}
           </h2>
-          <input
+          <input aria-label='nom décor'
             type="text"
             placeholder="Nom du décor"
             value={editingDecor ? editingDecor.name : newDecor.name}
@@ -463,7 +463,7 @@ export default function DecorArticle() {
               {allArticles.map(article => (
                 <li key={article.id} className={`p-2 border rounded-md cursor-pointer ${article.deteriorated || article.lost ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-100 hover:bg-gray-200'}`}>
                   <label className="flex items-center space-x-3">
-                    <input
+                    <input aria-label='selection article'
                       type="checkbox"
                       checked={editingDecor ? editingDecorArticleIds.includes(article.id) : selectedArticleIds.includes(article.id)}
                       disabled={article.deteriorated || article.lost}
@@ -496,7 +496,7 @@ export default function DecorArticle() {
               ))}
             </ul>
           </div>
-          <button
+          <button aria-label='valider'
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
             onClick={() => {
               if (editingDecor) {

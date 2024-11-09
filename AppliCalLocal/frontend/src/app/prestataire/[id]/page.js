@@ -175,30 +175,32 @@ export default function UserDetails() {
       <h1 className="text-4xl font-bold text-center mb-8">Détails du prestataire</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-purple-400 text-white shadow-lg rounded-lg p-6 text-center flex flex-col items-center justify-center">
+        <div className="bg-purple-600 text-white shadow-lg rounded-lg p-6 text-center flex flex-col items-center justify-center">
           <h2 className="text-3xl font-semibold mb-2">{capitalize(user.username)}</h2>
           <p className="text-2xl font-medium">{capitalize(user.role)}</p>
         </div>
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Filtrer par mois et année</h2>
-          <select
+          <label htmlFor='choixmois' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
+          <select id='choixmois' aria-label='choix du mois'
             value={selectedMonth}
             onChange={e => setSelectedMonth(Number(e.target.value))}
             className="w-full border border-gray-300 rounded-lg p-2 mb-4"
           >
             {months.map((month, index) => (
-              <option key={index + 1} value={index + 1}>
+              <option aria-label='mois' key={index + 1} value={index + 1}>
                 {month}
               </option>
             ))}
           </select>
-          <select
+          <label htmlFor='choixannee' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
+          <select aria-label='selection année' id='choixannee'
             value={selectedYear}
             onChange={e => setSelectedYear(Number(e.target.value))}
             className="w-full border border-gray-300 rounded-lg p-2"
           >
             {years.map((year, index) => (
-              <option key={index} value={year}>
+              <option aria-label='annees' key={index} value={year}>
                 {year}
               </option>
             ))}

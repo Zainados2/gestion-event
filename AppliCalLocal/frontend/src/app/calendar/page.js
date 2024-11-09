@@ -642,8 +642,9 @@ end: info.event.allDay
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col items-center p-4 lg:p-6 bg-gray-100 h-[90vh]">
+    <div className="flex flex-col items-center p-4 lg:p-6 bg-gray-100 h-[100vh]">
       <div className="relative w-full max-w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl bg-white p-4 md:p-6 rounded-lg shadow-lg">
+      <div classname="text-4xl mb-8 text-black flex justify-center">Planning des shootings</div>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           timeZone="Europe/Paris"
@@ -660,7 +661,7 @@ end: info.event.allDay
           end: event.allDay 
             ? moment(event.end).endOf('day').format('YYYY-MM-DD') 
             : moment(event.end).format(),
-            allDay: event.allDay,description: event.description,participants: event.participants,isCompleted: event.isCompleted,location_type: event.location_type,decor_id: event.decor_id,article_ids: event.article_ids,address_id: event.address_id,backgroundColor: event.isCompleted ? '#2c3e50' : '#c084fc',borderColor: event.isCompleted ? '#2c3e50' : '#c084fc',
+            allDay: event.allDay,description: event.description,participants: event.participants,isCompleted: event.isCompleted,location_type: event.location_type,decor_id: event.decor_id,article_ids: event.article_ids,address_id: event.address_id,backgroundColor: event.isCompleted ? '#2c3e50' : '#6f2eaf',borderColor: event.isCompleted ? '#2c3e50' : '#6f2eaf',
           }))}
           headerToolbar={{
             left: 'prev,next today',
