@@ -25,6 +25,8 @@ export default function UserDetails() {
   const [selectedYear, setSelectedYear] = useState(currentYear); // Année par défaut
   const { isAuthenticated, userRole, userId } = useAuth();
 
+  console.log(userId)
+
   useEffect(() => {
     // Vérifier si l'utilisateur est un gérant ou l'utilisateur correspondant à l'ID dans l'URL
     if (isAuthenticated && (userRole === 'gerant' || userId === id)) {
@@ -95,6 +97,8 @@ export default function UserDetails() {
       setEvents(eventsWithHours || []);
     } catch (error) {
       setError('Une erreur s\'est produite lors de la récupération des événements.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
