@@ -123,14 +123,14 @@ export default function ManageUsersAndRegister() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Bloc Inscription */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
-          <h3 className="text-xl font-semibold mb-4 text-black">Inscription</h3>
+          <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
           {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
           <form onSubmit={handleSubmit} className="flex flex-col flex-grow overflow-auto">
             <div className="mb-4">
               <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">
                 Nom d'utilisateur
               </label>
-              <input
+              <input aria-label='username'
                 type="text"
                 id="username"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
@@ -145,6 +145,7 @@ export default function ManageUsersAndRegister() {
                 Mot de passe
               </label>
               <input
+              aria-label='password'
                 type="password"
                 id="password"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
@@ -159,23 +160,24 @@ export default function ManageUsersAndRegister() {
                 Rôle
               </label>
               <select
+              aria-label='selection de role'
                 id="role"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
                 required
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
               >
-                <option value="">Sélectionnez un rôle</option>
-                <option value="gerant">Gérant</option>
-                <option value="photographe">Photographe</option>
-                <option value="photographeassistant">Photographe Assistant</option>
-                <option value="decorateur">Décorateur</option>
-                <option value="decorateurassistant">Décorateur Assistant</option>
-                <option value="chauffeur">Chauffeur</option>
+                <option aria-label='selectionnez un rôle' value="">Sélectionnez un rôle</option>
+                <option aria-label='gerant' value="gerant">Gérant</option>
+                <option aria-label='photographe' value="photographe">Photographe</option>
+                <option aria-label='photographeassistant' value="photographeassistant">Photographe Assistant</option>
+                <option aria-label='decorateur' value="decorateur">Décorateur</option>
+                <option aria-label='decorateurassistant' value="decorateurassistant">Décorateur Assistant</option>
+                <option aria-label='chauffeur' value="chauffeur">Chauffeur</option>
               </select>
               {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
             </div>
-            <button type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            <button aria-label='inscrire' type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               S'inscrire
             </button>
           </form>
@@ -183,14 +185,14 @@ export default function ManageUsersAndRegister() {
 
         {/* Bloc Liste des Utilisateurs */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
-          <h3 className="text-xl font-semibold mb-4 text-black">Liste des Utilisateurs</h3>
+          <h2 className="text-xl font-semibold mb-4 text-black">Liste des Utilisateurs</h2>
           {error.global && <div className="text-red-500 mb-4">{error.global}</div>}
           <div className="flex-1 overflow-auto">
             <ul className="space-y-4">
               {users.map(user => (
                 <li key={user.id} className="flex lg:flex-row flex-col items-left justify-between p-4 border-b border-gray-200 rounded-lg bg-gray-50 shadow-sm">
                   <span className="text-gray-800">{user.username} - {user.role}</span>
-                  <button 
+                  <button aria-label='supprimer' 
                     onClick={() => handleDelete(user.id)} 
                     className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition mt-2 w-24"
                   >

@@ -34,7 +34,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-[90vh] bg-gray-100">
+    <div className="flex items-center justify-center h-[90vh] bg-gray-100 flex-col">
+      <div className='mb-14'>
+        <h1 className='text-5xl text-black'>Studio photo</h1>
+      </div>
       <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg lg:w-1/3">
         <h3 className="text-2xl font-bold text-gray-900 mb-6">Connexion</h3>
         {error && <p className="text-red-500 mb-4">{error}</p>}
@@ -44,6 +47,7 @@ export default function LoginPage() {
               Nom d'utilisateur
             </label>
             <input
+            aria-label='username'
             name='username'
               type="text"
               id="username"
@@ -58,6 +62,7 @@ export default function LoginPage() {
               Mot de passe
             </label>
             <input
+            aria-label='password'
             name='password'
               type="password"
               id="password"
@@ -67,7 +72,7 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="w-full text-white bg-purple-500 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+          <button aria-label='connexion' type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
             Se connecter
           </button>
         </form>
