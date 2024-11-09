@@ -5,7 +5,7 @@ import { useAuth } from '../app/contexts/authContext';
 import { useRouter } from 'next/navigation';
 
 export default function Menu() {
-  const { isAuthenticated, userRole, updateAuthContext } = useAuth();
+  const { isAuthenticated, userRole, userId, updateAuthContext } = useAuth();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -47,6 +47,9 @@ export default function Menu() {
             >
               Déconnexion
             </button>
+            {userRole !== 'gerant' && (
+              <button onClick={() => router.push(`/prestataire/${userId}`)} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none">Récapitulatif</button>
+            )}
           </>
         )}
 
@@ -114,6 +117,20 @@ export default function Menu() {
           className="block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none"
         >
           Historique
+        </button>
+      </>
+    )}
+    
+    {userRole === 'gerant' && (
+      <>
+        <button
+          onClick={() => {
+            router.push(`/prestataire/${userId}`);
+            setMenuOpen(false);
+          }}
+          className="block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none"
+        >
+          Récapitulatif
         </button>
       </>
     )}
