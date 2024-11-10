@@ -33,19 +33,19 @@ export default function Menu() {
           <>
             {userRole === 'gerant' && (
               <>
-                <button aria-label='admin' onClick={() => router.push('/admin')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none">Admin</button>
-                <button aria-label='decors' onClick={() => router.push('/decor&article')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Décors</button>
-                <button aria-label='lieux' onClick={() => router.push('/lieux')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Lieux</button>
-                <button aria-label='prestataire' onClick={() => router.push('/prestataire')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Prestataire</button>
-                <button aria-label='historique' onClick={() => router.push('/historique')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Historique</button>
+                <button aria-label='admin' onClick={() => router.push('/admin')} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none">Admin</button>
+                <button aria-label='decors' onClick={() => router.push('/decor&article')} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Décors</button>
+                <button aria-label='lieux' onClick={() => router.push('/lieux')} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Lieux</button>
+                <button aria-label='prestataire' onClick={() => router.push('/prestataire')} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Prestataire</button>
+                <button aria-label='historique' onClick={() => router.push('/historique')} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Historique</button>
               </>
             )}
             {userRole !== 'gerant' && (
-              <button aria-label='recapitulatif' onClick={() => router.push(`/prestataire/${userId}`)} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none">Récapitulatif</button>
+              <button aria-label='recapitulatif' onClick={() => router.push(`/prestataire/${userId}`)} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none">Récapitulatif</button>
             )}
-            <button aria-label='calendrier' onClick={() => router.push('/calendar')} className="hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Calendrier</button>
+            <button aria-label='calendrier' onClick={() => router.push('/calendar')} className="hidden md:block text-purple-600 focus:border-purple-700 hover:bg-purple-100 py-2 px-4 focus:outline-none ">Calendrier</button>
             <button aria-label='deconnexion' 
-              className="hidden md:block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4" 
+              className="hidden md:block bg-purple-600 focus:border-purple-700 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4" 
               onClick={handleLogout}
             >
               Déconnexion
