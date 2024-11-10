@@ -183,12 +183,16 @@ export default function Modal({
                   <div
                     onClick={() => handleLocationTypeSelect('shooting')}
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
+                    tabIndex="0"
+                      role="option"
                   >
                     Shooting en situation
                   </div>
                   <div
                     onClick={() => handleLocationTypeSelect('studio')}
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
+                    tabIndex="0"
+                      role="option"
                   >
                     En studio
                   </div>
@@ -225,6 +229,8 @@ export default function Modal({
                       return (
                         <div
                           key={decorItem.id}
+                          tabIndex="0"
+                      role="option"
                           onClick={() => !isDisabled && handleDecorSelect(decorItem.id)}
                           className={`px-4 py-2 flex justify-between items-center text-sm ${
                             isDisabled
@@ -314,6 +320,8 @@ export default function Modal({
                       key={addr.id}
                       onClick={() => handleAddressSelect(addr.id)}
                       className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
+                      tabIndex="0"
+                      role="option"
                     >
                       {addr.name}
                     </div>
@@ -338,7 +346,7 @@ export default function Modal({
           </div>
             <fieldset> 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner lg:col-span-2">
-            <legend><label htmlFor='participant' className="block mb-1 text-sm font-semibold text-gray-800">Participants</label></legend>
+            <legend className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"><label htmlFor='participant' className="block mb-1 text-sm font-semibold text-gray-800">Participants</label></legend>
             <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {[
                 { value: 'photographe', label: 'Photographe' },

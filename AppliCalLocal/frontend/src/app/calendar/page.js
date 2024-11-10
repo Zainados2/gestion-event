@@ -46,7 +46,7 @@ export default function Events() {
 
   useEffect(() => {
     // Sélectionner toutes les cases de jours
-    const dayCells = document.querySelectorAll('.fc-daygrid-day');
+    const dayCells = document.querySelectorAll('.fc-daygrid-day-number');
 
     dayCells.forEach((cell) => {
       // Rendre chaque case accessible au focus
