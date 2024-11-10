@@ -83,7 +83,7 @@ export default function Events() {
   
     // Pour plus de fiabilité, utilisez un setTimeout pour attendre un peu avant de forcer la manipulation du DOM
     setTimeout(() => {
-      const dayCells = document.querySelectorAll('.fc .fc-daygrid-day-number');
+      const dayCells = document.querySelectorAll('fc-day fc-day-sun fc-day-past fc-day-other fc-daygrid-day');
       dayCells.forEach((cell) => {
         if (cell.getAttribute('tabIndex') === null) {
           cell.setAttribute('tabIndex', '0');
