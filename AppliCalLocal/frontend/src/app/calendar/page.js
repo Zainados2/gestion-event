@@ -44,6 +44,43 @@ export default function Events() {
     }
   }, [isAuthenticated, userRole]);
 
+  useEffect(() => {
+    // Créer un observer pour détecter les changements dans le DOM du calendrier
+    const observer = new MutationObserver((mutationsList) => {
+      // Rechercher l'élément contenant les cases de jours
+      const dayCells = document.querySelectorAll('.fc-daygrid-day-number');
+
+      // Si des cellules de jour sont trouvées, on les rend accessibles au focus
+      if (dayCells.length > 0) {
+        dayCells.forEach((cell) => {
+          // Rendre chaque case accessible au focus
+          cell.setAttribute('tabIndex', '0');
+
+          // Ajouter un style de focus pour une meilleure visibilité
+          cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+        });
+
+        // Dès qu'on a trouvé les éléments, on arrête l'observation
+        observer.disconnect();
+      }
+    });
+
+    // Lancer l'observation sur le conteneur du calendrier
+    const calendarElement = document.querySelector('.fc'); // Ce sélecteur peut être modifié selon ta structure
+    if (calendarElement) {
+      observer.observe(calendarElement, {
+        childList: true, // Observer les ajouts/enlèvements d'enfants
+        subtree: true,   // Observer tous les sous-éléments
+      });
+    }
+
+    // Nettoyer l'observer lorsque le composant est démonté
+    return () => {
+      observer.disconnect();
+    };
+
+  }, [events]);
+
 
   const fetchEvents = async () => {
     try {
@@ -667,12 +704,6 @@ end: info.event.allDay
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
-          }}
-          eventContent={({ date, el }) => {
-            // Rendre chaque case de jour accessible avec un tabIndex
-            el.tabIndex = 0;
-            el.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
-            return null; // N'ajoute pas de contenu supplémentaire
           }}
           height="auto"
           contentHeight="auto"
