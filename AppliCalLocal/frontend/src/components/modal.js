@@ -368,7 +368,7 @@ export default function Modal({
               <span className="text-gray-700 text-sm flex-grow text-left">Marquer comme complété</span>
             </label>
           </div>
-            <fieldset> 
+            <fieldset className='bg-gray-50 p-2 rounded-lg shadow-inner lg:col-span-2'> 
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner lg:col-span-2">
             <legend className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"><label htmlFor='participant' className="block mb-1 text-sm font-semibold text-gray-800">Participants</label></legend>
             <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">

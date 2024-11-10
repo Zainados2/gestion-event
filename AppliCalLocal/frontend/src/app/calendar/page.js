@@ -49,30 +49,30 @@ export default function Events() {
     const observer = new MutationObserver((mutationsList) => {
       // Rechercher l'élément contenant les cases de jours
       const dayCells = document.querySelectorAll('.fc .fc-daygrid-day-number');
-      if(dayCells){
-        console.log('good')
-      }
-  
-      // Si des cellules de jour sont trouvées, on les rend accessibles au focus
       if (dayCells.length > 0) {
         console.log('trouvé');
         dayCells.forEach((cell) => {
-          // Vérifier si le tabIndex n'est pas déjà défini
           if (cell.getAttribute('tabIndex') === null) {
-            // Rendre chaque case accessible au focus
             cell.setAttribute('tabIndex', '0');
           }
-  
-          // Ajouter un style de focus pour une meilleure visibilité
+    
+          // Ajouter les styles de focus
           cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+    
+          // Ajouter un écouteur d'événements pour la touche "Enter" et "Space"
+          cell.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { // Vérifie si la touche est Enter ou Space
+              e.preventDefault(); // Prévenir le comportement par défaut
+              handleDateSelect(); // Appeler la fonction qui gère la sélection de la date
+            }
+          });
         });
-  
+    
         // Dès qu'on a trouvé les éléments, on arrête l'observation
         observer.disconnect();
       }
     });
   
-    // Lancer l'observation sur le conteneur du calendrier
     const calendarElement = document.querySelector('.fc'); // Ce sélecteur peut être modifié selon ta structure
     if (calendarElement) {
       observer.observe(calendarElement, {
@@ -83,13 +83,12 @@ export default function Events() {
   
     // Pour plus de fiabilité, utilisez un setTimeout pour attendre un peu avant de forcer la manipulation du DOM
     setTimeout(() => {
-      // Redéclencher la recherche des cellules de jour après un court délai
       const dayCells = document.querySelectorAll('.fc .fc-daygrid-day-number');
       dayCells.forEach((cell) => {
         if (cell.getAttribute('tabIndex') === null) {
           cell.setAttribute('tabIndex', '0');
         }
-        // Ajoutez les styles de focus
+        // Ajouter les styles de focus
         cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
       });
     }, 500); // Attendre 500ms pour s'assurer que le DOM est bien chargé
@@ -99,8 +98,9 @@ export default function Events() {
       observer.disconnect();
     };
   
-  }, [events]); // Assurez-vous que cela réagit aussi aux changements d'événements
+  }, [events]);
   
+ 
 
 
   const fetchEvents = async () => {
