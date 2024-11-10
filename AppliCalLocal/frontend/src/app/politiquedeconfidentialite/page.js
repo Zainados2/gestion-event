@@ -25,7 +25,7 @@ const PolitiqueDeConfidentialite = () => {
       )}
       
       <div className="max-w-none mx-auto p-8 sm:p-12">
-        <h1 className="text-3xl font-bold text-center mb-5">Politique de confidentialité</h1>
+        <h1 className="text-3xl font-bold text-center mb-5 mt-8">Politique de confidentialité</h1>
 
         <p className="mb-4">
           Nous prenons la protection de vos données personnelles très au sérieux. Cette politique de confidentialité vous

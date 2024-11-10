@@ -40,14 +40,12 @@ export default function Events() {
       loadDecorArticles();
       fetchEventArticles()
     } else {
-      setIsLoading(false); // Arrête le chargement si l'utilisateur n'est pas authentifié
+      setIsLoading(false); 
     }
   }, [isAuthenticated, userRole]);
 
   useEffect(() => {
-    // Créer un observer pour détecter les changements dans le DOM du calendrier
     const observer = new MutationObserver((mutationsList) => {
-      // Rechercher l'élément contenant les cases de jours
       const dayCells = document.querySelectorAll('.fc-daygrid-day');
       if (dayCells.length > 0) {
         console.log('trouvé');
@@ -56,42 +54,32 @@ export default function Events() {
             cell.setAttribute('tabIndex', '0');
           }
   
-          // Ajouter les styles de focus
           cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
-  
-          // Ajouter un écouteur d'événements pour la touche "Enter" et "Space"
           cell.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') { // Vérifie si la touche est Enter ou Space
-              e.preventDefault(); // Prévenir le comportement par défaut
-              
-              // Récupérer la date à partir de l'attribut data-date de la cellule <td>
-              const date = cell.getAttribute('data-date'); // "2024-11-02"
-              
-              // Créer un objet selectInfo avec les propriétés nécessaires
+            if (e.key === 'Enter' || e.key === ' ') { 
+              e.preventDefault(); 
+              const date = cell.getAttribute('data-date'); 
               const selectInfo = {
-                startStr: `${date}T00:00:00`, // Date de début (vous pouvez ajuster l'heure)
-                endStr: `${date}T23:59:59`,   // Date de fin (vous pouvez ajuster l'heure)
-                allDay: true, // Si vous considérez cela comme une journée entière
+                startStr: `${date}T00:00:00`, 
+                endStr: `${date}T23:59:59`,  
+                allDay: true, 
               };
-              handleDateSelect(selectInfo); // Passer selectInfo à la fonction
+              handleDateSelect(selectInfo); 
             }
           });
         });
-  
-        // Dès qu'on a trouvé les éléments, on arrête l'observation
         observer.disconnect();
       }
     });
   
-    const calendarElement = document.querySelector('.fc'); // Ce sélecteur peut être modifié selon ta structure
+    const calendarElement = document.querySelector('.fc'); 
     if (calendarElement) {
       observer.observe(calendarElement, {
-        childList: true, // Observer les ajouts/enlèvements d'enfants
-        subtree: true,   // Observer tous les sous-éléments
+        childList: true,
+        subtree: true,  
       });
     }
   
-    // Pour plus de fiabilité, utilisez un setTimeout pour attendre un peu avant de forcer la manipulation du DOM
     setTimeout(() => {
       const dayCells = document.querySelectorAll('.fc-daygrid-day');
       dayCells.forEach((cell) => {
@@ -101,25 +89,21 @@ export default function Events() {
         // Ajouter les styles de focus
         cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
         cell.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { // Vérifie si la touche est Enter ou Space
-            e.preventDefault(); // Prévenir le comportement par défaut
+          if (e.key === 'Enter' || e.key === ' ') { 
+            e.preventDefault(); 
             
-            // Récupérer la date à partir de l'attribut data-date de la cellule <td>
-            const date = cell.getAttribute('data-date'); // "2024-11-02"
+            const date = cell.getAttribute('data-date');
             
-            // Créer un objet selectInfo avec les propriétés nécessaires
             const selectInfo = {
-              startStr: `${date}T00:00:00`, // Date de début (vous pouvez ajuster l'heure)
-              endStr: `${date}T23:59:59`,   // Date de fin (vous pouvez ajuster l'heure)
-              allDay: true, // Si vous considérez cela comme une journée entière
+              startStr: `${date}T00:00:00`, 
+              endStr: `${date}T23:59:59`, 
+              allDay: true, 
             };
-            handleDateSelect(selectInfo); // Passer selectInfo à la fonction
+            handleDateSelect(selectInfo); 
           }
         });
       });
-    }, 500); // Attendre 500ms pour s'assurer que le DOM est bien chargé
-  
-    // Nettoyer l'observer lorsque le composant est démonté
+    }, 500); 
     return () => {
       observer.disconnect();
     };

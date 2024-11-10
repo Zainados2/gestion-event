@@ -121,7 +121,7 @@ export default function Menu() {
       </>
     )}
     
-    {userRole === 'gerant' && (
+    {userRole !== 'gerant' && (
       <>
         <button aria-label='recapitulatif'
           onClick={() => {
