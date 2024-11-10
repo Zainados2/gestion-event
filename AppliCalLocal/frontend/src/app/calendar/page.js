@@ -90,6 +90,12 @@ export default function Events() {
         }
         // Ajouter les styles de focus
         cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+        cell.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { // Vérifie si la touche est Enter ou Space
+            e.preventDefault(); // Prévenir le comportement par défaut
+            handleDateSelect(); // Appeler la fonction qui gère la sélection de la date
+          }
+        });
       });
     }, 500); // Attendre 500ms pour s'assurer que le DOM est bien chargé
   
