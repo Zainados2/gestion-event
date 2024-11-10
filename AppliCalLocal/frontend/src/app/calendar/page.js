@@ -44,18 +44,38 @@ export default function Events() {
     }
   }, [isAuthenticated, userRole]);
 
-  useEffect(() => {
-    // Sélectionner toutes les cases de jours
-    const dayCells = document.querySelectorAll('.fc-daygrid-day-number');
 
+useEffect(() => {
+  // Fonction pour rendre les cases de jour accessibles au focus
+  const setDayCellsFocusable = () => {
+    const dayCells = document.querySelectorAll('.fc-daygrid-day-number');
     dayCells.forEach((cell) => {
       // Rendre chaque case accessible au focus
       cell.setAttribute('tabIndex', '0');
-
-      // Ajouter un style de focus pour une meilleure visibilité
-      cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+      // Appliquer un style de focus visible
+      cell.style.outline = 'none';
+      cell.style.boxShadow = '0 0 0 2px #6f2eaf'; // couleur de focus
     });
-  }, []);
+  };
+
+  // Initialiser la fonction une première fois
+  setDayCellsFocusable();
+
+  // Observer les modifications pour s'assurer que les éléments conservent le `tabIndex`
+  const observer = new MutationObserver(setDayCellsFocusable);
+  const calendarElement = document.querySelector('.fc-daygrid'); // Sélectionnez la grille principale
+
+  if (calendarElement) {
+    observer.observe(calendarElement, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  // Nettoyer l'observer en quittant le composant
+  return () => observer.disconnect();
+}, []);
+
 
 
   const fetchEvents = async () => {

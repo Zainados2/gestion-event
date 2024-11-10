@@ -185,6 +185,12 @@ export default function Modal({
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
                     tabIndex="0"
                       role="option"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleLocationTypeSelect('shooting');
+                        }
+                      }}
                   >
                     Shooting en situation
                   </div>
@@ -193,6 +199,12 @@ export default function Modal({
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
                     tabIndex="0"
                       role="option"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleLocationTypeSelect('studio');
+                        }
+                      }}
                   >
                     En studio
                   </div>
@@ -229,6 +241,12 @@ export default function Modal({
                       return (
                         <div
                           key={decorItem.id}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              handleDecorSelect(decorItem.id);
+                            }
+                          }}
                           tabIndex="0"
                       role="option"
                           onClick={() => !isDisabled && handleDecorSelect(decorItem.id)}
@@ -319,6 +337,12 @@ export default function Modal({
                     <div
                       key={addr.id}
                       onClick={() => handleAddressSelect(addr.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleAddressSelect(addr.id);
+                        }
+                      }}
                       className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
                       tabIndex="0"
                       role="option"
