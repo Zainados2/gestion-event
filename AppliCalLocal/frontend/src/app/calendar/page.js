@@ -55,19 +55,29 @@ export default function Events() {
           if (cell.getAttribute('tabIndex') === null) {
             cell.setAttribute('tabIndex', '0');
           }
-    
+  
           // Ajouter les styles de focus
           cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
-    
+  
           // Ajouter un écouteur d'événements pour la touche "Enter" et "Space"
           cell.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') { // Vérifie si la touche est Enter ou Space
               e.preventDefault(); // Prévenir le comportement par défaut
-              handleDateSelect(); // Appeler la fonction qui gère la sélection de la date
+              
+              // Récupérer la date à partir de l'attribut data-date de la cellule <td>
+              const date = cell.getAttribute('data-date'); // "2024-11-02"
+              
+              // Créer un objet selectInfo avec les propriétés nécessaires
+              const selectInfo = {
+                startStr: `${date}T00:00:00`, // Date de début (vous pouvez ajuster l'heure)
+                endStr: `${date}T23:59:59`,   // Date de fin (vous pouvez ajuster l'heure)
+                allDay: true, // Si vous considérez cela comme une journée entière
+              };
+              handleDateSelect(selectInfo); // Passer selectInfo à la fonction
             }
           });
         });
-    
+  
         // Dès qu'on a trouvé les éléments, on arrête l'observation
         observer.disconnect();
       }
@@ -93,7 +103,17 @@ export default function Events() {
         cell.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { // Vérifie si la touche est Enter ou Space
             e.preventDefault(); // Prévenir le comportement par défaut
-            handleDateSelect(); // Appeler la fonction qui gère la sélection de la date
+            
+            // Récupérer la date à partir de l'attribut data-date de la cellule <td>
+            const date = cell.getAttribute('data-date'); // "2024-11-02"
+            
+            // Créer un objet selectInfo avec les propriétés nécessaires
+            const selectInfo = {
+              startStr: `${date}T00:00:00`, // Date de début (vous pouvez ajuster l'heure)
+              endStr: `${date}T23:59:59`,   // Date de fin (vous pouvez ajuster l'heure)
+              allDay: true, // Si vous considérez cela comme une journée entière
+            };
+            handleDateSelect(selectInfo); // Passer selectInfo à la fonction
           }
         });
       });
@@ -105,9 +125,6 @@ export default function Events() {
     };
   
   }, [events]);
-  
- 
-
 
   const fetchEvents = async () => {
     try {
