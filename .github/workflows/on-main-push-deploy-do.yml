@@ -27,7 +27,7 @@ jobs:
             docker-compose down
             
             # Nettoyer les images non utilisées sans affecter les volumes
-            # docker image prune -f
+            docker image prune -f
             
             # Mettre à jour le code
             cd ../..
