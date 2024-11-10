@@ -55,15 +55,27 @@ export default function Events() {
           }
   
           cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+          
           cell.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') { 
-              e.preventDefault(); 
-              const date = cell.getAttribute('data-date'); 
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+  
+              const date = cell.getAttribute('data-date');
+              
+              // Créer un objet Date à partir de la date de début
+              const startDate = new Date(date);
+              
+              // Ajouter 1 jour à la date de début pour obtenir la date de fin
+              const endDate = new Date(startDate);
+              endDate.setDate(startDate.getDate() + 1); // Ajoute 1 jour à la date de début
+  
+              // Formater les dates en chaîne de caractères dans le format 'YYYY-MM-DDT00:00:00'
               const selectInfo = {
-                startStr: `${date}T00:00:00`, 
-                endStr: `${date}T23:59:59`,  
+                startStr: `${startDate.toISOString().split('T')[0]}T00:00:00`, 
+                endStr: `${endDate.toISOString().split('T')[0]}T00:00:00`,  
                 allDay: true, 
               };
+  
               handleDateSelect(selectInfo); 
             }
           });
@@ -72,11 +84,11 @@ export default function Events() {
       }
     });
   
-    const calendarElement = document.querySelector('.fc'); 
+    const calendarElement = document.querySelector('.fc');
     if (calendarElement) {
       observer.observe(calendarElement, {
         childList: true,
-        subtree: true,  
+        subtree: true,
       });
     }
   
@@ -88,27 +100,38 @@ export default function Events() {
         }
         // Ajouter les styles de focus
         cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+        
         cell.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { 
-            e.preventDefault(); 
-            
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+  
             const date = cell.getAttribute('data-date');
             
+            // Créer un objet Date à partir de la date de début
+            const startDate = new Date(date);
+            
+            // Ajouter 1 jour à la date de début pour obtenir la date de fin
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 1); // Ajoute 1 jour à la date de début
+  
+            // Formater les dates en chaîne de caractères dans le format 'YYYY-MM-DDT00:00:00'
             const selectInfo = {
-              startStr: `${date}T00:00:00`, 
-              endStr: `${date}T23:59:59`, 
+              startStr: `${startDate.toISOString().split('T')[0]}T00:00:00`, 
+              endStr: `${endDate.toISOString().split('T')[0]}T00:00:00`,  
               allDay: true, 
             };
+  
             handleDateSelect(selectInfo); 
           }
         });
       });
-    }, 500); 
+    }, 500);
+  
     return () => {
       observer.disconnect();
     };
-  
   }, [events]);
+  
 
   const fetchEvents = async () => {
     try {
