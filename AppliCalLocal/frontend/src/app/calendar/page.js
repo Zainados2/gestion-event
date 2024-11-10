@@ -44,6 +44,19 @@ export default function Events() {
     }
   }, [isAuthenticated, userRole]);
 
+  useEffect(() => {
+    // Sélectionner toutes les cases de jours
+    const dayCells = document.querySelectorAll('.fc-daygrid-day');
+
+    dayCells.forEach((cell) => {
+      // Rendre chaque case accessible au focus
+      cell.setAttribute('tabIndex', '0');
+
+      // Ajouter un style de focus pour une meilleure visibilité
+      cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
+    });
+  }, []);
+
 
   const fetchEvents = async () => {
     try {
