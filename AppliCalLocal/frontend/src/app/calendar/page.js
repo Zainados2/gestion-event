@@ -48,10 +48,11 @@ export default function Events() {
     // Créer un observer pour détecter les changements dans le DOM du calendrier
     const observer = new MutationObserver((mutationsList) => {
       // Rechercher l'élément contenant les cases de jours
-      const dayCells = document.querySelectorAll('.fc-daygrid-day-number');
+      const dayCells = document.querySelectorAll('.fc .fc-daygrid-day-number');
 
       // Si des cellules de jour sont trouvées, on les rend accessibles au focus
       if (dayCells.length > 0) {
+        console.log('trouvé')
         dayCells.forEach((cell) => {
           // Rendre chaque case accessible au focus
           cell.setAttribute('tabIndex', '0');
