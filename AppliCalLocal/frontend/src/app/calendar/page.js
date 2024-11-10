@@ -48,7 +48,7 @@ export default function Events() {
     // Créer un observer pour détecter les changements dans le DOM du calendrier
     const observer = new MutationObserver((mutationsList) => {
       // Rechercher l'élément contenant les cases de jours
-      const dayCells = document.querySelectorAll('.fc .fc-daygrid-day-number');
+      const dayCells = document.querySelectorAll('fc-day fc-day-sun fc-day-past fc-day-other fc-daygrid-day');
       if (dayCells.length > 0) {
         console.log('trouvé');
         dayCells.forEach((cell) => {
