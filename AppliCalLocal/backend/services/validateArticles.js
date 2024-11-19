@@ -9,8 +9,7 @@ const validateArticles = async (articleIds) => {
       }
     });
 
-    // Ajoutez la logique pour déterminer si certains articles sont problématiques
-    const problematicArticles = articles.some(article => article.isProblematic); // Supposons que `isProblematic` est un champ booléen
+    const problematicArticles = articles.some(article => article.lost !== 0 || article.deteriorated !== 0); 
 
     return problematicArticles;
   } catch (error) {
