@@ -15,7 +15,7 @@ const validateArticles = async (articleIds) => {
     // Retourner si des articles problématiques ont été trouvés
     return problematicArticles;
   } catch (error) {
-    console.error('Erreur lors de la validation des articles :', error);
+    console.error(`Erreur lors de la validation des articles : ${problematicArticles}`, error);
     throw error;
   }
 };
