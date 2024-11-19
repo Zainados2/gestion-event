@@ -14,7 +14,7 @@ const validateArticles = async (articleIds) => {
     });
 
     // Vérification si certains articles ont des champs "lost" ou "deteriorated" non nuls
-    const problematicArticles = filteredArticles.some(article => Number(article.lost) !== 0 || Number(article.deteriorated) !== 0);
+    const problematicArticles = articles.some(article => Number(article.lost) !== 0 || Number(article.deteriorated) !== 0);
 
 
     return problematicArticles;
