@@ -13,7 +13,7 @@ docker-compose up -d
 ssh root@165.232.115.209
 scp -r "Documents/AppliCal" root@165.232.115.209:memoire/calendrier/
 
-
+ h
 df -h
 sudo rm -rf /var/log/*
 sudo rm -rf /var/www/logs/*
