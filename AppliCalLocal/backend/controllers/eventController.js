@@ -53,7 +53,7 @@ const jwtSecret = 'YOUR_JWT_SECRET';
           .filter(id => !isNaN(id));
         const hasProblematicArticles = await validateArticles(articleIds);
         if (hasProblematicArticles) {
-          return res.status(400).json({ error: 'Certains articles sélectionnés sont problématiques.' });
+          return res.status(400).json({ error: 'Certains articles sélectionnés sont problématiques.' ,hasProblematicArticles });
         }
       }
   
