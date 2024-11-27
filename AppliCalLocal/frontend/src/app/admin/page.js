@@ -1,130 +1,41 @@
 "use client";
-import React from 'react';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '../contexts/authContext';
-import Loader from '../../components/Loader';
-import Modal from '../../components/modaldecor';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../contexts/authContext";
+import Loader from "../../components/Loader";
 
 export default function ManageUsersAndRegister() {
   const { isAuthenticated, userRole } = useAuth();
   const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    role: "",
+  });
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedUser, setSelectedUser] = useState(null); 
-  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === "gerant") {
       fetchUsers();
-      setIsLoading(false);
-    } else {
-      setIsLoading(false);
     }
+    setIsLoading(false);
   }, [isAuthenticated, userRole]);
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://165.232.115.209:8081/users', {
+      const token = localStorage.getItem("token");
+      const response = await axios.get("http://165.232.115.209:8081/users", {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.data.success) {
         setUsers(response.data.users);
-      } else {
-        setError({ global: response.data.message });
-      }
-    } catch (error) {
-      setError({ global: 'Une erreur s\'est produite. Veuillez réessayer.' });
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.delete(`http://165.232.115.209:8081/users/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      if (response.data.success) {
-        fetchUsers();
-      } else {
-        setError({ global: response.data.message });
-      }
-    } catch (error) {
-      setError({ global: 'Une erreur s\'est produite. Veuillez réessayer.' });
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
-    // Vérification des champs vides
-    if (!username || !password || !role) {
-      setError({
-        username: !username ? "Nom d'utilisateur est requis" : '',
-        password: !password ? 'Mot de passe est requis' : '',
-        role: !role ? 'Rôle est requis' : '',
-      });
-      return;
-    }
-
-    try {
-      const response = await axios.post('http://165.232.115.209:8081/users', {
-        username,
-        password,
-        role,
-      },{
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-
-      if (response.data.success) {
-        fetchUsers();
-        // Réinitialiser les champs du formulaire et les erreurs
-        setUsername('');
-        setPassword('');
-        setRole('');
-        setError({});
-      } else {
-        setError({ global: response.data.message });
-      }
-    } catch (error) {
-      setError({ global: 'Une erreur s\'est produite. Veuillez réessayer.' });
-    }
-  };
-
-
-  const handleUpdate = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.put(
-        `http://165.232.115.209:8081/users/${selectedUser.id}`,
-        {
-          username: selectedUser.username,
-          password: selectedUser.password,
-          role: selectedUser.role,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.data.success) {
-        fetchUsers();
-        setShowModal(false); // Ferme la modale après succès
       } else {
         setError({ global: response.data.message });
       }
@@ -133,25 +44,85 @@ export default function ManageUsersAndRegister() {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSelectedUser({ ...selectedUser, [name]: value });
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(`http://165.232.115.209:8081/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.data.success) {
+        fetchUsers();
+      } else {
+        setError({ global: response.data.message });
+      }
+    } catch (error) {
+      setError({ global: "Une erreur s'est produite. Veuillez réessayer." });
+    }
   };
 
-  const closeAndResetModal = () => {
-    setSelectedUser(null);
-    setShowModal(false);
+  const handleEditClick = (user) => {
+    setSelectedUser(user);
+    setFormData({
+      username: user.username,
+      password: "",
+      role: user.role,
+    });
+    setShowModal(true);
   };
-  
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdate = async () => {
+    if (!formData.username || !formData.role) {
+      setError({
+        username: !formData.username ? "Nom d'utilisateur requis" : "",
+        role: !formData.role ? "Rôle requis" : "",
+      });
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `http://165.232.115.209:8081/users/${selectedUser.id}`,
+        {
+          username: formData.username,
+          password: formData.password,
+          role: formData.role,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setShowModal(false);
+        fetchUsers();
+      } else {
+        setError({ global: response.data.message });
+      }
+    } catch (error) {
+      setError({ global: "Une erreur s'est produite. Veuillez réessayer." });
+    }
+  };
 
   if (isLoading) {
     return <Loader />;
   }
 
-  if (!isAuthenticated || userRole !== 'gerant') {
+  if (!isAuthenticated || userRole !== "gerant") {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg">
+        <div className="px-8 py-6 text-left bg-white shadow-lg rounded-lg">
           <h1 className="text-xl font-bold text-center text-black">Accès refusé</h1>
           <p className="text-center text-gray-600">Vous n'avez pas la permission d'accéder à cette page.</p>
         </div>
@@ -160,164 +131,109 @@ export default function ManageUsersAndRegister() {
   }
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen lg:min-h-[85vh]">
+    <div className="p-8 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-6 text-center text-black">Gestion des Utilisateurs</h1>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Bloc Inscription */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
-          <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
-          {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
-          <form onSubmit={handleSubmit} className="flex flex-col flex-grow overflow-auto">
-            <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">
-                Nom d'utilisateur
-              </label>
-              <input aria-label='username'
-                type="text"
-                id="username"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
-            </div>
-            <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">
-                Mot de passe
-              </label>
-              <input
-              aria-label='password'
-                type="password"
-                id="password"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
-            </div>
-            <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">
-                Rôle
-              </label>
-              <select
-              aria-label='selection de role'
-                id="role"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-                required
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option aria-label='selectionnez un rôle' value="">Sélectionnez un rôle</option>
-                <option aria-label='gerant' value="gerant">Gérant</option>
-                <option aria-label='photographe' value="photographe">Photographe</option>
-                <option aria-label='photographeassistant' value="photographeassistant">Photographe Assistant</option>
-                <option aria-label='decorateur' value="decorateur">Décorateur</option>
-                <option aria-label='decorateurassistant' value="decorateurassistant">Décorateur Assistant</option>
-                <option aria-label='chauffeur' value="chauffeur">Chauffeur</option>
-              </select>
-              {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
-            </div>
-            <button aria-label='inscrire' type="submit" className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-              S'inscrire
-            </button>
-          </form>
-        </div>
-
-        {/* Bloc Liste des Utilisateurs */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+        {/* Liste des utilisateurs */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 text-black">Liste des Utilisateurs</h2>
-          {error.global && <div className="text-red-500 mb-4">{error.global}</div>}
-          <div className="flex-1 overflow-auto">
-            <ul className="space-y-4">
-              {users.map(user => (
-                <li key={user.id} className="flex lg:flex-row flex-col items-left justify-between p-4 border-b border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-                  <span className="text-gray-800">{user.username} - {user.role}</span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => {
-                        setSelectedUser(user);
-                        setShowModal(true);
-                      }}
-                      
-                      className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      onClick={() => handleDelete(user.id)}
-                      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="space-y-4">
+            {users.map((user) => (
+              <li
+                key={user.id}
+                className="flex justify-between items-center p-4 border-b bg-gray-50 rounded-lg"
+              >
+                <span className="text-gray-800">{user.username} - {user.role}</span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleEditClick(user)}
+                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  >
+                    Modifier
+                  </button>
+                  <button
+                    onClick={() => handleDelete(user.id)}
+                    className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <Modal onClose={closeAndResetModal}>
-  <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
-  <form className="flex flex-col space-y-4">
-    <div>
-      <label htmlFor="username" className="block text-sm font-medium">
-        Nom d'utilisateur
-      </label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={selectedUser.username}
-        onChange={handleInputChange}
-        className="w-full border border-gray-300 rounded-lg p-2"
-      />
-    </div>
-    <div>
-      <label htmlFor="password" className="block text-sm font-medium">
-        Mot de passe
-      </label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={selectedUser.password}
-        onChange={handleInputChange}
-        className="w-full border border-gray-300 rounded-lg p-2"
-      />
-    </div>
-    <div>
-      <label htmlFor="role" className="block text-sm font-medium">
-        Rôle
-      </label>
-      <select
-        id="role"
-        name="role"
-        value={selectedUser.role}
-        onChange={handleInputChange}
-        className="w-full border border-gray-300 rounded-lg p-2"
-      >
-        <option value="gerant">Gérant</option>
-        <option value="photographe">Photographe</option>
-        <option value="photographeassistant">Photographe Assistant</option>
-        <option value="decorateur">Décorateur</option>
-        <option value="decorateurassistant">Décorateur Assistant</option>
-        <option value="chauffeur">Chauffeur</option>
-      </select>
-    </div>
-    <button
-      type="button"
-      onClick={handleUpdate}
-      className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-    >
-      Enregistrer
-    </button>
-  </form>
-</Modal>
-
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+            <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium" htmlFor="username">
+                  Nom d'utilisateur
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-300 rounded-lg p-2"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium" htmlFor="password">
+                  Mot de passe (laisser vide pour ne pas modifier)
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-300 rounded-lg p-2"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium" htmlFor="role">
+                  Rôle
+                </label>
+                <select
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-300 rounded-lg p-2"
+                >
+                  <option value="gerant">Gérant</option>
+                  <option value="photographe">Photographe</option>
+                  <option value="photographeassistant">Photographe Assistant</option>
+                  <option value="decorateur">Décorateur</option>
+                  <option value="decorateurassistant">Décorateur Assistant</option>
+                  <option value="chauffeur">Chauffeur</option>
+                </select>
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
+                >
+                  Annuler
+                </button>
+                <button
+                  type="button"
+                  onClick={handleUpdate}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Enregistrer
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
