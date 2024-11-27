@@ -25,7 +25,7 @@ export default function ManageUsersAndRegister() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated && userRole === "gerant" && userRole === 'admin') {
+    if (isAuthenticated && (userRole === "gerant" || userRole === "admin")) {
       fetchUsers();
     }
     setIsLoading(false);
