@@ -6,11 +6,11 @@ const Decor = require('./modelsDecors');
 const EventDecor = sequelize.define('EventDecor', {
   event_id: {
     type: DataTypes.INTEGER,
-    allowNull: false // Assurez-vous que ce champ ne peut pas être NULL
+    allowNull: false 
   },
   decor_id: {
     type: DataTypes.INTEGER,
-    allowNull: false // Assurez-vous que ce champ ne peut pas être NULL
+    allowNull: false 
   },
   validation_decors: {
     type: DataTypes.BOOLEAN,

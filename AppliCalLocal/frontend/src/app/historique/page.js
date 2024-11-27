@@ -12,7 +12,6 @@ const months = [
 ];
 
 const currentYear = new Date().getFullYear();
-// Étendre la plage de sélection à 10 années dans le passé et 10 années dans le futur
 const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
 
 export default function Historique() {
@@ -22,8 +21,8 @@ export default function Historique() {
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
   const [hoursByMonth, setHoursByMonth] = useState({});
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Mois par défaut
-  const [selectedYear, setSelectedYear] = useState(currentYear); // Année par défaut
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); 
+  const [selectedYear, setSelectedYear] = useState(currentYear); 
   const [articles, setArticles] = useState([]);
   const [eventArticles, setEventArticles] = useState([]);
   const [validatedArticles, setValidatedArticles] = useState([]);
@@ -32,9 +31,9 @@ export default function Historique() {
   const [eventsById, setEventsById] = useState({});
   const [decorsById, setDecorsById] = useState({});
   const [addressesById, setAddressesById] = useState({});
-  const [heureTotal, setHeureTotal] = useState(0); // Total des heures
-  const [heureEffectue, setHeureEffectue] = useState(0); // Heures déjà effectuées
-  const [heureAVenir, setHeureAVenir] = useState(0); // Heures à venir
+  const [heureTotal, setHeureTotal] = useState(0); 
+  const [heureEffectue, setHeureEffectue] = useState(0); 
+  const [heureAVenir, setHeureAVenir] = useState(0); 
 
   useEffect(() => {
     if (isAuthenticated && userRole === 'gerant') {
@@ -250,7 +249,7 @@ export default function Historique() {
     const eventMonth = eventDate.getMonth() + 1;
     const eventYear = eventDate.getFullYear();
     return eventMonth === selectedMonth && eventYear === selectedYear;
-  }).sort((a, b) => new Date(b.start) - new Date(a.start)); // Trier du plus récent au plus ancien
+  }).sort((a, b) => new Date(b.start) - new Date(a.start));
 
   if (isLoading) {
     return <Loader />;
@@ -272,9 +271,7 @@ export default function Historique() {
       <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Historique général</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Bloc combiné avec Filtrer par mois et Total des heures travaillées */}
         <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col gap-6">
-          {/* Filtrer par mois */}
           <div className="bg-gray-50 border border-gray-300 shadow-lg rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Filtrer par mois et année</h2>
             <label htmlFor='choixmois' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
@@ -303,7 +300,6 @@ export default function Historique() {
             </select>
           </div>
 
-          {/* Total des heures travaillées */}
           <div className="bg-gray-50 border border-gray-300 shadow-lg rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Total des heures travaillées</h2>
             <p className="text-lg"><strong>Mois sélectionné:</strong> {months[selectedMonth - 1]}</p>
@@ -314,7 +310,6 @@ export default function Historique() {
           </div>
         </div>
 
-        {/* Bloc des événements du mois */}
         <div className="bg-white shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Événements du mois</h2>
           {filteredEvents.length > 0 ? (
@@ -344,7 +339,6 @@ export default function Historique() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Articles Photographiés */}
         <div className="bg-white shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Articles Photographiés</h2>
           {validatedArticles.length > 0 && moment(validatedArticles.event_start).month() + 1  == selectedMonth ? (
@@ -367,7 +361,6 @@ export default function Historique() {
           )}
         </div>
 
-        {/* Décors Photographiés */}
         <div className="bg-white shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Décors Photographiés</h2>
           {validatedDecors.length > 0 && moment(validatedDecors.event_start).month() + 1  == selectedMonth ? (

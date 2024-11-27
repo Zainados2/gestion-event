@@ -21,7 +21,6 @@ export default function DecorArticle() {
   const [isDecorModalOpen, setIsDecorModalOpen] = useState(false);
   const [decorArticles, setDecorArticles] = useState([]);
 
-  // États pour les messages d'erreur
   const [articleError, setArticleError] = useState('');
   const [decorError, setDecorError] = useState('');
 
@@ -80,7 +79,7 @@ export default function DecorArticle() {
       setAllArticles(prevArticles => [...prevArticles, response.data].sort((a, b) => a.title.localeCompare(b.title)));
       setNewArticle({ title: '', deteriorated: false, lost: false });
       setIsArticleModalOpen(false);
-      setArticleError(''); // Réinitialiser le message d'erreur
+      setArticleError(''); 
     } catch (error) {
       console.error('Erreur lors de la création de l\'article:', error);
     }
@@ -105,7 +104,7 @@ export default function DecorArticle() {
       );
       setEditingArticle(null);
       setIsArticleModalOpen(false);
-      setArticleError(''); // Réinitialiser le message d'erreur
+      setArticleError(''); 
     } catch (error) {
       console.error('Erreur lors de la mise à jour de l\'article:', error);
     }
@@ -148,7 +147,7 @@ export default function DecorArticle() {
       setNewDecor({ name: '' });
       setSelectedArticleIds([]);
       setIsDecorModalOpen(false);
-      setDecorError(''); // Réinitialiser le message d'erreur
+      setDecorError(''); 
     } catch (error) {
       console.error('Erreur lors de la création du décor:', error);
     }
@@ -181,7 +180,7 @@ export default function DecorArticle() {
       setEditingDecor(null);
       setEditingDecorArticleIds([]);
       setIsDecorModalOpen(false);
-      setDecorError(''); // Réinitialiser le message d'erreur
+      setDecorError(''); 
     } catch (error) {
       console.error('Erreur lors de la mise à jour du décor:', error);
     }
@@ -230,7 +229,6 @@ export default function DecorArticle() {
     }
   };
 
-  // Calculer le nombre d'articles problématiques pour un décor spécifique
   const getProblematicArticleCount = (decorId) => {
     const associatedArticles = decorArticles
       .filter(da => da.decor_id === decorId)
@@ -259,13 +257,12 @@ export default function DecorArticle() {
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Gestion des Décors et Articles</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Création d'Article */}
         <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Créer un Article</h2>
           <button aria-label='modale creation article'
             className="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700 transition"
             onClick={() => {
-              setEditingArticle(null); // Clear editing state
+              setEditingArticle(null); 
               setIsArticleModalOpen(true);
             }}
           >
@@ -273,13 +270,12 @@ export default function DecorArticle() {
           </button>
         </div>
 
-        {/* Création de Décor */}
         <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Créer un Décor</h2>
           <button aria-label='modale création décor'
             className="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700 transition"
             onClick={() => {
-              setEditingDecor(null); // Clear editing state
+              setEditingDecor(null); 
               setIsDecorModalOpen(true);
             }}
           >
@@ -287,7 +283,6 @@ export default function DecorArticle() {
           </button>
         </div>
 
-        {/* Liste des articles */}
         <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Articles Existants</h2>
           <div className="flex-1 overflow-auto">
@@ -323,7 +318,6 @@ export default function DecorArticle() {
           </div>
         </div>
 
-        {/* Liste des décors */}
         <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
   <h2 className="text-xl font-semibold mb-4 text-black">Liste des Décors</h2>
   <div className="flex-1 overflow-auto">
@@ -366,7 +360,6 @@ export default function DecorArticle() {
 </div>
 
 
-      {/* Modale pour créer ou modifier un Article */}
       <Modal isOpen={isArticleModalOpen} onClose={() => setIsArticleModalOpen(false)}>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
@@ -436,7 +429,6 @@ export default function DecorArticle() {
         </div>
       </Modal>
 
-      {/* Modale pour créer ou modifier un Décor */}
       <Modal isOpen={isDecorModalOpen} onClose={() => setIsDecorModalOpen(false)}>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">

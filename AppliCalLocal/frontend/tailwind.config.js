@@ -8,9 +8,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Définir la couleur de texte par défaut
         text: {
-          DEFAULT: '#374151', // Couleur de texte par défaut
+          DEFAULT: '#374151', 
         },
       },
       backgroundImage: {

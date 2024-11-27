@@ -1,4 +1,3 @@
-// utils/calculateHours.js
 
 export const calculateHours = (events, selectedMonth, selectedYear) => {
     const now = new Date();

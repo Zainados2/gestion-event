@@ -123,6 +123,39 @@ const getUserById = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { username, password, role } = req.body; 
+  if (!username && !password && !role) {
+    return res.status(400).json({
+      success: false,
+      message: 'Les champs doivent être complété',
+    });
+  }
+  try {
+    const user = await User.findByPk(id); 
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'Utilisateur non trouvé.' });
+    }
+    if (username) {
+      user.username = username;
+    }
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword;
+    }
+    if (role) {
+      user.role = role;
+    }
+    await user.save();
+    res.status(200).json({ success: true, message: 'Utilisateur mis à jour avec succès.' });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de l\'utilisateur:', error);
+    res.status(500).json({ success: false, message: 'Erreur serveur.' });
+  }
+};
+
+
 module.exports = {
   registerUser,
   loginUser,
@@ -130,4 +163,5 @@ module.exports = {
   deleteUser,
   getCurrentUser,
   getUserById,
+  updateUser
 };

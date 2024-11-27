@@ -14,7 +14,6 @@ export function AuthProvider({ children }) {
   const [userId, setUserId] = useState('');
   const router = useRouter();
 
-  // Fonction pour mettre à jour le contexte d'authentification
   const updateAuthContext = async () => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -50,7 +49,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      updateAuthContext(); // Appel de la fonction updateAuthContext
+      updateAuthContext(); 
     } else {
       router.push('/');
       setIsLoading(false);
@@ -62,7 +61,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userRole, userId, updateAuthContext }}> {/* Transmettez updateAuthContext */}
+    <AuthContext.Provider value={{ isAuthenticated, userRole, userId, updateAuthContext }}> 
       {children}
     </AuthContext.Provider>
   );

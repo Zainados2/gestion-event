@@ -36,7 +36,6 @@
   --fc-today-bg-color: rgba(255, 220, 40, 0.15);
   --fc-now-indicator-color: red;
 
-  /* Ajoutez la couleur de texte par défaut ici */
   --default-text-color: #374151;
 }
 
@@ -49,7 +48,7 @@
 }
 
 body {
-  color: var(--default-text-color); /* Utilisez la couleur de texte par défaut */
+  color: var(--default-text-color); 
   background: linear-gradient(
       to bottom,
       transparent,

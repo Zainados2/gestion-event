@@ -4,7 +4,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// Route pour obtenir le statut de validation d'un article
 router.get('/event_id/:eventId/article_id/:articleId/isValidated',authMiddleware.verifyToken, getArticleValidationStatus);
 router.get('/',authMiddleware.verifyToken, getEventArticles);
 

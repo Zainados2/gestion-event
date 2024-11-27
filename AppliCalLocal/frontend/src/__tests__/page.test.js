@@ -1,15 +1,14 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Events from '../app/calendar/page';  // Assurez-vous que le chemin est correct
+import Events from '../app/calendar/page';  
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import moment from 'moment'; // Assurez-vous d'importer FullCalendar si nécessaire
+import moment from 'moment';
 import { useAuth } from '@/app/contexts/authContext';
 
-// Mock de useAuth
 jest.mock('../app/contexts/authContext', () => ({
   useAuth: () => ({
     isAuthenticated: true,
@@ -17,15 +16,12 @@ jest.mock('../app/contexts/authContext', () => ({
   }),
 }));
 
-// Configurer jest-fetch-mock
 beforeEach(() => {
-  fetch.resetMocks(); // Réinitialise les mocks avant chaque test
+  fetch.resetMocks(); 
 });
 
-// Test pour le composant Events
 describe('Events Component', () => {
   test('renders without crashing', async () => {
-    // Simulez des réponses pour fetch
     fetch.mockResponses(
       [JSON.stringify([
         {
@@ -54,44 +50,36 @@ describe('Events Component', () => {
           "decor_id": null,
           "address_id": 13
         },
-        // Ajouter d'autres événements si nécessaire
       ]), { status: 200 }],
       [JSON.stringify([{ id: 3, name: 'Chasse et pêche' }, { id: 5, name: 'Racing' }]), { status: 200 }],
       [JSON.stringify([
         { id: 12, title: 'Fourche', deteriorated: false, lost: false },
         { id: 11, title: 'Chapeau de paille', deteriorated: false, lost: true },
         { id: 10, title: 'Fusil', deteriorated: false, lost: false },
-        // Ajouter d'autres articles si nécessaire
       ]), { status: 200 }],
       [JSON.stringify([
         { id: 1, name: 'Studio Porte de la chapelle', location: '2 rue machin 75000 Paris', type: 'studio' },
         { id: 2, name: 'Forêt de villejuif', location: '2 rue jean jaurès', type: 'shooting' },
-        // Ajouter d'autres adresses si nécessaire
       ]), { status: 200 }],
       [JSON.stringify([
         { decor_id: 3, article_id: 9 },
         { decor_id: 3, article_id: 10 },
-        // Ajouter d'autres relations décor-article si nécessaire
       ]), { status: 200 }],
       [JSON.stringify([
         { event_id: 70, article_id: 12, isValidated: true },
         { event_id: 67, article_id: 13, isValidated: true },
-        // Ajouter d'autres validations d'articles si nécessaire
       ]), { status: 200 }]
     );
 
     render(<Events />);
 
-    // Attendre que le Loader disparaisse
     await waitFor(() => {
       expect(screen.queryByText(/Chargement.../i)).not.toBeInTheDocument();
     });
 
-    // Ajoute plus de vérifications ici si nécessaire
   });
 });
 
-// Test pour FullCalendar
 describe('FullCalendar Component', () => {
   test('renders FullCalendar component', () => {
     render(<FullCalendar
@@ -106,10 +94,9 @@ describe('FullCalendar Component', () => {
         }}
         height="auto"
         contentHeight="auto"
-        aspectRatio={1.35} // Adjusts the height based on width
+        aspectRatio={1.35} 
       />);
     
-    // Vérifie si l'élément du calendrier est présent
     expect(screen.getByRole('grid')).toBeInTheDocument();
   });
 });

@@ -11,7 +11,6 @@ const months = [
 ];
 
 const currentYear = new Date().getFullYear();
-// Étendre la plage de sélection à 10 années dans le passé et 10 années dans le futur
 const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
 
 export default function UserDetails() {
@@ -21,15 +20,14 @@ export default function UserDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
   const [hoursByMonth, setHoursByMonth] = useState({});
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Mois par défaut
-  const [selectedYear, setSelectedYear] = useState(currentYear); // Année par défaut
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); 
+  const [selectedYear, setSelectedYear] = useState(currentYear); 
   const { isAuthenticated, userRole, userId } = useAuth();
 
   console.log(userId)
   console.log(id)
 
   useEffect(() => {
-    // Vérifier si l'utilisateur est un gérant ou l'utilisateur correspondant à l'ID dans l'URL
     if (isAuthenticated && (userRole === 'gerant' || userId == id)) {
       if (id) {
         fetchUser();
@@ -91,7 +89,7 @@ export default function UserDetails() {
         if (event.allDay) {
           hoursWorked = 8;
         } else {
-          hoursWorked = (end - start) / (1000 * 60 * 60); // Conversion de millisecondes en heures
+          hoursWorked = (end - start) / (1000 * 60 * 60); 
         }
         return { ...event, hoursWorked };
       });
@@ -125,15 +123,13 @@ export default function UserDetails() {
     events.forEach(event => {
       const start = new Date(event.start);
       const end = new Date(event.end);
-      const eventMonth = start.getMonth() + 1; // Mois de l'événement (1-12)
-      const eventYear = start.getFullYear(); // Année de l'événement
+      const eventMonth = start.getMonth() + 1; 
+      const eventYear = start.getFullYear(); 
       const now = new Date();
 
-      // Mise à jour des heures totales pour le mois et l'année sélectionnés
       if (eventMonth === selectedMonth && eventYear === selectedYear) {
-        hours.total += event.hoursWorked; // Total général pour le mois et l'année sélectionnés
+        hours.total += event.hoursWorked; 
 
-        // Calcul des heures effectuées ou à venir
         if (end < now) {
           hours.completed += event.hoursWorked;
         } else {
@@ -148,11 +144,11 @@ export default function UserDetails() {
   const filteredEvents = events
     .filter(event => {
       const start = new Date(event.start);
-      const eventMonth = start.getMonth() + 1; // Mois de l'événement (1-12)
-      const eventYear = start.getFullYear(); // Année de l'événement
+      const eventMonth = start.getMonth() + 1; 
+      const eventYear = start.getFullYear(); 
       return eventMonth === selectedMonth && eventYear === selectedYear;
     })
-    .sort((a, b) => new Date(b.start) - new Date(a.start)); // Trier du plus récent au plus ancien
+    .sort((a, b) => new Date(b.start) - new Date(a.start)); 
 
   if (isLoading) {
     return <Loader />;

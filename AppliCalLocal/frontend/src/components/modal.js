@@ -35,16 +35,14 @@ export default function Modal({
       setLocationType(event.location_type || 'shooting');
       setDecor(event.decor_id || '');
 
-      // Initialisation des articles sélectionnés
       const eventArticleIds = eventArticle
-        .filter(ea => ea.event_id === parseInt(event.id, 10))  // Assurez-vous que l'ID de l'événement est un nombre
+        .filter(ea => ea.event_id === parseInt(event.id, 10))  
         .map(ea => ea.article_id.toString());
 
       setSelectedArticles(eventArticleIds);
 
       setAddressId(event.address_id || '');
 
-      // Filtrer les articles en fonction des eventArticle
       const filteredArticles = articles.filter(article => eventArticleIds.includes(article.id.toString()));
     }
   }, [event, eventArticle, articles]);

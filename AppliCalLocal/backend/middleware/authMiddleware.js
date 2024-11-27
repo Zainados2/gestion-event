@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/modelsUser'); // Assure-toi que ce chemin est correct
+const User = require('../models/modelsUser'); 
 
-const jwtSecret = 'YOUR_JWT_SECRET'; // Remplacez par votre secret JWT réel
+const jwtSecret = 'YOUR_JWT_SECRET'; 
 
-// Middleware pour vérifier le token JWT
+
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   if (!authHeader) {
@@ -19,12 +19,12 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(500).json({ success: false, message: 'Échec de l\'authentification du token.' });
     }
-    req.userId = decoded.userId; // Ajoute l'ID utilisateur au request pour une utilisation ultérieure
+    req.userId = decoded.userId; 
     next();
   });
 };
 
-// Middleware pour vérifier le rôle de l'utilisateur
+
 const verifyRole = (role) => {
   return async (req, res, next) => {
     try {

@@ -62,14 +62,11 @@ export default function Events() {
   
               const date = cell.getAttribute('data-date');
               
-              // Créer un objet Date à partir de la date de début
               const startDate = new Date(date);
               
-              // Ajouter 1 jour à la date de début pour obtenir la date de fin
               const endDate = new Date(startDate);
-              endDate.setDate(startDate.getDate() + 1); // Ajoute 1 jour à la date de début
+              endDate.setDate(startDate.getDate() + 1); 
   
-              // Formater les dates en chaîne de caractères dans le format 'YYYY-MM-DDT00:00:00'
               const selectInfo = {
                 startStr: `${startDate.toISOString().split('T')[0]}T00:00:00`, 
                 endStr: `${endDate.toISOString().split('T')[0]}T00:00:00`,  
@@ -98,7 +95,6 @@ export default function Events() {
         if (cell.getAttribute('tabIndex') === null) {
           cell.setAttribute('tabIndex', '0');
         }
-        // Ajouter les styles de focus
         cell.classList.add('focus:outline-none', 'focus:ring', 'focus:ring-purple-500', 'focus:border-purple-700');
         
         cell.addEventListener('keydown', (e) => {
@@ -107,14 +103,11 @@ export default function Events() {
   
             const date = cell.getAttribute('data-date');
             
-            // Créer un objet Date à partir de la date de début
             const startDate = new Date(date);
             
-            // Ajouter 1 jour à la date de début pour obtenir la date de fin
             const endDate = new Date(startDate);
-            endDate.setDate(startDate.getDate() + 1); // Ajoute 1 jour à la date de début
+            endDate.setDate(startDate.getDate() + 1); 
   
-            // Formater les dates en chaîne de caractères dans le format 'YYYY-MM-DDT00:00:00'
             const selectInfo = {
               startStr: `${startDate.toISOString().split('T')[0]}T00:00:00`, 
               endStr: `${endDate.toISOString().split('T')[0]}T00:00:00`,  
@@ -234,7 +227,6 @@ export default function Events() {
     }
   };
 
-  // Calculer le nombre d'articles problématiques pour un décor spécifique
   const getProblematicArticleCount = (decorId) => {
     const associatedArticles = decorArticles
       .filter(da => da.decor_id === decorId)
@@ -275,7 +267,6 @@ export default function Events() {
     try {
         let addressResponse = null;
 
-        // Récupérer l'adresse si un address_id est présent
         if (eventDetails.address_id) {
           const token = localStorage.getItem('token');
             addressResponse = await fetch(`${API_ADDRESS_URL}/${eventDetails.address_id}`, {
@@ -293,7 +284,6 @@ export default function Events() {
         let decorDemontageStatus = null;
         let decorName = null;
 
-        // Trouver le nom du décor en utilisant l'ID de decor_id
         if (eventDetails.decor_id) {
             const decor = decors.find(decor => decor.id === eventDetails.decor_id);
             if (decor) {
@@ -301,11 +291,10 @@ export default function Events() {
             }
         }
 
-        // Récupérer les articles si l'utilisateur est photographe
         if (userRole === 'photographe') {
             if (eventArticle.length > 0) {
                 const eventArticleIds = eventArticle
-                    .filter(ea => ea.event_id === parseInt(eventDetails.id, 10))  // Assurez-vous que l'ID de l'événement est un nombre
+                    .filter(ea => ea.event_id === parseInt(eventDetails.id, 10))  
                     .map(ea => ea.article_id.toString());
 
                 console.log('eventArticleIds:', eventArticleIds);
@@ -330,7 +319,7 @@ export default function Events() {
                                 return { ...article, isValidated };
                             } catch (error) {
                                 console.error('Erreur lors de la récupération du statut de validation pour l\'article ID:', article.id, error);
-                                return { ...article, isValidated: false }; // Par défaut, définir comme non validé en cas d'erreur
+                                return { ...article, isValidated: false }; 
                             }
                         })
                     );
@@ -338,7 +327,6 @@ export default function Events() {
             }
         }
 
-        // Récupérer le statut de validation des décors si l'utilisateur est photographe
         if (userRole === 'photographe' && eventDetails.decor_id) {
             try {
               const token = localStorage.getItem('token');
@@ -357,7 +345,6 @@ export default function Events() {
             }
         }
 
-        // Récupérer le statut de montage des décors si l'utilisateur est décorateur
         if (userRole === 'decorateur' && eventDetails.decor_id) {
             try {
               const token = localStorage.getItem('token');
@@ -562,7 +549,6 @@ end: info.event.allDay
       });
       if (!response.ok) throw new Error(`Failed to invalidate article, Status: ${response.status}`);
       fetchEventArticles()
-      // Mise à jour locale
       setSelectedEvent(prevState => ({
         ...prevState,
         filteredArticles: prevState.filteredArticles.map(article =>
@@ -762,7 +748,6 @@ end: info.event.allDay
         />
       </div>
 
-      {/* Inline style for responsive toolbar */}
       <style>
         {`
           /* Mobile styles for FullCalendar toolbar */

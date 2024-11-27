@@ -1,94 +1,88 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'; // Fonctions pour rendre et tester les composants.
-import '@testing-library/jest-dom'; // Assertions supplémentaires pour le DOM.
-import axios from 'axios'; // Pour simuler les appels API.
-import LoginPage from '../app/page'; // Composant LoginPage à tester.
-import { useAuth } from '../app/contexts/authContext'; // Hook useAuth utilisé dans LoginPage.
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'; 
+import '@testing-library/jest-dom';
+import axios from 'axios';
+import LoginPage from '../app/page'; 
+import { useAuth } from '../app/contexts/authContext'; 
 
-// Mock du hook useAuth
 jest.mock('../app/contexts/authContext', () => ({
   useAuth: () => ({
-    updateAuthContext: jest.fn(), // Fonction fictive pour updateAuthContext.
+    updateAuthContext: jest.fn(), 
   }),
 }));
 
-// Mock d'axios
-jest.mock('axios'); // Simulation des appels API avec axios.
+jest.mock('axios'); 
 
-// Mock du hook useRouter de next/navigation
 jest.mock('next/navigation', () => ({
-  useRouter: jest.fn(), // Fonction fictive pour useRouter.
+  useRouter: jest.fn(), 
 }));
 
 describe('LoginPage Component', () => {
   let useRouterMock;
 
   beforeEach(() => {
-    useRouterMock = require('next/navigation').useRouter; // Récupération du mock pour useRouter.
+    useRouterMock = require('next/navigation').useRouter; 
     useRouterMock.mockReturnValue({
-      push: jest.fn(), // Fonction fictive pour la méthode push.
+      push: jest.fn(), 
     });
 
-    jest.clearAllMocks(); // Réinitialisation des mocks avant chaque test.
+    jest.clearAllMocks(); 
   });
 
   test('should successfully login with correct credentials', async () => {
     axios.post.mockResolvedValue({
       data: {
         success: true,
-        token: 'mocked_token', // Réponse simulée avec succès.
+        token: 'mocked_token', 
       },
     });
 
-    render(<LoginPage />); // Rendre le composant pour les tests.
+    render(<LoginPage />); 
 
-    // Simuler la saisie des identifiants corrects.
     fireEvent.change(screen.getByLabelText(/Nom d'utilisateur/i), { target: { value: 'gerant' } });
     fireEvent.change(screen.getByLabelText(/Mot de passe/i), { target: { value: 'azerty619' } });
 
-    fireEvent.click(screen.getByText(/Se connecter/i)); // Soumettre le formulaire.
+    fireEvent.click(screen.getByText(/Se connecter/i)); 
 
     await waitFor(() => {
-      expect(useRouterMock().push).toHaveBeenCalledWith('/calendar'); // Vérifier la redirection.
+      expect(useRouterMock().push).toHaveBeenCalledWith('/calendar'); 
     });
 
-    expect(localStorage.getItem('token')).toBe('mocked_token'); // Vérifier le stockage du token.
+    expect(localStorage.getItem('token')).toBe('mocked_token'); 
   });
 
   test('should fail to login with incorrect credentials', async () => {
     axios.post.mockResolvedValue({
       data: {
         success: false,
-        message: 'Identifiants incorrects', // Réponse simulée d'échec.
+        message: 'Identifiants incorrects', 
       },
     });
 
-    render(<LoginPage />); // Rendre le composant pour les tests.
+    render(<LoginPage />); 
 
-    // Simuler la saisie des identifiants incorrects.
     fireEvent.change(screen.getByLabelText(/Nom d'utilisateur/i), { target: { value: 'incorrect_user' } });
     fireEvent.change(screen.getByLabelText(/Mot de passe/i), { target: { value: 'wrong_password' } });
 
-    fireEvent.click(screen.getByText(/Se connecter/i)); // Soumettre le formulaire.
+    fireEvent.click(screen.getByText(/Se connecter/i)); 
 
     await waitFor(() => {
-      expect(screen.getByText('Identifiants incorrects')).toBeInTheDocument(); // Vérifier le message d'erreur.
+      expect(screen.getByText('Identifiants incorrects')).toBeInTheDocument(); 
     });
   });
 
   test('should handle server error', async () => {
-    axios.post.mockRejectedValue(new Error('Erreur serveur')); // Simuler une erreur serveur.
+    axios.post.mockRejectedValue(new Error('Erreur serveur')); 
 
-    render(<LoginPage />); // Rendre le composant pour les tests.
+    render(<LoginPage />); 
 
-    // Simuler la saisie des identifiants corrects.
     fireEvent.change(screen.getByLabelText(/Nom d'utilisateur/i), { target: { value: 'gerant' } });
     fireEvent.change(screen.getByLabelText(/Mot de passe/i), { target: { value: 'azerty619' } });
 
-    fireEvent.click(screen.getByText(/Se connecter/i)); // Soumettre le formulaire.
+    fireEvent.click(screen.getByText(/Se connecter/i)); 
 
     await waitFor(() => {
-      expect(screen.getByText("Une erreur s'est produite. Veuillez réessayer.")).toBeInTheDocument(); // Vérifier le message d'erreur.
+      expect(screen.getByText("Une erreur s'est produite. Veuillez réessayer.")).toBeInTheDocument(); 
     });
   });
 });

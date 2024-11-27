@@ -1,6 +1,5 @@
-// models/event.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('./db'); // Ajustez le chemin selon votre configuration
+const sequelize = require('./db'); 
 
 const Event = sequelize.define('Event', {
   id: {
@@ -34,7 +33,7 @@ const Event = sequelize.define('Event', {
     defaultValue: false
   },
   participants: {
-    type: DataTypes.STRING, // You might want to use a different structure for participants
+    type: DataTypes.STRING, 
     allowNull: false
   },
   location_type: {
@@ -53,7 +52,6 @@ const Event = sequelize.define('Event', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  // Ajout du champ article_ids
   article_ids: {
     type: DataTypes.STRING,
     allowNull: true

@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('./db');
 const Decor = require('./modelsDecors');
-const Article = require('./modelsArticles'); // Supposons que vous ayez un modèle pour les articles
+const Article = require('./modelsArticles'); 
 
 const DecorArticle = sequelize.define('DecorArticle', {
   decor_id: {

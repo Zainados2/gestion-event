@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('../backend/models/db'); // Importer l'instance Sequelize
-const helmet = require('helmet'); // Importer helmet
+const sequelize = require('../backend/models/db'); 
+const helmet = require('helmet'); 
 const articleRoutes = require('./routes/articleRoutes');
 const decorRoutes = require('./routes/decorRoutes');
 const eventRoutes = require('./routes/eventRoutes');
@@ -15,14 +15,13 @@ const event_decors = require('./routes/event_decorsRoutes');
 const app = express();
 const port = 8081;
 
-// Configurer CORS
 const corsOptions = {
   origin: [
     'http://165.232.115.209:3000'
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
-  credentials: true, // Autoriser l'envoi de cookies, si nécessaire
+  credentials: true, 
 };
 
 
@@ -52,7 +51,6 @@ app.use(helmet.referrerPolicy({ policy: 'origin-when-cross-origin' }));
 
 app.use(express.json());
 
-// Configurer les routes
 app.use('/articles', articleRoutes);
 app.use('/decors', decorRoutes);
 app.use('/events', eventRoutes);
@@ -62,19 +60,16 @@ app.use('/event_articles', event_articles);
 app.use('/event_decors', event_decors);
 app.use('/', userRoutes);
 
-// Synchroniser les modèles avec la base de données
 const syncDatabase = async () => {
   try {
-    // Synchroniser les modèles avec la base de données
-    await sequelize.sync({ alter: true }); // Utiliser `alter: true` pour mettre à jour la base de données sans perdre de données
+    await sequelize.sync({ alter: true }); 
     console.log('Modèles synchronisés avec la base de données.');
   } catch (error) {
     console.error('Erreur de synchronisation des modèles:', error);
-    process.exit(1); // Arrêter le processus si la synchronisation échoue
+    process.exit(1);
   }
 };
 
-// Démarrer le serveur après la synchronisation des modèles
 if (process.env.NODE_ENV !== 'test') {
   syncDatabase().then(() => {
     app.listen(port, () => {

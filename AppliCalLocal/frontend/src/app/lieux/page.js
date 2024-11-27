@@ -93,7 +93,6 @@ const AddressesPage = () => {
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Gestion des Adresses</h1>
 
       <div className="flex flex-col md:flex-row gap-6">
-        {/* Création d'Adresse */}
         <div className="bg-white p-4 rounded-lg shadow-md flex-1">
           <h2 className="text-xl font-semibold mb-6 text-black">Créer une Adresse</h2>
           {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
@@ -129,7 +128,6 @@ const AddressesPage = () => {
           </button>
         </div>
 
-        {/* Liste des Adresses */}
         <div className="bg-white p-4 rounded-lg shadow-md flex-1">
           <h2 className="text-xl font-semibold mb-4 text-black">Adresses Existantes</h2>
           <div className="max-h-[400px] overflow-y-auto">
@@ -160,7 +158,6 @@ const AddressesPage = () => {
         </div>
       </div>
 
-      {/* Modale Modification d'Adresse */}
       {editingAddress && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-70 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3 max-h-[80%] overflow-y-auto">

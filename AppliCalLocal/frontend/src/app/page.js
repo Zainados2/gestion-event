@@ -3,11 +3,11 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../app/contexts/authContext'; // Importez useAuth
+import { useAuth } from '../app/contexts/authContext'; 
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
-  const { updateAuthContext } = useAuth(); // Importez updateAuthContext
+  const { updateAuthContext } = useAuth();
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const router = useRouter();

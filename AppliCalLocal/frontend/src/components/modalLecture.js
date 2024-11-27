@@ -64,7 +64,7 @@ const ModalLecture = ({
   
     try {
       await validateArticle(articleId);
-      updateArticleState(articleId, true);  // Met à jour localement
+      updateArticleState(articleId, true); 
     } catch (error) {
       setValidationError('Erreur de validation de l\'article. Veuillez réessayer.');
     } finally {
@@ -78,7 +78,7 @@ const ModalLecture = ({
   
     try {
       await invalidateArticle(articleId);
-      updateArticleState(articleId, false);  // Met à jour localement
+      updateArticleState(articleId, false); 
     } catch (error) {
       setValidationError('Erreur de dévalidation de l\'article. Veuillez réessayer.');
     } finally {
