@@ -223,39 +223,52 @@ export default function Historique() {
     const now = new Date();
     let effectue = 0;
     let aVenir = 0;
-  
-    const completedEvents = events.filter(event => event.isCompleted === 1);
-    
-    console.log('completedEvents:', completedEvents);  
-    
-    completedEvents.forEach(event => {
-      const eventStart = new Date(event.start);
-      const eventEnd = new Date(event.end);
-      const eventHeure = (eventEnd - eventStart) / (1000 * 60 * 60);  
-  
-      const heureTravaille = eventHeure >= 8 ? 8 : eventHeure; 
-  
-      if (eventStart.getMonth() + 1 === selectedMonth && eventStart.getFullYear() === selectedYear) {
-        if (eventEnd < now) {
-          effectue += heureTravaille;  
-        } else if (eventStart > now) {
-          aVenir += heureTravaille;  
+    let total = 0;
+
+    // Parcourir tous les événements
+    events.forEach(event => {
+        const eventStart = new Date(event.start);
+        const eventEnd = new Date(event.end);
+        const eventHeure = (eventEnd - eventStart) / (1000 * 60 * 60); // Calcul des heures
+
+        const heureTravaille = eventHeure >= 8 ? 8 : eventHeure; // Limite à 8 heures
+
+        // Vérifier si l'événement est dans le mois et l'année sélectionnés
+        if (eventStart.getMonth() + 1 === selectedMonth && eventStart.getFullYear() === selectedYear) {
+            total += heureTravaille; // Ajouter toutes les heures au total
+
+            if (event.isCompleted === 1 || event.isCompleted === true) {
+                // Ajouter aux heures effectuées si l'événement est terminé
+                effectue += heureTravaille;
+            } else if (eventStart > now) {
+                // Ajouter aux heures à venir si l'événement n'est pas encore commencé
+                aVenir += heureTravaille;
+            }
         }
-      }
     });
-  
+
+    // Mettre à jour les états
     setHeureEffectue(effectue);
     setHeureAVenir(aVenir);
-    setHeureTotal(effectue + aVenir);
-  };
-  
-  const filteredEvents = events.filter(event => {
-    const eventDate = new Date(event.start);
-    const eventMonth = eventDate.getMonth() + 1;
-    const eventYear = eventDate.getFullYear();
-    console.log('Event:', event);  
-    return eventMonth === selectedMonth && eventYear === selectedYear && (event.isCompleted === 1 || event.isCompleted === true);
-  }).sort((a, b) => new Date(b.start) - new Date(a.start));
+    setHeureTotal(total);
+
+    console.log(`Heures effectuées: ${effectue}`);
+    console.log(`Heures à venir: ${aVenir}`);
+    console.log(`Total des heures: ${total}`);
+};
+
+const filteredEvents = events
+    .filter(event => {
+        const eventDate = new Date(event.start);
+        const eventMonth = eventDate.getMonth() + 1;
+        const eventYear = eventDate.getFullYear();
+        console.log('Event:', event);
+
+        // Filtrer les événements par mois/année et inclure tous les états
+        return eventMonth === selectedMonth && eventYear === selectedYear;
+    })
+    .sort((a, b) => new Date(b.start) - new Date(a.start));
+
   
   console.log('filteredEvents:', filteredEvents);  
   
