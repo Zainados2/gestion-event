@@ -72,12 +72,18 @@ const loginUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const { userRole } = req; 
-    console.log(req)
-    if (userRole === 'admin') {
+    const { userId } = req; 
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'Utilisateur non trouvé.' });
+    }
+
+    if (user.role === 'admin') {
       const users = await User.findAll(); 
       return res.status(200).json({ success: true, users });
     }
+
     const users = await User.findAll({
       attributes: ['id', 'username', 'role'], 
       where: { role: { [Op.notIn]: ['gérant', 'admin'] } },
@@ -89,6 +95,7 @@ const getUsers = async (req, res) => {
     res.status(500).json({ success: false, message: 'Erreur serveur.' });
   }
 };
+
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
