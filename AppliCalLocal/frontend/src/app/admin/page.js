@@ -218,48 +218,56 @@ export default function ManageUsersAndRegister() {
         <div className="bg-white p-6 rounded-lg shadow-md overflow-auto">
           <h2 className="text-xl font-semibold mb-4 text-black">Liste des Utilisateurs</h2>
           {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
-          <table className="table-auto w-full">
+          <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
             <thead>
               <tr>
-                <th className="px-4 py-2 text-left">Nom d'utilisateur</th>
-                <th className="px-4 py-2 text-left">Rôle</th>
-                <th className="px-4 py-2 text-left">Actions</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-700">Nom d'utilisateur</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-700">Rôle</th>
+                <th className="p-4 text-center text-sm font-semibold text-gray-700">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td className="px-4 py-2">{user.username}</td>
-                  <td className="px-4 py-2">{user.role}</td>
-                  <td className="px-4 py-2">
-                    <button
-                      aria-label="Modifier"
-                      onClick={() => handleEditClick(user)}
-                      className="text-blue-500 hover:text-blue-700 mr-3"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      aria-label="Supprimer"
-                      onClick={() => handleDelete(user.id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      Supprimer
-                    </button>
+              {users.length > 0 ? (
+                users.map((user) => (
+                  <tr key={user.id}>
+                    <td className="p-4 text-sm font-medium text-gray-800">{user.username}</td>
+                    <td className="p-4 text-sm font-medium text-gray-800">{user.role}</td>
+                    <td className="p-4 text-center">
+                      <button
+                        aria-label={`Modifier ${user.username}`}
+                        onClick={() => handleEditClick(user)}
+                        className="text-blue-600 hover:text-blue-800 mr-2"
+                      >
+                        Modifier
+                      </button>
+                      <button
+                        aria-label={`Supprimer ${user.username}`}
+                        onClick={() => handleDelete(user.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        Supprimer
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="p-4 text-center text-sm text-gray-500">
+                    Aucun utilisateur trouvé.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
+
       </div>
 
-      {/* Modal de modification */}
+      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-10">
-          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
             <h2 className="text-xl font-semibold mb-4 text-black">Modifier l'utilisateur</h2>
-            {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
             <div className="mb-4">
               <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">Nom d'utilisateur</label>
               <input
@@ -274,6 +282,24 @@ export default function ManageUsersAndRegister() {
               {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
             </div>
             <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">Rôle</label>
+              <select
+                name="role"
+                id="role"
+                value={formData.role}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+              >
+                <option value="gerant">Gérant</option>
+                <option value="photographe">Photographe</option>
+                <option value="photographeassistant">Photographe Assistant</option>
+                <option value="decorateur">Décorateur</option>
+                <option value="decorateurassistant">Décorateur Assistant</option>
+                <option value="chauffeur">Chauffeur</option>
+              </select>
+              {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
+            </div>
+            <div className="mb-4">
               <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">Mot de passe</label>
               <input
                 name="password"
@@ -284,42 +310,22 @@ export default function ManageUsersAndRegister() {
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
               />
-              {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
             </div>
-            <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">Rôle</label>
-              <select
-                name="role"
-                id="role"
-                aria-label="Sélectionnez un rôle"
-                value={formData.role}
-                onChange={handleInputChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => setShowModal(false)}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg"
               >
-                <option value="">Sélectionnez un rôle</option>
-                <option value="gerant">Gérant</option>
-                <option value="photographe">Photographe</option>
-                <option value="photographeassistant">Photographe Assistant</option>
-                <option value="decorateur">Décorateur</option>
-                <option value="decorateurassistant">Décorateur Assistant</option>
-                <option value="chauffeur">Chauffeur</option>
-              </select>
-              {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
+                Annuler
+              </button>
+              <button
+                onClick={handleUpdate}
+                className="bg-purple-600 text-white px-4 py-2 rounded-lg"
+              >
+                Sauvegarder
+              </button>
             </div>
-            <button
-              aria-label="Sauvegarder les modifications"
-              onClick={handleUpdate}
-              className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              Sauvegarder
-            </button>
-            <button
-              aria-label="Annuler"
-              onClick={() => setShowModal(false)}
-              className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4"
-            >
-              Annuler
-            </button>
           </div>
         </div>
       )}
