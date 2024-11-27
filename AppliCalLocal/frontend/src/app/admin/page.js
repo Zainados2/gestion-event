@@ -13,6 +13,11 @@ export default function ManageUsersAndRegister() {
     password: "",
     role: "",
   });
+  const [modalFormData, setModalFormData] = useState({
+    username: "",
+    password: "",
+    role: "",
+  });
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -129,11 +134,6 @@ export default function ManageUsersAndRegister() {
     }
   };
 
-  const handleSwitchToCreate = () => {
-    setFormData({ username: "", password: "", role: "" });
-    setShowModal(false);
-  };
-
   if (isLoading) return <Loader />;
   if (!isAuthenticated || userRole !== "gerant") {
     return (
@@ -151,15 +151,13 @@ export default function ManageUsersAndRegister() {
       <h1 className="text-2xl font-bold mb-6 text-center">Gestion des Utilisateurs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+        {/* Formulaire d'inscription */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
           {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
           <form onSubmit={handleSubmit} className="flex flex-col flex-grow overflow-auto">
-            {/* Nom d'utilisateur */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">
-                Nom d'utilisateur
-              </label>
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">Nom d'utilisateur</label>
               <input
                 name="username"
                 id="username"
@@ -172,12 +170,8 @@ export default function ManageUsersAndRegister() {
               />
               {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
             </div>
-
-            {/* Mot de passe */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">
-                Mot de passe
-              </label>
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">Mot de passe</label>
               <input
                 name="password"
                 id="password"
@@ -190,12 +184,8 @@ export default function ManageUsersAndRegister() {
               />
               {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
             </div>
-
-            {/* Sélection de rôle */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">
-                Rôle
-              </label>
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">Rôle</label>
               <select
                 name="role"
                 id="role"
@@ -214,27 +204,125 @@ export default function ManageUsersAndRegister() {
               </select>
               {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
             </div>
-
-            {/* Boutons */}
-            <div className="flex justify-between items-center">
-              <button
-                type="submit"
-                className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
-              >
-                Ajouter Utilisateur
-              </button>
-              <button
-                type="button"
-                onClick={handleSwitchToCreate}
-                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
-              >
-                Passer en mode création
-              </button>
-            </div>
+            <button
+              aria-label="Inscrire"
+              type="submit"
+              className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              S'inscrire
+            </button>
           </form>
         </div>
 
+        {/* Liste des utilisateurs */}
+        <div className="bg-white p-6 rounded-lg shadow-md overflow-auto">
+          <h2 className="text-xl font-semibold mb-4 text-black">Liste des Utilisateurs</h2>
+          {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
+          <table className="table-auto w-full">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 text-left">Nom d'utilisateur</th>
+                <th className="px-4 py-2 text-left">Rôle</th>
+                <th className="px-4 py-2 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td className="px-4 py-2">{user.username}</td>
+                  <td className="px-4 py-2">{user.role}</td>
+                  <td className="px-4 py-2">
+                    <button
+                      aria-label="Modifier"
+                      onClick={() => handleEditClick(user)}
+                      className="text-blue-500 hover:text-blue-700 mr-3"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      aria-label="Supprimer"
+                      onClick={() => handleDelete(user.id)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      {/* Modal de modification */}
+      {showModal && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-10">
+          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+            <h2 className="text-xl font-semibold mb-4 text-black">Modifier l'utilisateur</h2>
+            {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">Nom d'utilisateur</label>
+              <input
+                name="username"
+                id="username"
+                aria-label="Nom d'utilisateur"
+                type="text"
+                value={formData.username}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+              />
+              {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">Mot de passe</label>
+              <input
+                name="password"
+                id="password"
+                aria-label="Mot de passe"
+                type="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+              />
+              {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">Rôle</label>
+              <select
+                name="role"
+                id="role"
+                aria-label="Sélectionnez un rôle"
+                value={formData.role}
+                onChange={handleInputChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+              >
+                <option value="">Sélectionnez un rôle</option>
+                <option value="gerant">Gérant</option>
+                <option value="photographe">Photographe</option>
+                <option value="photographeassistant">Photographe Assistant</option>
+                <option value="decorateur">Décorateur</option>
+                <option value="decorateurassistant">Décorateur Assistant</option>
+                <option value="chauffeur">Chauffeur</option>
+              </select>
+              {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
+            </div>
+            <button
+              aria-label="Sauvegarder les modifications"
+              onClick={handleUpdate}
+              className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              Sauvegarder
+            </button>
+            <button
+              aria-label="Annuler"
+              onClick={() => setShowModal(false)}
+              className="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
