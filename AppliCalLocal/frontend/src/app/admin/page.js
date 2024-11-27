@@ -207,7 +207,7 @@ export default function ManageUsersAndRegister() {
             <button
               aria-label="Inscrire"
               type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Créer un utilisateur
             </button>
@@ -215,9 +215,9 @@ export default function ManageUsersAndRegister() {
         </div>
 
         {/* Liste des utilisateurs et formulaire de modification */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Utilisateurs existants</h2>
-          <div className="space-y-4">
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+          <h2 className="text-xl font-semibold mb-4 text-black">Utilisateurs existants</h2>
+          <div className="flex space-y-4">
             {users.map((user) => (
               <div key={user.id} className="flex justify-between items-center">
                 <div>
@@ -227,13 +227,13 @@ export default function ManageUsersAndRegister() {
                 <div>
                   <button
                     onClick={() => handleEditClick(user)}
-                    className="text-blue-600 hover:text-blue-800 px-2 py-1 rounded"
+                    className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
                   >
                     Modifier
                   </button>
                   <button
                     onClick={() => handleDelete(user.id)}
-                    className="text-red-600 hover:text-red-800 px-2 py-1 rounded"
+                    className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700transition"
                   >
                     Supprimer
                   </button>
@@ -244,15 +244,14 @@ export default function ManageUsersAndRegister() {
         </div>
       </div>
 
-      {/* Modal pour la mise à jour de l'utilisateur */}
       {showModal && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-md w-96">
-            <h2 className="text-xl font-semibold mb-4">Modifier l'utilisateur</h2>
+            <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
             {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
             <form className="flex flex-col">
               <div className="mb-4">
-                <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="modalUsername">Nom d'utilisateur</label>
+                <label className="block mb-2 text-sm font-medium" htmlFor="modalUsername">Nom d'utilisateur</label>
                 <input
                   name="username"
                   id="modalUsername"
