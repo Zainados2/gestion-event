@@ -272,7 +272,7 @@ export default function Historique() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col gap-6">
-          <div className="bg-gray-50 border border-gray-300 shadow-lg rounded-lg p-6">
+          <div className="bg-gray-50 border border-gray-300 shadow-lg rounded-lg p-6 max-h-[550px]">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Filtrer par mois et année</h2>
             <label htmlFor='choixmois' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
             <select id='choixmois' aria-label='choix du mois'
@@ -310,7 +310,7 @@ export default function Historique() {
           </div>
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
+        <div className="bg-white shadow-lg rounded-lg p-6 max-h-[550px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Événements du mois</h2>
           {filteredEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
