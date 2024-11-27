@@ -4,7 +4,7 @@ const User = require('../models/modelsUser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const jwtSecret = process.env.JWT_SECRET; // Clé secrète stockée dans une variable d'environnement
+const jwtSecret = process.env.JWT_SECRET; 
 
 const reorderIDs = async (deletedId) => {
   try {

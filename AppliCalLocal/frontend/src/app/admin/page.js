@@ -151,7 +151,6 @@ export default function ManageUsersAndRegister() {
       <h1 className="text-2xl font-bold mb-6 text-center">Gestion des Utilisateurs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        {/* Formulaire d'inscription */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
           {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
@@ -214,17 +213,16 @@ export default function ManageUsersAndRegister() {
           </form>
         </div>
 
-        {/* Liste des utilisateurs et formulaire de modification */}
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Utilisateurs existants</h2>
-          <div className="flex space-y-4">
+          <div className="space-y-4">
             {users.map((user) => (
               <div key={user.id} className="flex justify-between items-center">
                 <div>
                   <p className="font-semibold text-gray-800">{user.username}</p>
                   <p className="text-sm text-gray-600">{user.role}</p>
                 </div>
-                <div>
+                <div className="flex space-x-2">
                   <button
                     onClick={() => handleEditClick(user)}
                     className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"

@@ -3,7 +3,8 @@ const Article = require('../models/modelsArticles');
 const DecorArticle = require('../models/modelsDecorArticles');
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'YOUR_JWT_SECRET';
-// Obtenir tous les décors
+
+
 const getDecors = async (req, res) => {
   try {
     const decors = await Decor.findAll();
@@ -13,14 +14,14 @@ const getDecors = async (req, res) => {
   }
 };
 
-// Obtenir les articles associés à un décor
+
 const getDecorArticles = async (req, res) => {
   const { id } = req.params;
   try {
     const decor = await Decor.findByPk(id, {
       include: {
         model: Article,
-        through: { attributes: [] }, // Exclut les colonnes de la table pivot
+        through: { attributes: [] }, 
       },
     });
     if (!decor) {
@@ -32,7 +33,7 @@ const getDecorArticles = async (req, res) => {
   }
 };
 
-// Obtenir un décor par ID
+
 const getDecorById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -46,7 +47,7 @@ const getDecorById = async (req, res) => {
   }
 };
 
-// Créer un décor
+
 const createDecor = async (req, res) => {
   const { name, articleIds } = req.body;
   const token = req.headers.authorization.split(' ')[1];
@@ -71,7 +72,7 @@ const createDecor = async (req, res) => {
     const decor = await Decor.create({ name, user_id: userId, });
 
     if (validArticles.length > 0) {
-      await decor.setArticles(validArticles); // Associe les articles valides au décor
+      await decor.setArticles(validArticles); 
     }
 
     res.json({ id: decor.id, name });
@@ -80,7 +81,7 @@ const createDecor = async (req, res) => {
   }
 };
 
-// Mettre à jour un décor
+
 const updateDecor = async (req, res) => {
   const { id } = req.params;
   const { name, articleIds } = req.body;
@@ -110,7 +111,7 @@ const updateDecor = async (req, res) => {
     await decor.update({ name, user_id: userId, });
 
     if (validArticles.length > 0) {
-      await decor.setArticles(validArticles); // Met à jour les articles associés au décor
+      await decor.setArticles(validArticles); 
     }
 
     res.json({ id, name });
@@ -119,7 +120,7 @@ const updateDecor = async (req, res) => {
   }
 };
 
-// Supprimer un décor
+
 const deleteDecor = async (req, res) => {
   const { id } = req.params;
   try {
@@ -128,8 +129,7 @@ const deleteDecor = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Decor not found' });
     }
 
-    await decor.destroy(); // Supprime le décor, ainsi que les associations dans `decor_articles`
-
+    await decor.destroy(); 
     res.json({ id });
   } catch (err) {
     res.status(500).send(err.message);

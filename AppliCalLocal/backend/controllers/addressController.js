@@ -1,7 +1,8 @@
 const Address = require('../models/modelsAdresses');
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'YOUR_JWT_SECRET';
-// Get all addresses
+
+
 const getAllAddresses = async (req, res) => {
   try {
     const addresses = await Address.findAll();
@@ -11,7 +12,7 @@ const getAllAddresses = async (req, res) => {
   }
 };
 
-// Get address by ID
+
 const getAddressById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -25,14 +26,15 @@ const getAddressById = async (req, res) => {
   }
 };
 
-// Create a new address
+
 const createAddress = async (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token,jwtSecret);
     const userId = decodedToken.userId;
   const { name, location, type } = req.body;
 
-  // Validation des champs
+
+  
   if (!name || !location || !type) {
     return res.status(400).send('Tous les champs sont requis.');
   }
@@ -52,7 +54,7 @@ const updateAddress = async (req, res) => {
     const decodedToken = jwt.verify(token,jwtSecret);
     const userId = decodedToken.userId;
 
-  // Validation des champs
+ 
   if (!name || !location || !type) {
     return res.status(400).send('Tous les champs sont requis.');
   }
@@ -72,7 +74,6 @@ const updateAddress = async (req, res) => {
 };
 
 
-// Delete an address
 const deleteAddress = async (req, res) => {
   const { id } = req.params;
   try {

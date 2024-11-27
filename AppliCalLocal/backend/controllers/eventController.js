@@ -1,4 +1,3 @@
-// controllers/eventController.js
 const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const Event = require('../models/modelsEvent');
@@ -17,7 +16,6 @@ const jwtSecret = 'YOUR_JWT_SECRET';
    const createEvent = async (req, res) => {
     const event = req.body;
     
-    // Extraction de l'user_id à partir du token
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token,jwtSecret);
     const userId = decodedToken.userId;
@@ -179,7 +177,7 @@ const updateEvent = async (req, res) => {
       ...updatedEvent,
       participants: uniqueParticipants,
       user_id: userId,
-      article_ids: articleIds.join(','), // Met à jour la colonne article_ids
+      article_ids: articleIds.join(','), 
     });
 
     if (event.address_id !== updatedEvent.address_id) {
@@ -215,7 +213,6 @@ const deleteEvent = async (req, res) => {
 
     await event.destroy();
 
-    // Supprime les associations
     await removeArticlesFromEvent(eventId);
     await removeDecorsFromEvent(eventId);
     await removeAddressFromEvent(eventId);

@@ -1,7 +1,8 @@
-const Article = require('../models/modelsArticles'); // Importation du modèle Sequelize
+const Article = require('../models/modelsArticles'); 
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'YOUR_JWT_SECRET';
-// Obtenir tous les articles
+
+
 const getArticles = async (req, res) => {
   try {
     const articles = await Article.findAll();
@@ -11,7 +12,7 @@ const getArticles = async (req, res) => {
   }
 };
 
-// Obtenir les articles par IDs
+
 const getArticlesByIds = async (req, res) => {
   const ids = req.query.ids;
 
@@ -39,7 +40,7 @@ const getArticlesByIds = async (req, res) => {
   }
 };
 
-// Créer un article
+
 const createArticle = async (req, res) => {
   const { title, deteriorated = false, lost = false } = req.body;
   const token = req.headers.authorization.split(' ')[1];
@@ -61,7 +62,7 @@ const createArticle = async (req, res) => {
   }
 };
 
-// Mettre à jour un article
+
 const updateArticle = async (req, res) => {
   const { title, deteriorated, lost } = req.body;
   const { id } = req.params;
@@ -92,7 +93,7 @@ const updateArticle = async (req, res) => {
   }
 };
 
-// Supprimer un article
+
 const deleteArticle = async (req, res) => {
   const { id } = req.params;
   

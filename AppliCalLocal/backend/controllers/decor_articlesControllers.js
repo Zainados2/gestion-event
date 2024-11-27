@@ -1,6 +1,6 @@
-const DecorArticle = require('../models/modelsDecorArticles'); // Importation du modèle Sequelize
+const DecorArticle = require('../models/modelsDecorArticles'); 
 
-// Obtenir un article associé à un décor par ID
+
 const getDecor_ArticleById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -17,7 +17,7 @@ const getDecor_ArticleById = async (req, res) => {
   }
 };
 
-// Obtenir tous les articles associés à un décor
+
 const getDecorArticles = async (req, res) => {
   try {
     const decorArticles = await DecorArticle.findAll();
