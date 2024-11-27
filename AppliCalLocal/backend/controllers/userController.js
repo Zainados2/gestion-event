@@ -72,12 +72,17 @@ const loginUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.findAll({ attributes: ['id', 'username', 'role'] });
+    const users = await User.findAll({
+      attributes: ['id', 'username', 'role'],
+      where: { role: { [Op.ne]: 'gérant' } }, 
+    });
     res.status(200).json({ success: true, users });
   } catch (error) {
+    console.error('Erreur lors de la récupération des utilisateurs:', error);
     res.status(500).json({ success: false, message: 'Erreur serveur.' });
   }
 };
+
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
