@@ -102,7 +102,7 @@ const getEvents = async (req, res) => {
     let events;
     if (userRole === 'gerant' || userRole === 'admin') {
       events = await Event.findAll({ order: [['id', 'ASC']] });
-    } else if (userRole === 'photographe' || userRole === 'decorateur' || userRole === 'decorateur' || userRole === 'chauffeur') {
+    } else if (userRole === 'photographe' || userRole === 'decorateur' || userRole === 'decorateurassistant' || userRole === 'chauffeur' || userRole === 'photographeassistant') {
       events = await Event.findAll({
         where: {
           participants: {
