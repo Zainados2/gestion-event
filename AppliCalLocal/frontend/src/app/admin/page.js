@@ -213,7 +213,7 @@ export default function ManageUsersAndRegister() {
           </form>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px', overflow:'auto' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Utilisateurs existants</h2>
           <div className="space-y-4">
             {users.map((user) => (
