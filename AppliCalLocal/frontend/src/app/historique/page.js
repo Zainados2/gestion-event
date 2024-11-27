@@ -226,7 +226,9 @@ export default function Historique() {
   
     // Filtrer les événements complets (isCompleted === 1)
     const completedEvents = events.filter(event => event.isCompleted === 1);
-  
+    
+    console.log('completedEvents:', completedEvents);  // Log des événements filtrés par isCompleted
+    
     completedEvents.forEach(event => {
       const eventStart = new Date(event.start);
       const eventEnd = new Date(event.end);
@@ -255,8 +257,11 @@ export default function Historique() {
     const eventDate = new Date(event.start);
     const eventMonth = eventDate.getMonth() + 1;
     const eventYear = eventDate.getFullYear();
+    console.log('Event:', event);  // Log des événements avant de filtrer par mois et année
     return eventMonth === selectedMonth && eventYear === selectedYear && event.isCompleted === 1;
   }).sort((a, b) => new Date(b.start) - new Date(a.start));
+  
+  console.log('filteredEvents:', filteredEvents);  // Log des événements après filtrage
   
 
   if (isLoading) {
@@ -274,7 +279,6 @@ export default function Historique() {
     );
   }
 
-  console.log(filteredEvents)
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
