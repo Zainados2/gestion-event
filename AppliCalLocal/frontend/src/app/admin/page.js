@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -74,6 +74,22 @@ export default function ManageUsersAndRegister() {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(`http://165.232.115.209:8081/users/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.success) {
+        fetchUsers();
+      } else {
+        setError({ global: response.data.message });
+      }
+    } catch (error) {
+      setError({ global: "Une erreur s'est produite. Veuillez réessayer." });
+    }
+  };
+
   const handleEditClick = (user) => {
     setSelectedUser(user);
     setFormData({ username: user.username, password: "", role: user.role });
@@ -113,6 +129,11 @@ export default function ManageUsersAndRegister() {
     }
   };
 
+  const handleSwitchToCreate = () => {
+    setFormData({ username: "", password: "", role: "" });
+    setShowModal(false);
+  };
+
   if (isLoading) return <Loader />;
   if (!isAuthenticated || userRole !== "gerant") {
     return (
@@ -130,14 +151,15 @@ export default function ManageUsersAndRegister() {
       <h1 className="text-2xl font-bold mb-6 text-center">Gestion des Utilisateurs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
-          <h2 className="text-xl font-semibold mb-4 text-black">{selectedUser ? 'Modifier utilisateur' : 'Inscription'}</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+          <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
           {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
-          <form onSubmit={selectedUser ? handleUpdate : handleSubmit} className="flex flex-col flex-grow overflow-auto">
-
+          <form onSubmit={handleSubmit} className="flex flex-col flex-grow overflow-auto">
             {/* Nom d'utilisateur */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">Nom d'utilisateur</label>
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">
+                Nom d'utilisateur
+              </label>
               <input
                 name="username"
                 id="username"
@@ -153,7 +175,9 @@ export default function ManageUsersAndRegister() {
 
             {/* Mot de passe */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">Mot de passe</label>
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">
+                Mot de passe
+              </label>
               <input
                 name="password"
                 id="password"
@@ -169,7 +193,9 @@ export default function ManageUsersAndRegister() {
 
             {/* Sélection de rôle */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">Rôle</label>
+              <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">
+                Rôle
+              </label>
               <select
                 name="role"
                 id="role"
@@ -189,32 +215,25 @@ export default function ManageUsersAndRegister() {
               {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
             </div>
 
-            {/* Bouton */}
-            <div className="flex justify-center">
-              <button type="submit" className="w-full bg-purple-500 text-white font-bold py-2 px-4 rounded-lg">
-                {selectedUser ? "Mettre à jour" : "Créer un utilisateur"}
+            {/* Boutons */}
+            <div className="flex justify-between items-center">
+              <button
+                type="submit"
+                className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
+              >
+                Ajouter Utilisateur
+              </button>
+              <button
+                type="button"
+                onClick={handleSwitchToCreate}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+              >
+                Passer en mode création
               </button>
             </div>
           </form>
         </div>
 
-        {/* Liste des utilisateurs */}
-        <div className="overflow-hidden bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Liste des utilisateurs</h2>
-          <ul>
-            {users.map((user) => (
-              <li key={user.id} className="flex justify-between items-center mb-4">
-                <div className="text-sm">{user.username}</div>
-                <button
-                  onClick={() => handleEditClick(user)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm"
-                >
-                  Modifier
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </div>
   );
