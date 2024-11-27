@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../contexts/authContext';
 import Loader from '../../components/Loader';
+import Modal from '@/components/modaldecor';
 
 export default function ManageUsersAndRegister() {
   const { isAuthenticated, userRole } = useAuth();
@@ -14,6 +15,8 @@ export default function ManageUsersAndRegister() {
   const [role, setRole] = useState('');
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(null); 
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -99,6 +102,44 @@ export default function ManageUsersAndRegister() {
     } catch (error) {
       setError({ global: 'Une erreur s\'est produite. Veuillez réessayer.' });
     }
+  };
+
+  const handleEditClick = (user) => {
+    setSelectedUser(user);
+    setShowModal(true); // Ouvre la modale
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `http://165.232.115.209:8081/users/${selectedUser.id}`,
+        {
+          username: selectedUser.username,
+          password: selectedUser.password,
+          role: selectedUser.role,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        fetchUsers();
+        setShowModal(false); // Ferme la modale après succès
+      } else {
+        setError({ global: response.data.message });
+      }
+    } catch (error) {
+      setError({ global: "Une erreur s'est produite. Veuillez réessayer." });
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedUser({ ...selectedUser, [name]: value });
   };
 
   if (isLoading) {
@@ -192,18 +233,86 @@ export default function ManageUsersAndRegister() {
               {users.map(user => (
                 <li key={user.id} className="flex lg:flex-row flex-col items-left justify-between p-4 border-b border-gray-200 rounded-lg bg-gray-50 shadow-sm">
                   <span className="text-gray-800">{user.username} - {user.role}</span>
-                  <button aria-label='supprimer' 
-                    onClick={() => handleDelete(user.id)} 
-                    className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition mt-2 w-24"
-                  >
-                    Supprimer
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleEditClick(user)}
+                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      onClick={() => handleDelete(user.id)}
+                      className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </div>
+
+      {showModal && selectedUser && (
+        <Modal onClose={() => setShowModal(false)}>
+          <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
+          <form className="flex flex-col space-y-4">
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium">
+                Nom d'utilisateur
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={selectedUser.username}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded-lg p-2"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium">
+                Mot de passe
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={selectedUser.password}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded-lg p-2"
+              />
+            </div>
+            <div>
+              <label htmlFor="role" className="block text-sm font-medium">
+                Rôle
+              </label>
+              <select
+                id="role"
+                name="role"
+                value={selectedUser.role}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded-lg p-2"
+              >
+                <option value="gerant">Gérant</option>
+                <option value="photographe">Photographe</option>
+                <option value="photographeassistant">Photographe Assistant</option>
+                <option value="decorateur">Décorateur</option>
+                <option value="decorateurassistant">Décorateur Assistant</option>
+                <option value="chauffeur">Chauffeur</option>
+              </select>
+            </div>
+            <button
+              type="button"
+              onClick={handleUpdate}
+              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+            >
+              Enregistrer
+            </button>
+          </form>
+        </Modal>
+      )}
     </div>
   );
 }
