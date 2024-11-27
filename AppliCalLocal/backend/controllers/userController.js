@@ -135,7 +135,7 @@ const updateUser = async (req, res) => {
   try {
     const user = await User.findByPk(id); 
     if (!user) {
-      return res.status(404).json({ success: false, message: 'Utilisateur non trouvé.' });
+      return res.status(404).json({ success: false, message: 'Utilisateur non trouvé' });
     }
     if (username) {
       user.username = username;
