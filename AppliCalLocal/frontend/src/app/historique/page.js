@@ -36,7 +36,7 @@ export default function Historique() {
   const [heureAVenir, setHeureAVenir] = useState(0); 
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin')) {
       fetchEvents();
       fetchAddresses();
       fetchEventArticles();
@@ -47,7 +47,7 @@ export default function Historique() {
   }, [isAuthenticated, userRole]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin')) {
       if (events.length > 0) {
         calculateHoursByMonth();
       }
@@ -57,7 +57,7 @@ export default function Historique() {
   }, [events, selectedMonth, selectedYear, isAuthenticated, userRole]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin')) {
       if (eventArticles.length > 0) {
         fetchArticles();
       }
@@ -67,7 +67,7 @@ export default function Historique() {
   }, [eventArticles, isAuthenticated, userRole]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin')) {
       if (eventDecors.length > 0) {
         fetchDecors();
       }
@@ -224,44 +224,40 @@ export default function Historique() {
     let effectue = 0;
     let aVenir = 0;
   
-    // Filtrer les événements complets (isCompleted === 1)
     const completedEvents = events.filter(event => event.isCompleted === 1);
     
-    console.log('completedEvents:', completedEvents);  // Log des événements filtrés par isCompleted
+    console.log('completedEvents:', completedEvents);  
     
     completedEvents.forEach(event => {
       const eventStart = new Date(event.start);
       const eventEnd = new Date(event.end);
-      const eventHeure = (eventEnd - eventStart) / (1000 * 60 * 60);  // Calcul des heures en heures
+      const eventHeure = (eventEnd - eventStart) / (1000 * 60 * 60);  
   
-      const heureTravaille = eventHeure >= 8 ? 8 : eventHeure;  // Limite de 8 heures
+      const heureTravaille = eventHeure >= 8 ? 8 : eventHeure; 
   
-      // Vérification du mois et de l'année
       if (eventStart.getMonth() + 1 === selectedMonth && eventStart.getFullYear() === selectedYear) {
         if (eventEnd < now) {
-          effectue += heureTravaille;  // Ajout aux heures effectuées
+          effectue += heureTravaille;  
         } else if (eventStart > now) {
-          aVenir += heureTravaille;  // Ajout aux heures à venir
+          aVenir += heureTravaille;  
         }
       }
     });
   
-    // Mise à jour des états
     setHeureEffectue(effectue);
     setHeureAVenir(aVenir);
     setHeureTotal(effectue + aVenir);
   };
   
-  // Filtrer les événements en fonction du mois et de l'année, mais garder uniquement les événements terminés
   const filteredEvents = events.filter(event => {
     const eventDate = new Date(event.start);
     const eventMonth = eventDate.getMonth() + 1;
     const eventYear = eventDate.getFullYear();
-    console.log('Event:', event);  // Log des événements avant de filtrer par mois et année
+    console.log('Event:', event);  
     return eventMonth === selectedMonth && eventYear === selectedYear && event.isCompleted === 1;
   }).sort((a, b) => new Date(b.start) - new Date(a.start));
   
-  console.log('filteredEvents:', filteredEvents);  // Log des événements après filtrage
+  console.log('filteredEvents:', filteredEvents);  
   
 
   if (isLoading) {
