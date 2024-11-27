@@ -11,6 +11,7 @@ router.post('/', userController.loginUser);
 router.get('/users', authMiddleware.verifyToken, userController.getUsers);
 
 router.delete('/users/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), userController.deleteUser);
+router.update('/users/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), userController.updateUser);
 
 router.get('/me', authMiddleware.verifyToken, userController.getCurrentUser);
 
