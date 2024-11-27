@@ -119,34 +119,40 @@ export default function UserDetails() {
       upcoming: 0,
       total: 0
     };
-
-    events.forEach(event => {
+  
+    // Filtrer les événements qui sont complétés (isCompleted === 1 ou true)
+    const completedEvents = events.filter(event => 
+      (event.isCompleted === 1 || event.isCompleted === true)
+    );
+  
+    completedEvents.forEach(event => {
       const start = new Date(event.start);
       const end = new Date(event.end);
       const eventMonth = start.getMonth() + 1; 
-      const eventYear = start.getFullYear(); 
+      const eventYear = start.getFullYear();
       const now = new Date();
-
+  
       if (eventMonth === selectedMonth && eventYear === selectedYear) {
         hours.total += event.hoursWorked; 
-
+  
         if (end < now) {
-          hours.completed += event.hoursWorked;
+          hours.completed += event.hoursWorked; 
         } else {
           hours.upcoming += event.hoursWorked;
         }
       }
     });
-
-    setHoursByMonth(hours);
+  
+    setHoursByMonth(hours); 
   };
-
+  
   const filteredEvents = events
     .filter(event => {
       const start = new Date(event.start);
       const eventMonth = start.getMonth() + 1; 
-      const eventYear = start.getFullYear(); 
-      return eventMonth === selectedMonth && eventYear === selectedYear;
+      const eventYear = start.getFullYear();
+      
+      return eventMonth === selectedMonth && eventYear === selectedYear && (event.isCompleted === 1 || event.isCompleted === true);
     })
     .sort((a, b) => new Date(b.start) - new Date(a.start)); 
 
