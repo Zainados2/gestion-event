@@ -36,7 +36,7 @@ export default function Historique() {
   const [heureAVenir, setHeureAVenir] = useState(0); 
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
       fetchEvents();
       fetchAddresses();
       fetchEventArticles();
@@ -47,7 +47,7 @@ export default function Historique() {
   }, [isAuthenticated, userRole]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
       if (events.length > 0) {
         calculateHoursByMonth();
       }
@@ -57,7 +57,7 @@ export default function Historique() {
   }, [events, selectedMonth, selectedYear, isAuthenticated, userRole]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
       if (eventArticles.length > 0) {
         fetchArticles();
       }
@@ -67,7 +67,7 @@ export default function Historique() {
   }, [eventArticles, isAuthenticated, userRole]);
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
       if (eventDecors.length > 0) {
         fetchDecors();
       }

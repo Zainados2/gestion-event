@@ -14,7 +14,7 @@ export default function Prestataire() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
       fetchUsers();
     } else {
       setIsLoading(false);

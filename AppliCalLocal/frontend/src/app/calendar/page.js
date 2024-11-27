@@ -236,7 +236,7 @@ export default function Events() {
   };
 
   const handleDateSelect = (selectInfo) => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
       setSelectedEvent({
         start: selectInfo.startStr,
         end: selectInfo.endStr,
@@ -384,7 +384,7 @@ export default function Events() {
             decorName,
         });
 
-        if (isAuthenticated && userRole === 'gerant') {
+        if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
             setModalIsOpen(true);
         } else {
             setModalLectureIsOpen(true);

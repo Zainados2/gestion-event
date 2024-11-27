@@ -31,7 +31,7 @@ export default function Menu() {
       <div className="flex justify-end items-center py-4">
         {isAuthenticated && (
           <>
-            {userRole === 'gerant' && (
+            {userRole === 'gerant' || userRole === 'admin' && (
               <>
                 <button aria-label='admin' onClick={() => router.push('/admin')} className="hidden md:block text-purple-600 focus:ring-2 focus:ring-purple-400 mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none">Admin</button>
                 <button aria-label='decors' onClick={() => router.push('/decor&article')} className="hidden md:block text-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4 hover:bg-purple-100 py-2 px-4 ">Décors</button>
@@ -71,7 +71,7 @@ export default function Menu() {
       Calendrier
     </button>
 
-    {userRole === 'gerant' && (
+    {userRole === 'gerant' || userRole === 'admin' && (
       <>
         <button aria-label='admin'
           onClick={() => {

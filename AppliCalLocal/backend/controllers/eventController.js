@@ -100,7 +100,7 @@ const getEvents = async (req, res) => {
 
   try {
     let events;
-    if (userRole === 'gerant') {
+    if (userRole === 'gerant' || userRole === 'admin') {
       events = await Event.findAll({ order: [['id', 'ASC']] });
     } else if (userRole === 'photographe' || userRole === 'decorateur' || userRole === 'decorateur' || userRole === 'chauffeur') {
       events = await Event.findAll({

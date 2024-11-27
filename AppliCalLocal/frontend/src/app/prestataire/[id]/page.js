@@ -28,7 +28,7 @@ export default function UserDetails() {
   console.log(id)
 
   useEffect(() => {
-    if (isAuthenticated && (userRole === 'gerant' || userId == id)) {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin' || userId == id)) {
       if (id) {
         fetchUser();
       }
@@ -38,7 +38,7 @@ export default function UserDetails() {
   }, [id, isAuthenticated, userRole, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && (userRole === 'gerant' || userId == id)) {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin' || userId == id)) {
       if (user) {
         fetchEvents();
       }
@@ -46,7 +46,7 @@ export default function UserDetails() {
   }, [user, isAuthenticated, userRole, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && (userRole === 'gerant' || userId == id)) {
+    if (isAuthenticated && (userRole === 'gerant' || userRole === 'admin' || userId == id)) {
       if (events.length > 0) {
         calculateHoursByMonthAndYear();
       }

@@ -12,7 +12,7 @@ const AddressesPage = () => {
   const { isAuthenticated, userRole } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated && userRole === 'gerant') {
+    if (isAuthenticated && userRole === 'gerant' || userRole === 'admin') {
     fetchAddresses();
     }
   }, []);
