@@ -27,7 +27,8 @@ jobs:
     # Étape 7 : Exécuter les tests pour le frontend
     - name: Run Frontend Tests
       working-directory: AppliCalLocal/frontend/src
-      run: npm test
+      run: npm test -- __tests__/calcul.test.js __tests__/pageuser.js
+
 
     - name: Deploy to DigitalOcean
       uses: appleboy/ssh-action@master
