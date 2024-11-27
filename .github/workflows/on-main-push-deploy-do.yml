@@ -21,12 +21,12 @@ jobs:
 
     # Étape 3 : Installer les dépendances pour le backend
     - name: Install Backend Dependencies
-      working-directory: ./backend
+      working-directory: AppliCalLocal/backend
       run: npm install
 
     # Étape 4 : Exécuter les tests pour le backend
     - name: Run Backend Tests
-      working-directory: ./backend
+      working-directory: AppliCalLocal/backend
       run: npm test
 
     # Étape 5 : Installer Node.js pour le frontend
@@ -37,12 +37,12 @@ jobs:
 
     # Étape 6 : Installer les dépendances pour le frontend
     - name: Install Frontend Dependencies
-      working-directory: ./frontend
+      working-directory: AppliCalLocal/frontend
       run: npm install
 
     # Étape 7 : Exécuter les tests pour le frontend
     - name: Run Frontend Tests
-      working-directory: ./frontend
+      working-directory: AppliCalLocal/frontend/src
       run: npm test
 
     - name: Deploy to DigitalOcean
