@@ -219,37 +219,45 @@ export default function Historique() {
     }
   };
 
-   const calculateHoursByMonth = () => {
+  const calculateHoursByMonth = () => {
     const now = new Date();
     let effectue = 0;
     let aVenir = 0;
-
-    events.forEach(event => {
+  
+    // Filtrer les événements complets (isCompleted === 1)
+    const completedEvents = events.filter(event => event.isCompleted === 1);
+  
+    completedEvents.forEach(event => {
       const eventStart = new Date(event.start);
       const eventEnd = new Date(event.end);
-      const eventHeure = (eventEnd - eventStart) / (1000 * 60 * 60);
-
-      const heureTravaille = eventHeure >= 8 ? 8 : eventHeure;
-
+      const eventHeure = (eventEnd - eventStart) / (1000 * 60 * 60);  // Calcul des heures en heures
+  
+      const heureTravaille = eventHeure >= 8 ? 8 : eventHeure;  // Limite de 8 heures
+  
+      // Vérification du mois et de l'année
       if (eventStart.getMonth() + 1 === selectedMonth && eventStart.getFullYear() === selectedYear) {
         if (eventEnd < now) {
-          effectue += heureTravaille;
+          effectue += heureTravaille;  // Ajout aux heures effectuées
         } else if (eventStart > now) {
-          aVenir += heureTravaille;
+          aVenir += heureTravaille;  // Ajout aux heures à venir
         }
       }
     });
+  
+    // Mise à jour des états
     setHeureEffectue(effectue);
     setHeureAVenir(aVenir);
     setHeureTotal(effectue + aVenir);
   };
-
+  
+  // Filtrer les événements en fonction du mois et de l'année, mais garder uniquement les événements terminés
   const filteredEvents = events.filter(event => {
     const eventDate = new Date(event.start);
     const eventMonth = eventDate.getMonth() + 1;
     const eventYear = eventDate.getFullYear();
-    return eventMonth === selectedMonth && eventYear === selectedYear;
+    return eventMonth === selectedMonth && eventYear === selectedYear && event.isCompleted === 1;
   }).sort((a, b) => new Date(b.start) - new Date(a.start));
+  
 
   if (isLoading) {
     return <Loader />;
