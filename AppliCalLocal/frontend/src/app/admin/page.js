@@ -260,7 +260,7 @@ export default function ManageUsersAndRegister() {
               </div>
               <div>
                 <label className="block text-sm font-medium" htmlFor="password">
-                  Mot de passe (laisser vide pour ne pas modifier)
+                  Mot de passe (Possible de le laisser vide)
                 </label>
                 <input
                   type="password"
