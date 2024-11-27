@@ -72,18 +72,27 @@ const loginUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
+    // Vérification du rôle de l'utilisateur qui fait la requête
+    const { userRole } = req; // Assurez-vous que `userRole` est défini dans votre middleware ou lors de l'authentification.
+
+    // Si l'utilisateur est un admin, on ramène toutes les informations des utilisateurs
+    if (userRole === 'admin') {
+      const users = await User.findAll(); // Retourner toutes les colonnes si l'utilisateur est admin
+      return res.status(200).json({ success: true, users });
+    }
+
+    // Sinon, on exclut les rôles 'gérant' et 'admin'
     const users = await User.findAll({
-      attributes: ['id', 'username', 'role'],
+      attributes: ['id', 'username', 'role'], // Spécifier les attributs à renvoyer
       where: { role: { [Op.notIn]: ['gérant', 'admin'] } },
     });
+
     res.status(200).json({ success: true, users });
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs:', error);
     res.status(500).json({ success: false, message: 'Erreur serveur.' });
   }
 };
-
-
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
