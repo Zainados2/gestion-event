@@ -74,7 +74,7 @@ const getUsers = async (req, res) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'username', 'role'],
-      where: { role: { [Op.ne]: 'gérant' } }, 
+      where: { role: { [Op.notIn]: ['gérant', 'admin'] } },
     });
     res.status(200).json({ success: true, users });
   } catch (error) {
@@ -82,6 +82,7 @@ const getUsers = async (req, res) => {
     res.status(500).json({ success: false, message: 'Erreur serveur.' });
   }
 };
+
 
 
 const deleteUser = async (req, res) => {

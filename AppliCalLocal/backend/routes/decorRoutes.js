@@ -10,10 +10,10 @@ router.get('/:id',authMiddleware.verifyToken, decorController.getDecorById);
 
 router.get('/:id/articles',authMiddleware.verifyToken, decorController.getDecorArticles);
 
-router.post('/',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), decorController.createDecor);
+router.post('/',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), decorController.createDecor);
 
-router.put('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), decorController.updateDecor);
+router.put('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), decorController.updateDecor);
 
-router.delete('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), decorController.deleteDecor);
+router.delete('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), decorController.deleteDecor);
 
 module.exports = router;

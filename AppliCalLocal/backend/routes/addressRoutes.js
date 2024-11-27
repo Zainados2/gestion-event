@@ -7,10 +7,10 @@ router.get('/',authMiddleware.verifyToken, addressController.getAllAddresses);
 
 router.get('/:id',authMiddleware.verifyToken, addressController.getAddressById);
 
-router.post('/',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), addressController.createAddress);
+router.post('/',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), addressController.createAddress);
 
-router.put('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), addressController.updateAddress);
+router.put('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), addressController.updateAddress);
 
-router.delete('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), addressController.deleteAddress);
+router.delete('/:id',authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), addressController.deleteAddress);
 
 module.exports = router;

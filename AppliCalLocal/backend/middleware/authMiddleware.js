@@ -25,18 +25,19 @@ const verifyToken = (req, res, next) => {
 };
 
 
-const verifyRole = (role) => {
+const verifyRole = (...roles) => {
   return async (req, res, next) => {
     try {
       const user = await User.findByPk(req.userId);
       if (!user) {
         return res.status(404).json({ success: false, message: 'Utilisateur non trouvé.' });
       }
-      if (user.role !== role) {
+      if (!roles.includes(user.role)) {
         return res.status(403).json({ success: false, message: 'Accès refusé.' });
       }
       next();
     } catch (error) {
+      console.error('Erreur dans le middleware verifyRole:', error);
       res.status(500).json({ success: false, message: 'Erreur serveur.' });
     }
   };

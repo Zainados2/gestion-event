@@ -8,10 +8,10 @@ router.get('/', authMiddleware.verifyToken, articleController.getArticles);
 
 router.get('/:id',authMiddleware.verifyToken, articleController.getArticlesByIds);
 
-router.post('/', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), articleController.createArticle);
+router.post('/', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), articleController.createArticle);
 
-router.put('/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), articleController.updateArticle);
+router.put('/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), articleController.updateArticle);
 
-router.delete('/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant'), articleController.deleteArticle);
+router.delete('/:id', authMiddleware.verifyToken, authMiddleware.verifyRole('gerant', 'admin'), articleController.deleteArticle);
 
 module.exports = router;
