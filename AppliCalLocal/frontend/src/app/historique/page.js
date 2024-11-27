@@ -254,7 +254,7 @@ export default function Historique() {
     const eventMonth = eventDate.getMonth() + 1;
     const eventYear = eventDate.getFullYear();
     console.log('Event:', event);  
-    return eventMonth === selectedMonth && eventYear === selectedYear && event.isCompleted === 1;
+    return eventMonth === selectedMonth && eventYear === selectedYear && (event.isCompleted === 1 || event.isCompleted === true);
   }).sort((a, b) => new Date(b.start) - new Date(a.start));
   
   console.log('filteredEvents:', filteredEvents);  
