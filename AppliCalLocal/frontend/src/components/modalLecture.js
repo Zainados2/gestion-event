@@ -205,7 +205,7 @@ const ModalLecture = ({
               )}
             </div>
             <div className="space-y-4 text-gray-700">
-              {filteredArticles.length > 0 && (
+              {userRole === 'photographe' && filteredArticles.length > 0 && (
                 <>
                   <strong className="font-semibold text-gray-800">Articles :</strong>
                   <ul className="space-y-4">
