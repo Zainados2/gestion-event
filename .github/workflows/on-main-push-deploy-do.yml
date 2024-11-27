@@ -3,7 +3,7 @@ name: Deploy to DigitalOcean
 on:
   push:
     branches:
-      - main  # Changez cela selon le nom de votre branche principale
+      - main  
 
 jobs:
   deploy:
