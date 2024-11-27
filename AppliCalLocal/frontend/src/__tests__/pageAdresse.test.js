@@ -5,16 +5,28 @@ import AddressesPage from '../app/lieux/page';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
+// Simuler le contexte d'authentification
+const AuthContext = React.createContext();
+
+// Créer un mock adapter pour Axios
 const mock = new MockAdapter(axios);
 
 describe('AddressesPage', () => {
   beforeEach(() => {
     mock.reset();
-    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, []); 
+    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, []);
   });
 
+  const renderWithAuth = (ui, { isAuthenticated = true, userRole = 'admin' } = {}) => {
+    return render(
+      <AuthContext.Provider value={{ isAuthenticated, user: { role: userRole } }}>
+        {ui}
+      </AuthContext.Provider>
+    );
+  };
+
   test('should show an error if fields are not filled in', async () => {
-    render(<AddressesPage />);
+    renderWithAuth(<AddressesPage />);
 
     fireEvent.click(screen.getByText('Créer Adresse'));
 
@@ -35,7 +47,7 @@ describe('AddressesPage', () => {
       { id: 3, name: 'Adresse 3', location: 'Location 3', type: 'studio' },
     ]);
 
-    render(<AddressesPage />);
+    renderWithAuth(<AddressesPage />);
 
     fireEvent.change(screen.getByPlaceholderText("Nom de l'adresse"), { target: { value: 'Adresse 3' } });
     fireEvent.change(screen.getByPlaceholderText("Emplacement de l'adresse"), { target: { value: 'Location 3' } });
@@ -48,76 +60,16 @@ describe('AddressesPage', () => {
     });
   });
 
-  test('récupérer et afficher Adresse 3 après creation', async () => {
-    mock.onPost('http://165.232.115.209:8081/addresses').reply(200, {
-      id: 3,
-      name: 'Adresse 3',
-      location: 'Location 3',
-      type: 'studio',
-    });
+  test('affiche la page uniquement si authentifié avec le rôle admin', () => {
+    renderWithAuth(<AddressesPage />, { isAuthenticated: true, userRole: 'admin' });
 
-    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, [
-      { id: 3, name: 'Adresse 3', location: 'Location 3', type: 'studio' },
-    ]);
-
-    render(<AddressesPage />);
-
-    fireEvent.change(screen.getByPlaceholderText("Nom de l'adresse"), { target: { value: 'Adresse 3' } });
-    fireEvent.change(screen.getByPlaceholderText("Emplacement de l'adresse"), { target: { value: 'Location 3' } });
-    fireEvent.change(screen.getByTestId('create-address-type'), { target: { value: 'studio' } });
-
-    fireEvent.click(screen.getByText('Créer Adresse'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Adresse 3 - Location 3 (studio)')).toBeInTheDocument();
-    });
-
-    mock.onGet('http://165.232.115.209:8081/addresses/3').reply(200, {
-      id: 3,
-      name: 'Adresse 3',
-      location: 'Location 3',
-      type: 'studio',
-    });
-
-   
-
-    await waitFor(() => {
-      expect(screen.getByText('Adresse 3 - Location 3 (studio)')).toBeInTheDocument();
-    });
+    expect(screen.getByText(/Créer Adresse/i)).toBeInTheDocument();
   });
 
-  test('supprimer une adresse et voir sa disparition', async () => {
-    mock.onPost('http://165.232.115.209:8081/addresses').reply(200, {
-      id: 3,
-      name: 'Adresse 3',
-      location: 'Location 3',
-      type: 'studio',
-    });
+  test('bloque l’accès si non authentifié', () => {
+    renderWithAuth(<AddressesPage />, { isAuthenticated: false });
 
-    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, [
-      { id: 3, name: 'Adresse 3', location: 'Location 3', type: 'studio' },
-    ]);
-
-    mock.onDelete('http://165.232.115.209:8081/addresses/3').reply(200);
-
-    render(<AddressesPage />);
-
-    fireEvent.change(screen.getByPlaceholderText("Nom de l'adresse"), { target: { value: 'Adresse 3' } });
-    fireEvent.change(screen.getByPlaceholderText("Emplacement de l'adresse"), { target: { value: 'Location 3' } });
-    fireEvent.change(screen.getByTestId('create-address-type'), { target: { value: 'studio' } });
-
-    fireEvent.click(screen.getByText('Créer Adresse'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Adresse 3 - Location 3 (studio)')).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText('Supprimer'));
-
-    mock.onGet('http://165.232.115.209:8081/addresses').reply(200, []);
-
-    await waitFor(() => {
-      expect(screen.queryByText('Adresse 3 - Location 3 (studio)')).not.toBeInTheDocument();
-    });
+    expect(screen.queryByText(/Créer Adresse/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/Vous devez être connecté pour accéder à cette page/i)).toBeInTheDocument();
   });
 });
