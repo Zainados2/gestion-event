@@ -43,7 +43,6 @@ describe('Tests de base et de sécurité pour les utilisateurs', () => {
     expect(passwordCrypte).toBe(true);
   });
 
-  // Test d'injection SQL lors de l'inscription
   test('injection sql pour supprimer table users', async () => {
     const username = 'bernard\'; DROP TABLE users; --';
     const password = 'asef9th7th';

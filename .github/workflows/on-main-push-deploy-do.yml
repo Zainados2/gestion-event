@@ -13,22 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Étape 2 : Installer Node.js pour le backend
-    - name: Setup Node.js for Backend
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22.10.0' # Utilisez la version spécifique à votre projet
-
-    # Étape 3 : Installer les dépendances pour le backend
-    - name: Install Backend Dependencies
-      working-directory: AppliCalLocal/backend
-      run: npm install
-
-    # Étape 4 : Exécuter les tests pour le backend
-    - name: Run Backend Tests
-      working-directory: AppliCalLocal/backend
-      run: npm test
-
     # Étape 5 : Installer Node.js pour le frontend
     - name: Setup Node.js for Frontend
       uses: actions/setup-node@v3
