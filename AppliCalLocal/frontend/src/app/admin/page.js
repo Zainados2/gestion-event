@@ -104,10 +104,6 @@ export default function ManageUsersAndRegister() {
     }
   };
 
-  const handleEditClick = (user) => {
-    setSelectedUser(user);
-    setShowModal(true); // Ouvre la modale
-  };
 
   const handleUpdate = async () => {
     try {
@@ -141,6 +137,12 @@ export default function ManageUsersAndRegister() {
     const { name, value } = e.target;
     setSelectedUser({ ...selectedUser, [name]: value });
   };
+
+  const closeAndResetModal = () => {
+    setSelectedUser(null);
+    setShowModal(false);
+  };
+  
 
   if (isLoading) {
     return <Loader />;
@@ -235,7 +237,11 @@ export default function ManageUsersAndRegister() {
                   <span className="text-gray-800">{user.username} - {user.role}</span>
                   <div className="flex gap-2">
                     <button
-                      onClick={() => handleEditClick(user)}
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setShowModal(true);
+                      }}
+                      
                       className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
                     >
                       Modifier
@@ -254,65 +260,64 @@ export default function ManageUsersAndRegister() {
         </div>
       </div>
 
-      {showModal && selectedUser && (
-        <Modal onClose={() => setShowModal(false)}>
-          <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
-          <form className="flex flex-col space-y-4">
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium">
-                Nom d'utilisateur
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={selectedUser.username}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg p-2"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={selectedUser.password}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg p-2"
-              />
-            </div>
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium">
-                Rôle
-              </label>
-              <select
-                id="role"
-                name="role"
-                value={selectedUser.role}
-                onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg p-2"
-              >
-                <option value="gerant">Gérant</option>
-                <option value="photographe">Photographe</option>
-                <option value="photographeassistant">Photographe Assistant</option>
-                <option value="decorateur">Décorateur</option>
-                <option value="decorateurassistant">Décorateur Assistant</option>
-                <option value="chauffeur">Chauffeur</option>
-              </select>
-            </div>
-            <button
-              type="button"
-              onClick={handleUpdate}
-              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-            >
-              Enregistrer
-            </button>
-          </form>
-        </Modal>
-      )}
+      <Modal onClose={closeAndResetModal}>
+  <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
+  <form className="flex flex-col space-y-4">
+    <div>
+      <label htmlFor="username" className="block text-sm font-medium">
+        Nom d'utilisateur
+      </label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        value={selectedUser.username}
+        onChange={handleInputChange}
+        className="w-full border border-gray-300 rounded-lg p-2"
+      />
+    </div>
+    <div>
+      <label htmlFor="password" className="block text-sm font-medium">
+        Mot de passe
+      </label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={selectedUser.password}
+        onChange={handleInputChange}
+        className="w-full border border-gray-300 rounded-lg p-2"
+      />
+    </div>
+    <div>
+      <label htmlFor="role" className="block text-sm font-medium">
+        Rôle
+      </label>
+      <select
+        id="role"
+        name="role"
+        value={selectedUser.role}
+        onChange={handleInputChange}
+        className="w-full border border-gray-300 rounded-lg p-2"
+      >
+        <option value="gerant">Gérant</option>
+        <option value="photographe">Photographe</option>
+        <option value="photographeassistant">Photographe Assistant</option>
+        <option value="decorateur">Décorateur</option>
+        <option value="decorateurassistant">Décorateur Assistant</option>
+        <option value="chauffeur">Chauffeur</option>
+      </select>
+    </div>
+    <button
+      type="button"
+      onClick={handleUpdate}
+      className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+    >
+      Enregistrer
+    </button>
+  </form>
+</Modal>
+
     </div>
   );
 }
