@@ -144,43 +144,84 @@ export default function ManageUsersAndRegister() {
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-6 text-center">Gestion des Utilisateurs</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-4">Inscription</h2>
-        {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            name="username"
-            placeholder="Nom d'utilisateur"
-            value={formData.username}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-          />
-          {error.username && <p className="text-red-500">{error.username}</p>}
-          <input
-            name="password"
-            type="password"
-            placeholder="Mot de passe"
-            value={formData.password}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-          />
-          {error.password && <p className="text-red-500">{error.password}</p>}
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-          >
-            <option value="">Sélectionnez un rôle</option>
-            <option value="gerant">Gérant</option>
-            <option value="photographe">Photographe</option>
-            {/* Ajoutez les rôles restants */}
-          </select>
-          {error.role && <p className="text-red-500">{error.role}</p>}
-          <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">S'inscrire</button>
-        </form>
-      </div>
+  <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
+  {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
+  <form onSubmit={handleSubmit} className="space-y-4">
+    
+    {/* Nom d'utilisateur */}
+    <div className="mb-4">
+      <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="username">
+        Nom d'utilisateur
+      </label>
+      <input
+        name="username"
+        id="username"
+        aria-label="Nom d'utilisateur"
+        type="text"
+        placeholder="Nom d'utilisateur"
+        value={formData.username}
+        onChange={handleInputChange}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+      />
+      {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
+    </div>
+
+    {/* Mot de passe */}
+    <div className="mb-4">
+      <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="password">
+        Mot de passe
+      </label>
+      <input
+        name="password"
+        id="password"
+        aria-label="Mot de passe"
+        type="password"
+        placeholder="Mot de passe"
+        value={formData.password}
+        onChange={handleInputChange}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+      />
+      {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
+    </div>
+
+    {/* Sélection de rôle */}
+    <div className="mb-4">
+      <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="role">
+        Rôle
+      </label>
+      <select
+        name="role"
+        id="role"
+        aria-label="Sélectionnez un rôle"
+        value={formData.role}
+        onChange={handleInputChange}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+      >
+        <option value="">Sélectionnez un rôle</option>
+        <option value="gerant">Gérant</option>
+        <option value="photographe">Photographe</option>
+        <option value="photographeassistant">Photographe Assistant</option>
+        <option value="decorateur">Décorateur</option>
+        <option value="decorateurassistant">Décorateur Assistant</option>
+        <option value="chauffeur">Chauffeur</option>
+      </select>
+      {error.role && <p className="text-red-500 text-sm mt-1">{error.role}</p>}
+    </div>
+
+    {/* Bouton d'inscription */}
+    <button
+      aria-label="Inscrire"
+      type="submit"
+      className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+    >
+      S'inscrire
+    </button>
+  </form>
+</div>
+
 
       <div className="grid gap-6">
         <div className="bg-white p-6 rounded-lg shadow-md">
@@ -198,7 +239,7 @@ export default function ManageUsersAndRegister() {
           </ul>
         </div>
       </div>
-
+    </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-md w-96">
