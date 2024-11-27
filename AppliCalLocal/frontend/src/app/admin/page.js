@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../contexts/authContext';
 import Loader from '../../components/Loader';
-import Modal from '@/components/modaldecor';
+import Modal from '../../components/modaldecor';
 
 export default function ManageUsersAndRegister() {
   const { isAuthenticated, userRole } = useAuth();
@@ -236,7 +236,7 @@ export default function ManageUsersAndRegister() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleEditClick(user)}
-                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
+                      className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
                     >
                       Modifier
                     </button>
