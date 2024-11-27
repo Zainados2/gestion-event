@@ -1,22 +1,17 @@
-// services/validateArticles.js
 const Article = require('../models/modelsArticles');
 
-const { Op } = require('sequelize'); // Assurez-vous que vous avez importé Op depuis Sequelize
+const { Op } = require('sequelize');
 
 const validateArticles = async (articleIds) => {
   try {
     const articles = await Article.findAll({
       where: {
         id: {
-          [Op.in]: articleIds  // Utilisation de l'opérateur "in" pour vérifier si l'ID de l'article est dans articleIds
+          [Op.in]: articleIds 
         }
       }
     });
-
-    // Vérification si certains articles ont des champs "lost" ou "deteriorated" non nuls
     const problematicArticles = articles.some(article => Number(article.lost) !== 0 || Number(article.deteriorated) !== 0);
-
-
     return problematicArticles;
   } catch (error) {
     console.error('Erreur lors de la validation des articles :', error);
