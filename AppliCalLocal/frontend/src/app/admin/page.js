@@ -25,7 +25,7 @@ export default function ManageUsersAndRegister() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated && userRole === "gerant" || userRole === 'admin') {
+    if (isAuthenticated && userRole === "gerant" && userRole === 'admin') {
       fetchUsers();
     }
     setIsLoading(false);
@@ -135,7 +135,7 @@ export default function ManageUsersAndRegister() {
   };
 
   if (isLoading) return <Loader />;
-  if (!isAuthenticated || userRole !== "gerant" || userRole !== 'admin') {
+  if (!isAuthenticated || userRole !== "gerant" && userRole !== 'admin') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="px-8 py-6 text-left bg-white shadow-lg rounded-lg">

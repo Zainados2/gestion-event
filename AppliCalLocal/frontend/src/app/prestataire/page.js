@@ -49,7 +49,7 @@ export default function Prestataire() {
     return <Loader />;
   }
 
-  if (!isAuthenticated || userRole !== 'gerant') {
+  if (!isAuthenticated || userRole !== 'gerant' && userRole !== 'admin') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-200">
         <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg border border-gray-300">

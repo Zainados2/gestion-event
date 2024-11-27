@@ -255,7 +255,7 @@ export default function Historique() {
     return <Loader />;
   }
 
-  if (!isAuthenticated || userRole !== 'gerant') {
+  if (!isAuthenticated || userRole !== 'gerant' && userRole !== 'admin') {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 shadow-lg rounded-lg">
