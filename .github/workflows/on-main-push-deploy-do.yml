@@ -13,21 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Étape 5 : Installer Node.js pour le frontend
     - name: Setup Node.js for Frontend
       uses: actions/setup-node@v3
       with:
         node-version: '22.10.0'
 
-    # Étape 6 : Installer les dépendances pour le frontend
     - name: Install Frontend Dependencies
       working-directory: AppliCalLocal/frontend
       run: npm install
 
-    # Étape 7 : Exécuter les tests pour le frontend
     - name: Run Frontend Tests
       working-directory: AppliCalLocal/frontend/src
-      run: npm test -- __tests__/calcul.test.js __tests__/pageuser.js
+      run: npm test -- __tests__/calcul.test.js __tests__/pageuser.test.js
 
 
     - name: Deploy to DigitalOcean
