@@ -292,7 +292,7 @@ export default function DecorArticle() {
               {allArticles.map(article => (
                 <li key={article.id} className="flex flex-col items-left justify-between p-4 border-b border-gray-200 rounded-lg bg-gray-50 shadow-sm">
                   <div className="flex flex-col">
-                    <span className="text-gray-800">{article.title}</span>
+                    <span className={`text-gray-800 ${article.deteriorated || article.lost ? 'line-through' : ''}`}>{article.title}</span>
                     <span className="text-red-600 text-sm font-medium">
                       {article.deteriorated ? 'Détérioré' : ''} {article.lost ? 'Perdu' : ''}
                     </span>

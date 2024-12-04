@@ -721,6 +721,7 @@ end: info.event.allDay
       <div className="relative w-full max-w-full md:max-w-3xl lg:max-w-4xl xl:max-w-5xl bg-gray-50 p-4 md:p-6 rounded-lg shadow-lg">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          locale="fr"
           timeZone="Europe/Paris"
           initialView="dayGridMonth"
           editable={true}
