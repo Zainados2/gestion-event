@@ -268,7 +268,7 @@ const filteredEvents = events
   if (!isAuthenticated || userRole !== 'gerant' && userRole !== 'admin') {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="bg-white p-8 shadow-lg rounded-lg">
+        <div className="bg-gray-50 p-8 shadow-lg rounded-lg">
           <h1 className="text-2xl font-semibold mb-4">Accès non autorisé</h1>
           <p className="text-center text-gray-600">Vous n'avez pas la permission d'accéder à cette page.</p>
         </div>
@@ -282,7 +282,7 @@ const filteredEvents = events
       <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Historique général</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col gap-6">
+        <div className="bg-gray-50 shadow-lg rounded-lg p-6 flex flex-col gap-6">
           <div className="bg-gray-50 border border-gray-300 shadow-lg rounded-lg p-6 max-h-[550px]">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Filtrer par mois et année</h2>
             <label htmlFor='choixmois' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
@@ -321,7 +321,7 @@ const filteredEvents = events
           </div>
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-6 max-h-[550px] overflow-y-auto">
+        <div className="bg-gray-50 shadow-lg rounded-lg p-6 max-h-[550px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Événements du mois</h2>
           {filteredEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -350,7 +350,7 @@ const filteredEvents = events
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
+        <div className="bg-gray-50 shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Articles Photographiés</h2>
           {validatedArticles.length > 0 && moment(validatedArticles.event_start).month() + 1  == selectedMonth ? (
             validatedArticles.map(article => (
@@ -372,7 +372,7 @@ const filteredEvents = events
           )}
         </div>
 
-        <div className="bg-white shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
+        <div className="bg-gray-50 shadow-lg rounded-lg p-6 max-h-[500px] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Décors Photographiés</h2>
           {validatedDecors.length > 0 && moment(validatedDecors.event_start).month() + 1  == selectedMonth ? (
             validatedDecors.map(decor => (

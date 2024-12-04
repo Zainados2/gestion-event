@@ -244,7 +244,7 @@ export default function DecorArticle() {
   if (!isAuthenticated || userRole !== 'gerant' && userRole !== 'admin') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg">
+        <div className="px-8 py-6 mx-4 mt-4 text-left bg-gray-50 shadow-lg rounded-lg">
           <h1 className="text-xl font-bold text-center text-black">Accès refusé</h1>
           <p className="text-center text-gray-600">Vous n'avez pas la permission d'accéder à cette page.</p>
         </div>
@@ -257,7 +257,7 @@ export default function DecorArticle() {
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Gestion des Décors et Articles</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
+        <div className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Créer un Article</h2>
           <button aria-label='modale creation article'
             className="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700 transition"
@@ -270,7 +270,7 @@ export default function DecorArticle() {
           </button>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
+        <div className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '250px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Créer un Décor</h2>
           <button aria-label='modale création décor'
             className="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700 transition"
@@ -283,7 +283,7 @@ export default function DecorArticle() {
           </button>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+        <div className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Articles Existants</h2>
           <div className="flex-1 overflow-auto">
             <ul className="space-y-4">
@@ -318,7 +318,7 @@ export default function DecorArticle() {
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+        <div className="bg-gray-50 p-4 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
   <h2 className="text-xl font-semibold mb-4 text-black">Liste des Décors</h2>
   <div className="flex-1 overflow-auto">
     <ul className="space-y-4">
@@ -361,7 +361,7 @@ export default function DecorArticle() {
 
 
       <Modal isOpen={isArticleModalOpen} onClose={() => setIsArticleModalOpen(false)}>
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-gray-50 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
             {editingArticle ? 'Modifier l\'Article' : 'Créer un Article'}
           </h2>
@@ -430,7 +430,7 @@ export default function DecorArticle() {
       </Modal>
 
       <Modal isOpen={isDecorModalOpen} onClose={() => setIsDecorModalOpen(false)}>
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-gray-50 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
             {editingDecor ? 'Modifier le Décor' : 'Créer un Décor'}
           </h2>

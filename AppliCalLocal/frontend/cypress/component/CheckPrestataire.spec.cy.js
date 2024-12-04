@@ -8,9 +8,9 @@ export const checkPresta = () => {
         cy.url().should('include', '/prestataire');
         cy.contains('Liste des Prestataires').should('exist');
 
-        cy.get('.bg-white').should('have.length.greaterThan', 0); 
+        cy.get('.bg-gray-50').should('have.length.greaterThan', 0); 
 
-        cy.get('.bg-white').first().find('button').contains('Voir les détails').click();
+        cy.get('.bg-gray-50').first().find('button').contains('Voir les détails').click();
 
         cy.url().should('match', /\/prestataire\/\d+$/);
 

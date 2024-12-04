@@ -138,7 +138,7 @@ export default function ManageUsersAndRegister() {
   if (!isAuthenticated || userRole !== "gerant" && userRole !== 'admin') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="px-8 py-6 text-left bg-white shadow-lg rounded-lg">
+        <div className="px-8 py-6 text-left bg-gray-50 shadow-lg rounded-lg">
           <h1 className="text-xl font-bold text-center">Accès refusé</h1>
           <p className="text-center text-gray-600">Vous n'avez pas la permission d'accéder à cette page.</p>
         </div>
@@ -151,7 +151,7 @@ export default function ManageUsersAndRegister() {
       <h1 className="text-2xl font-bold mb-6 text-center">Gestion des Utilisateurs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
+        <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Inscription</h2>
           {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
           <form onSubmit={handleCreateSubmit} className="flex flex-col flex-grow overflow-auto">
@@ -213,7 +213,7 @@ export default function ManageUsersAndRegister() {
           </form>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px', overflow:'auto' }}>
+        <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col" style={{ maxHeight: '400px', overflow:'auto' }}>
           <h2 className="text-xl font-semibold mb-4 text-black">Utilisateurs existants</h2>
           <div className="space-y-4">
             {users.map((user) => (
@@ -244,7 +244,7 @@ export default function ManageUsersAndRegister() {
 
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-md w-96">
+          <div className="bg-gray-50 p-6 rounded-lg shadow-md w-96">
             <h2 className="text-xl font-bold mb-4">Modifier l'utilisateur</h2>
             {error.global && <p className="text-red-500 mb-4">{error.global}</p>}
             <form className="flex flex-col">

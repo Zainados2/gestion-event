@@ -38,7 +38,7 @@ export default function LoginPage() {
       <div className='mb-14'>
         <h1 className='text-5xl text-black'>Studio photo</h1>
       </div>
-      <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg lg:w-1/3">
+      <div className="px-8 py-6 mx-4 mt-4 text-left bg-gray-50 shadow-lg rounded-lg lg:w-1/3">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Connexion</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>

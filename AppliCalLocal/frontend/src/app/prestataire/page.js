@@ -52,7 +52,7 @@ export default function Prestataire() {
   if (!isAuthenticated || userRole !== 'gerant' && userRole !== 'admin') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-200">
-        <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg rounded-lg border border-gray-300">
+        <div className="px-8 py-6 mx-4 mt-4 text-left bg-gray-50 shadow-lg rounded-lg border border-gray-300">
           <h1 className="text-2xl font-bold text-center text-gray-800">Accès refusé</h1>
           <p className="text-center text-gray-700 mt-2">Vous n'avez pas la permission d'accéder à cette page.</p>
         </div>
@@ -66,7 +66,7 @@ export default function Prestataire() {
       {error && <p className="text-red-500 mb-6 text-lg font-medium">{error}</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {users.map(user => (
-          <div key={user.id} className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-300 transform transition-transform hover:scale-105">
+          <div key={user.id} className="bg-gray-50 shadow-lg rounded-lg overflow-hidden border border-gray-300 transform transition-transform hover:scale-105">
             <div className="p-6">
               <h2 className="text-2xl font-bold text-gray-800 capitalize">
                 {user.username.split(' ').map(name => name.charAt(0).toUpperCase() + name.slice(1)).join(' ')}

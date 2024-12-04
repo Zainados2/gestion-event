@@ -128,7 +128,7 @@ export default function Modal({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-2">
-      <div className="bg-white rounded-lg p-4 shadow-lg w-full sm:w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 max-h-[90vh] overflow-auto">
+      <div className="bg-gray-50 rounded-lg p-4 shadow-lg w-full sm:w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 max-h-[90vh] overflow-auto">
         <h2 className="text-lg font-semibold mb-3 text-gray-800 border-b pb-2">
           {event ? 'Modifier l\'événement' : 'Créer un événement'}
         </h2>
@@ -162,7 +162,7 @@ export default function Modal({
             <div className="relative">
               <button aria-labelledby="lieu" id='lieu' aria-label='selection type photo'
                 onClick={() => setShowLocationTypeDropdown(!showLocationTypeDropdown)}
-                className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
+                className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50 shadow-md text-sm flex justify-between items-center"
               >
                 <span>{locationType === 'shooting' ? 'Shooting en situation' : 'En studio'}</span>
                 <svg
@@ -177,7 +177,7 @@ export default function Modal({
                 </svg>
               </button>
               {showLocationTypeDropdown && (
-                <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto">
+                <div className="absolute z-10 mt-2 w-full bg-gray-50 border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto">
                   <div
                     onClick={() => handleLocationTypeSelect('shooting')}
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-sm"
@@ -217,7 +217,7 @@ export default function Modal({
               <div className="relative">
                 <button aria-labelledby="decor" id='decor' aria-label='selection decor'
                   onClick={() => setShowDropdown(!showDropdown)}
-                  className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
+                  className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50 shadow-md text-sm flex justify-between items-center"
                 >
                   <span>{decor ? decors.find(d => d.id === decor)?.name : 'Sélectionner un décor'}</span>
                   <svg
@@ -232,7 +232,7 @@ export default function Modal({
                   </svg>
                 </button>
                 {showDropdown && (
-                  <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto">
+                  <div className="absolute z-10 mt-2 w-full bg-gray-50 border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto">
                     {decors.map(decorItem => {
                       const problematicCount = count(decorItem.id);
                       const isDisabled = problematicCount > 0;
@@ -315,7 +315,7 @@ export default function Modal({
             <div className="relative">
               <button aria-labelledby="adresse" id='adresse' aria-label='selection adresse'
                 onClick={() => setShowAddressDropdown(!showAddressDropdown)}
-                className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white shadow-md text-sm flex justify-between items-center"
+                className="w-full border border-gray-300 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-50 shadow-md text-sm flex justify-between items-center"
               >
                 <span>{addressId ? address.find(a => a.id === addressId)?.name : 'Sélectionner une adresse'}</span>
                 <svg
@@ -330,7 +330,7 @@ export default function Modal({
                 </svg>
               </button>
               {showAddressDropdown && (
-                <div className="absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto">
+                <div className="absolute z-10 mt-2 w-full bg-gray-50 border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-auto">
                   {address.map(addr => (
                     <div
                       key={addr.id}

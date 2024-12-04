@@ -174,7 +174,7 @@ const ModalLecture = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-60 z-50 p-4">
-      <div className="bg-white rounded-xl p-8 shadow-2xl w-full max-w-6xl mx-auto relative border border-gray-200">
+      <div className="bg-gray-50 rounded-xl p-8 shadow-2xl w-full max-w-6xl mx-auto relative border border-gray-200">
         <button aria-label='fermer'
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"

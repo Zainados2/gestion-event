@@ -15,7 +15,7 @@ const PolitiqueDeConfidentialite = () => {
   }, []); 
 
   return (
-    <div className="bg-white text-gray-800 min-h-screen">
+    <div className="bg-gray-50 text-gray-800 min-h-screen">
         {!hasToken && (
         <div className="absolute top-5 left-5">
           <Link href="/" className="text-purple-600 font-semibold text-lg hover:text-purple-800 underline">

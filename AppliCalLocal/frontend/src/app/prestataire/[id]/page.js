@@ -181,7 +181,7 @@ const filteredEvents = events
           <h2 className="text-3xl font-semibold mb-2">{capitalize(user.username)}</h2>
           <h3 className="text-2xl font-medium">{capitalize(user.role)}</h3>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-6">
+        <div className="bg-gray-50 shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Filtrer par mois et année</h2>
           <label htmlFor='choixmois' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
           <select id='choixmois' aria-label='choix du mois'
@@ -210,7 +210,7 @@ const filteredEvents = events
         </div>
       </div>
 
-      <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
+      <div className="bg-gray-50 shadow-lg rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4">Heures travaillées</h2>
         <p className="text-lg"><strong>Mois sélectionné:</strong> {months[selectedMonth - 1]}</p>
         <p className="text-lg"><strong>Année sélectionnée:</strong> {selectedYear}</p>
@@ -219,7 +219,7 @@ const filteredEvents = events
         <p className="text-lg"><strong>Heures à venir:</strong> {totalUpcomingHours.toFixed(2)} heures</p>
       </div>
 
-      <div className='bg-white shadow-lg rounded-lg p-6'>
+      <div className='bg-gray-50 shadow-lg rounded-lg p-6'>
         <h2 className="text-2xl font-semibold mb-4">Événements du mois</h2>
         {filteredEvents.length > 0 ? (
           <div className="max-h-[300px] overflow-y-auto">
