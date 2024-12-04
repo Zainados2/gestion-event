@@ -99,7 +99,7 @@ export default function ManageUsersAndRegister() {
       });
       return;
     }
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
+    if (window.confirm('Êtes-vous sûr de vouloir modifier ce compte utilisateur ?')) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
@@ -120,7 +120,7 @@ export default function ManageUsersAndRegister() {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.delete(`http://165.232.115.209:8081/users/${id}`, {

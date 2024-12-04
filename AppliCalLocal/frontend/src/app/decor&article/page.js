@@ -90,7 +90,7 @@ export default function DecorArticle() {
       setArticleError('Le titre de l\'article est requis.');
       return;
     }
-
+    if (window.confirm('Êtes-vous sûr de vouloir modifier cet article ?')) {
     try {
       const token = localStorage.getItem('token');
       await axios.put(`http://165.232.115.209:8081/articles/${editingArticle.id}`, editingArticle, {
@@ -107,10 +107,11 @@ export default function DecorArticle() {
       setArticleError(''); 
     } catch (error) {
       console.error('Erreur lors de la mise à jour de l\'article:', error);
-    }
+    }}
   };
 
   const handleDeleteArticle = async (id) => {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(`http://165.232.115.209:8081/articles/${id}`, {
@@ -121,7 +122,7 @@ export default function DecorArticle() {
       setAllArticles(prevArticles => prevArticles.filter(article => article.id !== id).sort((a, b) => a.title.localeCompare(b.title)));
     } catch (error) {
       console.error('Erreur lors de la suppression de l\'article:', error);
-    }
+    }}
   };
 
   const handleCreateDecor = async () => {
@@ -162,7 +163,7 @@ export default function DecorArticle() {
       setDecorError('Au moins deux articles doivent être sélectionnés.');
       return;
     }
-
+    if (window.confirm('Êtes-vous sûr de vouloir modifier ce décor ?')) {
     try {
       const token = localStorage.getItem('token');
       await axios.put(`http://165.232.115.209:8081/decors/${editingDecor.id}`, {
@@ -183,10 +184,11 @@ export default function DecorArticle() {
       setDecorError(''); 
     } catch (error) {
       console.error('Erreur lors de la mise à jour du décor:', error);
-    }
+    }}
   };
 
   const handleDeleteDecor = async (id) => {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer ce décor ?')) {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(`http://165.232.115.209:8081/decors/${id}`, {
@@ -197,7 +199,7 @@ export default function DecorArticle() {
       setDecors(prevDecors => prevDecors.filter(decor => decor.id !== id).sort((a, b) => a.name.localeCompare(b.name)));
     } catch (error) {
       console.error('Erreur lors de la suppression du décor:', error);
-    }
+    }}
   };
 
   const handleSelectDecor = async (decor) => {

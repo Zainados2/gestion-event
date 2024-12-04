@@ -59,6 +59,7 @@ const AddressesPage = () => {
 
   const handleUpdateAddress = async () => {
     if (validateAddress(editingAddress)) {
+      if (window.confirm('Êtes-vous sûr de vouloir modifier cet adresse ?')) {
       try {
         const token = localStorage.getItem('token');
         await axios.put(`http://165.232.115.209:8081/addresses/${editingAddress.id}`, editingAddress, {
@@ -70,11 +71,12 @@ const AddressesPage = () => {
         fetchAddresses();
       } catch (error) {
         console.error('Failed to update address', error);
-      }
+      }}
     }
   };
 
   const handleDeleteAddress = async (id) => {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet adresse ?')) {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(`http://165.232.115.209:8081/addresses/${id}`, {
@@ -85,7 +87,7 @@ const AddressesPage = () => {
       fetchAddresses();
     } catch (error) {
       console.error('Failed to delete address', error);
-    }
+    }}
   };
 
   return (
