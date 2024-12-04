@@ -10,11 +10,11 @@ export default function Menu() {
   const [activeRoute, setActiveRoute] = useState('');
 
   useEffect(() => {
-    setActiveRoute(router.pathname);
+    setActiveRoute(router.asPath);
     if (!isAuthenticated) {
       setMenuOpen(false);
     }
-  }, [router.pathname, isAuthenticated]);
+  }, [router.asPath, isAuthenticated]);
 
   const handleLogout = async () => {
     localStorage.removeItem('token');
@@ -36,35 +36,35 @@ export default function Menu() {
           <>
             <button
               onClick={() => router.push('/admin')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/admin')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/admin')}`}
               aria-label="admin"
             >
               Admin
             </button>
             <button
               onClick={() => router.push('/decor&article')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/decor&article')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/decor&article')}`}
               aria-label="decors"
             >
               Décors
             </button>
             <button
               onClick={() => router.push('/lieux')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/lieux')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/lieux')}`}
               aria-label="lieux"
             >
               Lieux
             </button>
             <button
               onClick={() => router.push('/prestataire')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/prestataire')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/prestataire')}`}
               aria-label="prestataire"
             >
               Prestataire
             </button>
             <button
               onClick={() => router.push('/historique')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/historique')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/historique')}`}
               aria-label="historique"
             >
               Historique
@@ -74,7 +74,7 @@ export default function Menu() {
         {(userRole !== 'gerant' && userRole !== 'admin') && (
           <button
             onClick={() => router.push(`/prestataire/${userId}`)}
-            className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive(`/prestataire/${userId}`)}`}
+            className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive(`/prestataire/${userId}`)}`}
             aria-label="recapitulatif"
           >
             Récapitulatif
@@ -82,7 +82,7 @@ export default function Menu() {
         )}
         <button
           onClick={() => router.push('/calendar')}
-          className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/calendar')}`}
+          className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/calendar')}`}
           aria-label="calendrier"
         >
           Calendrier
@@ -113,7 +113,7 @@ export default function Menu() {
               router.push('/calendar');
               setMenuOpen(false);
             }}
-            className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/calendar')}`}
+            className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/calendar')}`}
             aria-label="calendrier"
           >
             Calendrier
@@ -125,7 +125,7 @@ export default function Menu() {
                   router.push('/admin');
                   setMenuOpen(false);
                 }}
-                className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/admin')}`}
+                className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 ${isActive('/admin')}`}
                 aria-label="admin"
               >
                 Admin
