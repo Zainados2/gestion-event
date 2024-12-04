@@ -38,7 +38,7 @@ export default function Menu() {
           <>
             {(userRole === "gerant" || userRole === "admin") && (
               <>
-                <button
+                <button aria-label="Naviguer vers la page d'administration"
                   onClick={() => router.push("/admin")}
                   className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                     "/admin"
@@ -46,7 +46,7 @@ export default function Menu() {
                 >
                   Admin
                 </button>
-                <button
+                <button aria-label="Naviguer sur la page d'édition d'articles et décors"
                   onClick={() => router.push("/decor&article")}
                   className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                     "/decor&article"
@@ -54,7 +54,7 @@ export default function Menu() {
                 >
                   Décors
                 </button>
-                <button
+                <button aria-label="Naviguer vers la page d'édition d'adresses"
                   onClick={() => router.push("/lieux")}
                   className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                     "/lieux"
@@ -62,7 +62,7 @@ export default function Menu() {
                 >
                   Lieux
                 </button>
-                <button
+                <button aria-label="Naviguer vers la page de statistique du préstataire"
                   onClick={() => router.push("/prestataire")}
                   className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                     "/prestataire"
@@ -70,7 +70,7 @@ export default function Menu() {
                 >
                   Prestataire
                 </button>
-                <button
+                <button aria-label="Naviguer vers la page de statitisque de l'entreprise"
                   onClick={() => router.push("/historique")}
                   className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                     "/historique"
@@ -81,7 +81,7 @@ export default function Menu() {
               </>
             )}
             {userRole !== "gerant" && userRole !== "admin" && (
-              <button
+              <button aria-label="Naviguer vers la page de statistique personnel"
                 onClick={() => router.push(`/prestataire/${userId}`)}
                 className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                   `/prestataire/${userId}`
@@ -90,7 +90,7 @@ export default function Menu() {
                 Récapitulatif
               </button>
             )}
-            <button
+            <button aria-label="Naviguer sur la page calendrier"
               onClick={() => router.push("/calendar")}
               className={`hidden md:block mr-4 hover:bg-purple-100 py-2 px-4 focus:outline-none ${getActiveClass(
                 "/calendar"
@@ -98,7 +98,7 @@ export default function Menu() {
             >
               Calendrier
             </button>
-            <button
+            <button aria-label="Se déconnecter"
               onClick={handleLogout}
               className="hidden md:block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4"
             >
@@ -108,7 +108,7 @@ export default function Menu() {
         )}
 
         {isAuthenticated && (
-          <button
+          <button aria-label="Ouvrir le menu"
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4"
           >
@@ -118,7 +118,7 @@ export default function Menu() {
       </div>
       {isAuthenticated && menuOpen && (
         <div className="md:hidden bg-gray-100 border-t-2 border-purple-600">
-          <button
+          <button aria-label="Naviguer sur la page calendrier"
             onClick={() => {
               router.push("/calendar");
               setMenuOpen(false);
@@ -129,6 +129,94 @@ export default function Menu() {
           >
             Calendrier
           </button>
+
+          {(userRole === 'gerant' || userRole === 'admin') && (
+      <>
+        <button aria-label='admin'
+          onClick={() => {
+            router.push('/admin');
+            setMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+            "/admin"
+          )}`}
+        >
+          Admin
+        </button>
+        <button aria-label='decors'
+          onClick={() => {
+            router.push('/decor&article');
+            setMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+            "/decor&article"
+          )}`}
+        >
+          Décors
+        </button>
+        <button aria-label='lieux'
+          onClick={() => {
+            router.push('/lieux');
+            setMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+            "/lieux"
+          )}`}
+        >
+          Lieux
+        </button>
+        <button aria-label='prestataire'
+          onClick={() => {
+            router.push('/prestataire');
+            setMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+            "/prestataire"
+          )}`}
+        >
+          Prestataire
+        </button>
+        <button aria-label='historique'
+          onClick={() => {
+            router.push('/historique');
+            setMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+            "/historique"
+          )}`}
+        >
+          Historique
+        </button>
+      </>
+    )}
+    
+    {(userRole !== 'gerant' && userRole !== 'admin') &&  (
+      <>
+        <button aria-label='recapitulatif'
+          onClick={() => {
+            router.push(`/prestataire/${userId}`);
+            setMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+            `/prestataire/${userId}`
+          )}`}
+        >
+          Récapitulatif
+        </button>
+      </>
+    )}
+
+    <button aria-label='deconnexion'
+      className={`block w-full text-left py-2 px-4 focus:outline-none ${getActiveClass(
+        "/deconnexion"
+      )}`}
+      onClick={() => {
+        handleLogout();
+        setMenuOpen(false);
+      }}
+    >
+      Déconnexion
+    </button>
         </div>
       )}
     </nav>
