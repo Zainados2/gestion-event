@@ -191,13 +191,13 @@ const ModalLecture = ({
             <div className="space-y-4 text-gray-700">
               {event && (
                 <>
-                  {event.title && <p><strong className="font-semibold text-gray-800">Titre :</strong> {event.title}</p>}
-                  {event.description && <p><strong className="font-semibold text-gray-800">Description :</strong> {event.description}</p>}
+                  {event.title && <p><strong className="font-semibold text-gray-800 first:uppercase">Titre :</strong> {event.title}</p>}
+                  {event.description && <p><strong className="font-semibold text-gray-800 first:uppercase">Description :</strong> {event.description}</p>}
                   {event.start && <p><strong className="font-semibold text-gray-800">Début :</strong> {formatDateTime(event.start)}</p>}
                   {event.end && <p><strong className="font-semibold text-gray-800">Fin :</strong> {formatDateTime(event.end)}</p>}
                   {event.address && (
                     <>
-                      <p><strong className="font-semibold text-gray-800">Type de Lieu :</strong> {event.address.type}</p>
+                      <p><strong className="font-semibold text-gray-800 first:uppercase">Type de Lieu :</strong> {event.address.type}</p>
                       <p><strong className="font-semibold text-gray-800">Adresse :</strong> {event.address.name}, {event.address.location}</p>
                     </>
                   )}
