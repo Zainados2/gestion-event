@@ -27,7 +27,7 @@ export default function Menu() {
     return null;
   }
 
-  const isActive = (route) => (activeRoute === route ? 'bg-purple-200 font-bold focus:ring-2 focus:ring-purple-400' : '');
+  const isActive = (route) => (activeRoute === route ? 'focus:outline-none focus:ring-2 focus:ring-purple-400' : '');
 
   return (
     <nav className="bg-gray-100 border-b-2 border-purple-600">
@@ -36,35 +36,35 @@ export default function Menu() {
           <>
             <button
               onClick={() => router.push('/admin')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/admin')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/admin')}`}
               aria-label="admin"
             >
               Admin
             </button>
             <button
               onClick={() => router.push('/decor&article')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/decor&article')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/decor&article')}`}
               aria-label="decors"
             >
               Décors
             </button>
             <button
               onClick={() => router.push('/lieux')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/lieux')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/lieux')}`}
               aria-label="lieux"
             >
               Lieux
             </button>
             <button
               onClick={() => router.push('/prestataire')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/prestataire')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/prestataire')}`}
               aria-label="prestataire"
             >
               Prestataire
             </button>
             <button
               onClick={() => router.push('/historique')}
-              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/historique')}`}
+              className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/historique')}`}
               aria-label="historique"
             >
               Historique
@@ -74,7 +74,7 @@ export default function Menu() {
         {(userRole !== 'gerant' && userRole !== 'admin') && (
           <button
             onClick={() => router.push(`/prestataire/${userId}`)}
-            className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive(`/prestataire/${userId}`)}`}
+            className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive(`/prestataire/${userId}`)}`}
             aria-label="recapitulatif"
           >
             Récapitulatif
@@ -82,14 +82,14 @@ export default function Menu() {
         )}
         <button
           onClick={() => router.push('/calendar')}
-          className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/calendar')}`}
+          className={`hidden md:block text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/calendar')}`}
           aria-label="calendrier"
         >
           Calendrier
         </button>
         <button
           onClick={handleLogout}
-          className="hidden md:block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4"
+          className="hidden md:block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded  focus:ring-2 focus:ring-purple-400 mr-4"
           aria-label="deconnexion"
         >
           Déconnexion
@@ -99,7 +99,7 @@ export default function Menu() {
       {isAuthenticated && (
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-400 mr-4"
+          className="md:hidden bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded  focus:ring-2 focus:ring-purple-400 mr-4"
           aria-label="menu"
         >
           Menu
@@ -113,7 +113,7 @@ export default function Menu() {
               router.push('/calendar');
               setMenuOpen(false);
             }}
-            className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/calendar')}`}
+            className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/calendar')}`}
             aria-label="calendrier"
           >
             Calendrier
@@ -125,17 +125,16 @@ export default function Menu() {
                   router.push('/admin');
                   setMenuOpen(false);
                 }}
-                className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none ${isActive('/admin')}`}
+                className={`block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4  ${isActive('/admin')}`}
                 aria-label="admin"
               >
                 Admin
               </button>
-              {/* Autres boutons similaires avec logique active */}
             </>
           )}
           <button
             onClick={handleLogout}
-            className="block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 focus:outline-none"
+            className="block w-full text-left text-purple-600 hover:bg-purple-100 py-2 px-4 "
             aria-label="deconnexion"
           >
             Déconnexion
