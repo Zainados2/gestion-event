@@ -127,7 +127,7 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-2">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-2">
       <div className="bg-gray-50 rounded-lg p-4 shadow-lg w-full sm:w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 max-h-[90vh] overflow-auto">
         <h2 className="text-lg font-semibold mb-3 text-gray-800 border-b pb-2">
           {event ? 'Modifier l\'événement' : 'Créer un événement'}

@@ -769,7 +769,7 @@ end: info.event.allDay
             .fc-header-toolbar .fc-toolbar-chunk.fc-toolbar-chunk-right {
               order: 3; /* Move 'dayGridMonth,timeGridWeek,timeGridDay' to the bottom */
             }
-            fc-scrollgrid-sync-inner{
+            .fc-col-header-cell{
             background-color: #f9f9f9;
             }
           }
@@ -792,7 +792,7 @@ end: info.event.allDay
             .fc-header-toolbar .fc-toolbar-chunk-right {
               order: 3;
             }
-            fc-scrollgrid-sync-inner{
+            .fc-col-header-cell{
             background-color: #f9f9f9;
             }
           }
