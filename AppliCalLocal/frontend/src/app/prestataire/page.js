@@ -67,7 +67,7 @@ export default function Prestataire() {
       {error && <p className="text-red-500 mb-6 text-lg font-medium">{error}</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {users.map(user => (
-          <Link href="#" onClick={() => handleViewDetails(user.id)} passHref>
+          <Link href={`/prestataire/${user.id}`}>
           <div key={user.id} className="bg-gray-50 shadow-lg rounded-lg overflow-hidden border border-gray-300 transform transition-transform hover:scale-105">
             <div className="p-6">
               <h2 className="text-2xl font-bold text-gray-800 capitalize">
