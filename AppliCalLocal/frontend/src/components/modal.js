@@ -67,7 +67,7 @@ export default function Modal({
     const updatedParticipants = participants.includes('gerant')
       ? participants
       : ['gerant', ...participants];
-
+      if (window.confirm('Êtes-vous sûr de vouloir éditer cet événement ?')) {
     onSave({
       ...event,
       title,
@@ -82,6 +82,7 @@ export default function Modal({
       allDay: event?.allDay,
       address_id: addressId || null,
     });
+  }
     onClose();
   };
 
@@ -411,12 +412,15 @@ export default function Modal({
             >
               Annuler
             </button>
-            <button aria-label='valider'
-              onClick={handleSave}
-              className="bg-lime-700 text-white py-1 px-4 rounded-lg hover:bg-lime-800 transition"
-            >
-              {event ? 'Sauvegarder' : 'Créer'}
-            </button>
+            <button
+  aria-label={title ? 'Sauvegarder les modifications' : 'Créer un nouvel évenement'}
+  onClick={handleSave}
+  className={`${
+    title ? 'bg-blue-600 hover:bg-blue-700' : 'bg-lime-700 hover:bg-lime-800'
+  } text-white py-1 px-4 rounded-lg transition`}
+>
+  {title ? 'Modifier' : 'Créer'}
+</button>
           </div>
         </div>
       </div>
