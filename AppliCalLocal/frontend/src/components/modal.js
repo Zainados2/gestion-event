@@ -130,7 +130,7 @@ export default function Modal({
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-2">
       <div className="bg-gray-50 rounded-lg p-4 shadow-lg w-full sm:w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 max-h-[90vh] overflow-auto">
         <h2 className="text-lg font-semibold mb-3 text-gray-800 border-b pb-2">
-          {event ? 'Modifier l\'événement' : 'Créer un événement'}
+          {event.title == '' ? 'Modifier l\'événement' : 'Créer un événement'}
         </h2>
         <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
@@ -407,13 +407,13 @@ export default function Modal({
           <div className="space-x-2">
             <button aria-label='annuler'
               onClick={onClose}
-              className="bg-gray-300 text-gray-800 py-1 px-4 rounded-lg hover:bg-gray-400 transition"
+              className="bg-gray-500 text-white py-1 px-4 rounded-lg hover:bg-gray-600 transition"
             >
               Annuler
             </button>
             <button aria-label='valider'
               onClick={handleSave}
-              className="bg-blue-600 text-white py-1 px-4 rounded-lg hover:bg-blue-700 transition"
+              className="bg-lime-700 text-white py-1 px-4 rounded-lg hover:bg-lime-800 transition"
             >
               {event ? 'Sauvegarder' : 'Créer'}
             </button>

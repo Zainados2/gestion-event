@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 export default function Menu() {
   const { isAuthenticated, userRole, userId, updateAuthContext } = useAuth();
   const router = useRouter();
-  const pathname = usePathname(); // Récupère le chemin actuel
+  const pathname = usePathname(); 
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -26,11 +26,10 @@ export default function Menu() {
     return null;
   }
 
-  // Fonction pour appliquer le style "actif" si le chemin correspond
   const getActiveClass = (path) =>
     pathname === path
-      ? "bg-purple-200 text-purple-800" // Style actif
-      : "text-purple-600"; // Style normal
+      ? "bg-purple-200 text-purple-800" 
+      : "text-purple-600"; 
 
   return (
     <nav className="bg-gray-100 border-b-2 border-purple-600">
@@ -130,7 +129,6 @@ export default function Menu() {
           >
             Calendrier
           </button>
-          {/* Répétez la logique pour les autres liens */}
         </div>
       )}
     </nav>

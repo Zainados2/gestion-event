@@ -211,7 +211,7 @@ const ModalLecture = ({
                   <ul className="space-y-4">
                     {filteredArticlesbis.map(article => {
                       const isValidationButton = article.isValidated === 0 || article.isValidated === false;
-                      const buttonText = isValidationButton ? 'Valider' : 'Annuler';
+                      const buttonText = isValidationButton ? 'Valider la photo' : 'Annuler la photo';
                       const buttonClass = isValidationButton
                         ? 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'
                         : 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors';
@@ -245,7 +245,7 @@ const ModalLecture = ({
                         disabled={loadingValidationDecorId === 'decor'}
                         className={event.decorValidationStatus ? 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors' : 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'}
                       >
-                        {loadingValidationDecorId === 'decor' ? 'Chargement...' : event.decorValidationStatus ? 'Annuler Décor' : 'Valider Décor'}
+                        {loadingValidationDecorId === 'decor' ? 'Chargement...' : event.decorValidationStatus ? 'Annuler la photo' : 'Valider la photo'}
                       </button>
                     </div>
                     {validationError && <p className="text-red-500 mt-2">{validationError}</p>}
@@ -263,7 +263,7 @@ const ModalLecture = ({
                         disabled={loadingMontageDecorId === 'montage_decor'}
                         className={event.decorMontageStatus ? 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors' : 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'}
                       >
-                        {loadingMontageDecorId === 'montage_decor' ? 'Chargement...' : event.decorMontageStatus ? 'Annuler montage Décor' : 'Valider montage Décor'}
+                        {loadingMontageDecorId === 'montage_decor' ? 'Chargement...' : event.decorMontageStatus ? 'Annuler le montage' : 'Valider le montage'}
                       </button>
                     </div>
                     {validationError && <p className="text-red-500 mt-2">{validationError}</p>}
@@ -276,7 +276,7 @@ const ModalLecture = ({
                         disabled={loadingDemontageDecorId === 'demontage_decor'}
                         className={event.decorDemontageStatus ? 'bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 transition-colors' : 'bg-green-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700 transition-colors'}
                       >
-                        {loadingDemontageDecorId === 'demontage_decor' ? 'Chargement...' : event.decorDemontageStatus ? 'Annuler démontage Décor' : 'Valider démontage Décor'}
+                        {loadingDemontageDecorId === 'demontage_decor' ? 'Chargement...' : event.decorDemontageStatus ? 'Annuler le démontage' : 'Valider le démontage'}
                       </button>
                     </div>
                     {validationError && <p className="text-red-500 mt-2">{validationError}</p>}

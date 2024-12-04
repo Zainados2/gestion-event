@@ -206,7 +206,7 @@ export default function ManageUsersAndRegister() {
             <button
               aria-label="Inscrire"
               type="submit"
-              className="w-full text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="w-full text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Créer un utilisateur
             </button>
@@ -225,7 +225,7 @@ export default function ManageUsersAndRegister() {
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleEditClick(user)}
-                    className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
+                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
                   >
                     Modifier
                   </button>

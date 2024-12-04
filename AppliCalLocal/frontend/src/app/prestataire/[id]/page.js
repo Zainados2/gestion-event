@@ -195,7 +195,7 @@ const filteredEvents = events
               </option>
             ))}
           </select>
-          <label htmlFor='choixannee' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner le mois</label>
+          <label htmlFor='choixannee' className="block mb-2 text-sm font-medium text-gray-700">Seléctionner l'année'</label>
           <select aria-label='selection année' id='choixannee'
             value={selectedYear}
             onChange={e => setSelectedYear(Number(e.target.value))}

@@ -266,7 +266,7 @@ export default function DecorArticle() {
               setIsArticleModalOpen(true);
             }}
           >
-            Ouvrir Création Article
+            Ouvrir le menu de création d'articles
           </button>
         </div>
 
@@ -279,7 +279,7 @@ export default function DecorArticle() {
               setIsDecorModalOpen(true);
             }}
           >
-            Ouvrir Création Décor
+            Ouvrir le menu de création de décors
           </button>
         </div>
 
@@ -297,7 +297,7 @@ export default function DecorArticle() {
                   </div>
                   <div className="flex space-x-2 mt-2">
                     <button aria-label='modifier'
-                      className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
+                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
                       onClick={() => {
                         setEditingArticle(article);
                         setIsArticleModalOpen(true);
@@ -337,7 +337,7 @@ export default function DecorArticle() {
             </h3>
             <div className="flex space-x-2">
               <button
-                className="bg-lime-700 text-white px-3 py-1 rounded hover:bg-lime-800 transition"
+                className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
                 onClick={() => {
                   handleSelectDecor(decor);
                   setIsDecorModalOpen(true);
@@ -363,7 +363,7 @@ export default function DecorArticle() {
       <Modal isOpen={isArticleModalOpen} onClose={() => setIsArticleModalOpen(false)}>
         <div className="bg-gray-50 p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
-            {editingArticle ? 'Modifier l\'Article' : 'Créer un Article'}
+            {editingArticle ? 'Modifier l\'article' : 'Créer un article'}
           </h2>
           <input aria-label='nom article'
             type="text"
@@ -415,7 +415,11 @@ export default function DecorArticle() {
             <label htmlFor="lost" className="text-gray-800">Perdu</label>
           </div>
           <button aria-label='valider'
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            className={`px-4 py-2 rounded text-white transition ${
+              editingArticle
+                ? "bg-blue-600 hover:bg-blue-700"
+                : "bg-lime-700 hover:bg-lime-800"
+            }`}
             onClick={() => {
               if (editingArticle) {
                 handleUpdateArticle();
@@ -489,7 +493,11 @@ export default function DecorArticle() {
             </ul>
           </div>
           <button aria-label='valider'
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            className={`px-4 py-2 rounded text-white transition ${
+              editingArticle
+                ? "bg-blue-600 hover:bg-blue-700"
+                : "bg-lime-700 hover:bg-lime-800"
+            }`}
             onClick={() => {
               if (editingDecor) {
                 handleUpdateDecor();

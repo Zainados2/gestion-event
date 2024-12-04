@@ -122,9 +122,9 @@ const AddressesPage = () => {
           />
           <button aria-label='créer'
             onClick={handleCreateAddress}
-            className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition"
+            className="bg-lime-700 text-white py-2 px-4 rounded hover:bg-lime-800 transition"
           >
-            Créer Adresse
+            Créer une adresse
           </button>
         </div>
 
@@ -139,7 +139,7 @@ const AddressesPage = () => {
                     <div className="flex flex-col sm:flex-row mt-4 sm:mt-0 sm:space-x-2">
                       <button aria-label='modifier'
                         onClick={() => setEditingAddress(address)}
-                        className="bg-lime-700 text-white py-1 px-3 rounded hover:bg-lime-800 transition"
+                        className="bg-purple-600 text-white py-1 px-3 rounded hover:bg-purple-700 transition"
                       >
                         Modifier
                       </button>
@@ -189,13 +189,13 @@ const AddressesPage = () => {
             <div className='flex lg:flex-row flex-col justify-left'>
               <button aria-label='mettre à jour'
                 onClick={handleUpdateAddress}
-                className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-500 transition"
+                className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
               >
-                Mettre à jour Adresse
+                Mettre à jour l'adresse
               </button>
               <button aria-label='annuler'
                 onClick={() => setEditingAddress(null)}
-                className="bg-gray-400 text-gray-800 py-2 px-4 rounded hover:bg-gray-500 transition mt-2 lg:mt-0 lg:ml-2 ml-0"
+                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition mt-2 lg:mt-0 lg:ml-2 ml-0"
               >
                 Annuler
               </button>
