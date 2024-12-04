@@ -130,7 +130,7 @@ export default function Modal({
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-2">
       <div className="bg-gray-50 rounded-lg p-4 shadow-lg w-full sm:w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 max-h-[90vh] overflow-auto">
         <h2 className="text-lg font-semibold mb-3 text-gray-800 border-b pb-2">
-          {event.title !== '' || event.title !== null || event.title !== undefined ? 'Modifier l\'événement' : 'Créer un événement'}
+          {title !== '' || title !== null || title !== undefined ? 'Modifier l\'événement' : 'Créer un événement'}
         </h2>
         <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
           <div className="bg-gray-50 p-2 rounded-lg shadow-inner">
